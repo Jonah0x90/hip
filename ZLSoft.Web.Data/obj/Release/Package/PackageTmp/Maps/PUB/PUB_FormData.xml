@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="FormData" type="ZLSoft.Model.PUB.FormData, ZLSoft.Model" />
+    <typeAlias alias="PK_FormData" type="ZLSoft.Model.PUB.PK_FormData, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="FormData_Result" class="FormData">
+      <result property="ID" column="表单文件ID" />
+      <result property="FSID" column="表单结构ID" />
+      <result property="DataText" column="数据内容" />
+      <result property="VersionCode" column="版本号" />
+      <result property="FormID" column="表单ID" />
+      
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_FormData" parameterClass="StrObjDict">
+      INSERT INTO PUB_表单数据(表单文件ID,表单结构ID,数据内容,版本号,表单ID)
+      VALUES (#ID#,#FSID#,#DataText#,#VersionCode#,#FormID#)
+    </update>
+
+    <update id="UPDATE_FormData" parameterClass="StrObjDict" >
+      update PUB_表单数据
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="FormID" >表单文件ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FSID" >表单结构ID=#FSID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="DataText" >数据内容=#DataText#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="VersionCode" >版本号=#VersionCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="VersionCode" >表单ID=#FormID#</isPropertyAvailable>    
+      </dynamic>
+      where 表单文件ID=#ID#
+    </update>
+
+    <delete id="DELETE_FormData" parameterClass="StrObjDict" >
+      delete from PUB_表单数据
+      where 表单文件ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_FormData" parameterClass="PK_FormData" resultMap="FormData_Result" >
+      SELECT * FROM PUB_表单数据
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_FormData" parameterClass="StrObjDict" resultClass="FormData" resultMap="FormData_Result" >
+      select * from PUB_表单数据
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormID" >表单文件ID like '%$ID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FSID" >表单结构ID like '%$FSID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DataText" >数据内容 like '%$DataText$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >版本号 like '%$VersionCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >表单ID like '%$FormID$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_FormData" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM PUB_表单数据
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormID" >表单文件ID like '%$FormID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FSID" >表单结构ID like '%$FSID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DataText" >数据内容 like '%$DataText$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >版本号 like '%$VersionCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >表单ID like '%$FormID$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

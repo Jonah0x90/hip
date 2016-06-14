@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+        <typeAlias alias="XT_GGDMMX" type="ZLSoft.Model.System.XT_GGDMMX,ZLSoft.Model" />
+        <typeAlias alias="PK_XT_GGDMMX" type="ZLSoft.Model.System.PK_XT_GGDMMX, ZLSoft.Model" />
+    </alias>
+    <statements>
+        <insert id="INSERT_XT_GGDMMX" parameterClass="StrObjDict" >
+            insert into XT_GGDMMX(DMID,MXID,MXMC,SJID,JB,XTPB,SFMJ,PXXH,XGYH,XGRQ,CHAR1,CHAR2,CHAR3,CHAR4,CHAR5,CHAR6,NUM1,NUM2,NUM3,NUM4,NUM5,NUM6,DATE1,DATE2,DATE3,SFZF,ZFRQ,SRM1,SRM2,SRM3,BZ)
+            values(
+            #DMID#,#MXID#,#MXMC#,#SJID#,#JB#,#XTPB#,#SFMJ#,#PXXH#,#XGYH#,#XGRQ#,#CHAR1#,#CHAR2#,#CHAR3#,#CHAR4#,#CHAR5#,#CHAR6#,#NUM1#,#NUM2#,#NUM3#,#NUM4#,#NUM5#,#NUM6#,#DATE1#,#DATE2#,#DATE3#,#SFZF#,#ZFRQ#,#SRM1#,#SRM2#,#SRM3#,#BZ#)
+        </insert>
+        <update id="UPDATE_XT_GGDMMX" parameterClass="StrObjDict" >
+            update XT_GGDMMX
+            set
+            <dynamic prepend=" ">
+                <isPropertyAvailable prepend=" , " property="MXMC" >MXMC=#MXMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SJID" >SJID=#SJID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="JB" >JB=#JB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="XTPB" >XTPB=#XTPB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SFMJ" >SFMJ=#SFMJ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="PXXH" >PXXH=#PXXH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="XGYH" >XGYH=#XGYH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="XGRQ" >XGRQ=#XGRQ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="CHAR1" >CHAR1=#CHAR1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="CHAR2" >CHAR2=#CHAR2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="CHAR3" >CHAR3=#CHAR3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="CHAR4" >CHAR4=#CHAR4#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="CHAR5" >CHAR5=#CHAR5#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="CHAR6" >CHAR6=#CHAR6#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="NUM1" >NUM1=#NUM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="NUM2" >NUM2=#NUM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="NUM3" >NUM3=#NUM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="NUM4" >NUM4=#NUM4#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="NUM5" >NUM5=#NUM5#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="NUM6" >NUM6=#NUM6#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="DATE1" >DATE1=#DATE1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="DATE2" >DATE2=#DATE2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="DATE3" >DATE3=#DATE3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SFZF" >SFZF=#SFZF#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="ZFRQ" >ZFRQ=#ZFRQ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SRM1" >SRM1=#SRM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SRM2" >SRM2=#SRM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SRM3" >SRM3=#SRM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="BZ" >BZ=#BZ#</isPropertyAvailable>
+            </dynamic>
+            where DMID=#DMID# and MXID=#MXID#
+        </update>
+        <delete id="DELETE_XT_GGDMMX" parameterClass="StrObjDict" >
+            delete XT_GGDMMX
+            where DMID=#DMID# and MXID=#MXID#
+        </delete>
+        <select id="LOAD_XT_GGDMMX" parameterClass="PK_XT_GGDMMX" resultClass="XT_GGDMMX" >
+            select DMID,MXID,MXMC,SJID,JB,XTPB,SFMJ,PXXH,XGYH,XGRQ,CHAR1,CHAR2,CHAR3,CHAR4,CHAR5,CHAR6,NUM1,NUM2,NUM3,NUM4,NUM5,NUM6,DATE1,DATE2,DATE3,SFZF,ZFRQ,SRM1,SRM2,SRM3,BZ from XT_GGDMMX
+            where DMID=#DMID# and MXID=#MXID#
+        </select>
+        <select id="LIST_XT_GGDMMX" parameterClass="StrObjDict" resultClass="XT_GGDMMX" >
+            select DMID,MXID,MXMC,SJID,JB,XTPB,SFMJ,PXXH,XGYH,XGRQ,CHAR1,CHAR2,CHAR3,CHAR4,CHAR5,CHAR6,NUM1,NUM2,NUM3,NUM4,NUM5,NUM6,DATE1,DATE2,DATE3,SFZF,ZFRQ,SRM1,SRM2,SRM3,BZ from XT_GGDMMX
+            <dynamic prepend=" WHERE ">
+                <isPropertyAvailable prepend=" AND " property="DMID" >DMID=#DMID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MXID" >MXID=#MXID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MXMC" >MXMC=#MXMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SJID" >SJID=#SJID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="JB" >JB=#JB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XTPB" >XTPB=#XTPB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SFMJ" >SFMJ=#SFMJ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PXXH" >PXXH=#PXXH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGYH" >XGYH=#XGYH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_START" >XGRQ>=${ibatis_key_todate}#XGRQ_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_END" >XGRQ&lt;=${ibatis_key_todate}#XGRQ_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CHAR1" >CHAR1=#CHAR1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CHAR2" >CHAR2=#CHAR2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CHAR3" >CHAR3=#CHAR3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CHAR4" >CHAR4=#CHAR4#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CHAR5" >CHAR5=#CHAR5#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CHAR6" >CHAR6=#CHAR6#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="NUM1" >NUM1=#NUM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="NUM2" >NUM2=#NUM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="NUM3" >NUM3=#NUM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="NUM4" >NUM4=#NUM4#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="NUM5" >NUM5=#NUM5#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="NUM6" >NUM6=#NUM6#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DATE1_START" >DATE1>=${ibatis_key_todate}#DATE1_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DATE1_END" >DATE1&lt;=${ibatis_key_todate}#DATE1_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DATE2_START" >DATE2>=${ibatis_key_todate}#DATE2_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DATE2_END" >DATE2&lt;=${ibatis_key_todate}#DATE2_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DATE3_START" >DATE3>=${ibatis_key_todate}#DATE3_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DATE3_END" >DATE3&lt;=${ibatis_key_todate}#DATE3_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SFZF" >SFZF=#SFZF#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ZFRQ_START" >ZFRQ>=${ibatis_key_todate}#ZFRQ_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ZFRQ_END" >ZFRQ&lt;=${ibatis_key_todate}#ZFRQ_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM1" >SRM1=#SRM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM2" >SRM2=#SRM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM3" >SRM3=#SRM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="BZ" >BZ=#BZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+            <dynamic prepend=" ORDER BY ">
+                <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+        </select>
+        <update id="UPDATE2_XT_GGDMMX" parameterClass="StrObjDict" >
+            update XT_GGDMMX
+            set
+            <dynamic prepend=" ">
+                <isPropertyAvailable prepend=" , " property="MXMC" >MXMC=#MXMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SJID" >SJID=#SJID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="JB" >JB=#JB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="XTPB" >XTPB=#XTPB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SFMJ" >SFMJ=#SFMJ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="PXXH" >PXXH=#PXXH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="XGYH" >XGYH=#XGYH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="XGRQ" >XGRQ=#XGRQ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="CHAR1" >CHAR1=#CHAR1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="CHAR2" >CHAR2=#CHAR2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="CHAR3" >CHAR3=#CHAR3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="CHAR4" >CHAR4=#CHAR4#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="CHAR5" >CHAR5=#CHAR5#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="CHAR6" >CHAR6=#CHAR6#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="NUM1" >NUM1=#NUM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="NUM2" >NUM2=#NUM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="NUM3" >NUM3=#NUM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="NUM4" >NUM4=#NUM4#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="NUM5" >NUM5=#NUM5#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="NUM6" >NUM6=#NUM6#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="DATE1" >DATE1=#DATE1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="DATE2" >DATE2=#DATE2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="DATE3" >DATE3=#DATE3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SFZF" >SFZF=#SFZF#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="ZFRQ" >ZFRQ=#ZFRQ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SRM1" >SRM1=#SRM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SRM2" >SRM2=#SRM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SRM3" >SRM3=#SRM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="BZ" >BZ=#BZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="MXID" >MXID=#MXID#</isPropertyAvailable>
+            </dynamic>
+            where DMID=#DMID# and MXID=#MXID#
+        </update>
+        <select id="LIST2_XT_GGDMMX" parameterClass="StrObjDict" resultClass="StrObjDict" >
+            select  DMID${ibatis_key_plus}MXID  AS ID ,DMID,MXID,MXMC,SJID,JB,XTPB,SFMJ,PXXH,XGYH,XGRQ,CHAR1,CHAR2,CHAR3,CHAR4,CHAR5,CHAR6,NUM1,NUM2,NUM3,NUM4,NUM5,NUM6,DATE1,DATE2,DATE3,SFZF,ZFRQ,SRM1,SRM2,SRM3,BZ from XT_GGDMMX
+            <dynamic prepend=" WHERE ">
+                <isPropertyAvailable prepend=" AND " property="DMID" >DMID=#DMID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MXID" >MXID=#MXID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MXMC" >MXMC=#MXMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SJID" >SJID=#SJID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="JB" >JB=#JB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XTPB" >XTPB=#XTPB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SFMJ" >SFMJ=#SFMJ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PXXH" >PXXH=#PXXH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGYH" >XGYH=#XGYH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_START" >XGRQ>=${ibatis_key_todate}#XGRQ_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_END" >XGRQ&lt;=${ibatis_key_todate}#XGRQ_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CHAR1" >CHAR1=#CHAR1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CHAR2" >CHAR2=#CHAR2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CHAR3" >CHAR3=#CHAR3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CHAR4" >CHAR4=#CHAR4#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CHAR5" >CHAR5=#CHAR5#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CHAR6" >CHAR6=#CHAR6#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="NUM1" >NUM1=#NUM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="NUM2" >NUM2=#NUM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="NUM3" >NUM3=#NUM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="NUM4" >NUM4=#NUM4#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="NUM5" >NUM5=#NUM5#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="NUM6" >NUM6=#NUM6#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DATE1_START" >DATE1>=${ibatis_key_todate}#DATE1_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DATE1_END" >DATE1&lt;=${ibatis_key_todate}#DATE1_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DATE2_START" >DATE2>=${ibatis_key_todate}#DATE2_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DATE2_END" >DATE2&lt;=${ibatis_key_todate}#DATE2_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DATE3_START" >DATE3>=${ibatis_key_todate}#DATE3_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DATE3_END" >DATE3&lt;=${ibatis_key_todate}#DATE3_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SFZF" >SFZF=#SFZF#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ZFRQ_START" >ZFRQ>=${ibatis_key_todate}#ZFRQ_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ZFRQ_END" >ZFRQ&lt;=${ibatis_key_todate}#ZFRQ_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM1" >SRM1=#SRM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM2" >SRM2=#SRM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM3" >SRM3=#SRM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="BZ" >BZ=#BZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+            <dynamic prepend=" ORDER BY ">
+                <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+        </select>
+    </statements>
+</sqlMap>

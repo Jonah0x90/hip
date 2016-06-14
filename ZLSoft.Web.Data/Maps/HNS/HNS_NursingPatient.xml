@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="NursingPatient" type="ZLSoft.Model.HNS.NursingPatient, ZLSoft.Model" />
+    <typeAlias alias="PK_NursingPatient" type="ZLSoft.Model.HNS.PK_NursingPatient, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="NursingPatient_Result" class="NursingPatient">
+      <result property="ID" column="ID" />
+      <result property="RelatID" column="相关ID" />
+      <result property="InTimes" column="相关住院次数" />
+      <result property="AdmissionNumber" column="住院号" />
+      <result property="FullName" column="姓名" />
+      <result property="Sex" column="性别" />
+      <result property="BirthDay" column="出生日期" />
+      <result property="InDay" column="入院日期" />
+      <result property="OutDay" column="出院日期" />
+      <result property="LesionID" column="当前病区相关ID" />
+      <result property="DepartmentID" column="当前科室相关ID" />
+      <result property="Nurse" column="责任护士" />
+      <result property="BedNumber" column="床号" />
+      <result property="Status" column="状态" />
+      <result property="IsBaseThird" column="是否对照" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="ModifyTime" column="修改时间" />
+      <result property="IsCritical" column="是否危重" />
+      <result property="NursingLevel" column="护理等级" />
+      <result property="Age" column="年龄" />
+      <result property="Doctor" column="主治医生"/>
+      <result property="BabyNum" column="相关婴儿"/>
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_NursingPatient" parameterClass="StrObjDict">
+      INSERT INTO PUB_病人基本信息(ID,相关ID,相关住院次数,住院号,姓名,性别,出生日期,入院日期,出院日期,当前病区相关ID,当前科室相关ID,责任护士,床号,状态,是否对照,修改用户,修改时间,是否危重,护理等级,年龄,相关婴儿)
+      VALUES (#ID#,#RelatID#,#InTimes#,#AdmissionNumber#,#FullName#,#Sex#,#BirthDay#,#InDay#,#OutDay#,#LesionID#,#DepartmentID#,#Nurse#,#BedNumber#,#Status#,#IsBaseThird#,#ModifyUser#,#ModifyTime#,#IsCritical#,#NursingLevel#,#Age#,#BabyNum#)
+    </update>
+
+    <update id="UPDATE_NursingPatient" parameterClass="StrObjDict" >
+      update PUB_病人基本信息
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="RelatID" >相关ID=#RelatID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InTimes" >相关住院次数=#InTimes#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="AdmissionNumber" >住院号=#AdmissionNumber#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FullName" >姓名=#FullName#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Sex" >性别=#Sex#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="BirthDay" >出生日期=#BirthDay#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InDay" >入院日期=#InDay#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="OutDay" >出院日期=#OutDay#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="LesionID" >当前病区相关ID=#LesionID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="DepartmentID" >当前科室相关ID=#DepartmentID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Nurse" >责任护士=#Nurse#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="BedNumber" >床号=#BedNumber#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Status" >状态=#Status#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsBaseThird" >是否对照=#IsBaseThird#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsCritical" >是否危重=#IsCritical#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="NursingLevel" >护理等级=#NursingLevel#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Age" >年龄=#Age#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_NursingPatient" parameterClass="StrObjDict" >
+      delete from PUB_病人基本信息
+      where ID=#ID#
+    </delete>
+
+    <select id="Get_SysPatient" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT ID,
+      相关ID,
+      相关住院次数,
+      住院号,
+      姓名,
+      性别,
+      to_char(出生日期,'yyyy-mm-dd HH24:mi:ss') AS 出生日期,
+      to_char(入院日期,'yyyy-mm-dd HH24:mi:ss') AS 入院日期,
+      to_char(出院日期,'yyyy-mm-dd HH24:mi:ss') AS 出院日期,
+      当前病区相关ID,
+      当前科室相关ID,
+      责任护士,
+      床号,
+      状态,
+      是否对照,
+      修改用户,
+      to_char(修改时间,'yyyy-mm-dd HH24:mi:ss') AS 修改时间
+      FROM PUB_病人基本信息
+      WHERE ID=#ID#
+    </select>
+
+    <select id="LOAD_NursingPatient" parameterClass="PK_NursingPatient" resultMap="NursingPatient_Result" >
+      SELECT * FROM PUB_病人基本信息
+      WHERE ID=#ID#
+    </select>
+
+    <!--获取病人基本信息关联补充信息,待办事项，明细，表单   and jbxx.ID in (52262,52134)-->
+    <select id="LIST_NursingPatient" parameterClass="StrObjDict"  resultClass="StrObjDict">
+      select jbxx.ID,jbxx.姓名 "Name",jbxx.相关婴儿 "Baby",jbxx.相关住院次数 "HomepageID",jbxx.床号 "BedNumber",jbxx.年龄 "Age",jbxx.性别 "Sex",jbxx.责任护士 "Nurse",jbxx.护理等级 "NursingLevel",jbxx.是否危重 "IsCritical",
+      To_Char(jbxx.入院日期, 'yyyy-MM-dd hh24:mi:ss') "InDay",To_Char(jbxx.出院日期, 'yyyy-MM-dd hh24:mi:ss') "OutDay",bcxx.ExtraInfo "ExtraInfo",bd.名称 "FormName",dbsx.名称 "TodoName",dbsx.URL,dbsx.参数 "Parameter"
+      from pub_病人基本信息 jbxx
+      join (
+      select 对象相关ID,LISTAGG(信息名||'_'||信息值,',') WITHIN GROUP (ORDER BY 对象相关ID) ExtraInfo
+      from pub_病人补充信息
+      group by 对象相关ID
+      ) bcxx on bcxx.对象相关ID=jbxx.ID||'.'||jbxx.相关住院次数||'.'||jbxx.相关婴儿||'.'
+      left join pub_待办事项明细 mx on jbxx.id=mx.对象ID
+      left join 系统_待办事项 dbsx on dbsx.ID=mx.待办事项ID
+      left join PUB_表单 bd on bd.id=mx.表单ID
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" OR " property="DepartmentID" >当前科室相关ID=#DepartmentID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="LesionID" >当前病区相关ID=#LesionID#</isPropertyAvailable>
+
+      </dynamic>
+      <dynamic prepend="AND">
+        <isEmpty property="IsContain">
+          (
+          <isPropertyAvailable prepend=" OR " property="LstLevel" >
+            jbxx.护理等级 IN
+            <iterate property="LstLevel" open="(" close=")" conjunction=",">
+              #LstLevel[]#
+            </iterate>
+          </isPropertyAvailable>
+          <isNotEmpty prepend=" OR " property="IsCritical" >jbxx.是否危重=#IsCritical#</isNotEmpty>
+          <isNotEmpty prepend="OR" property="NursingLevel">jbxx.护理等级 is null</isNotEmpty>
+          <!--<isNotEmpty prepend="OR" property="Age"> SUBSTR(年龄,0,INSTR(年龄,'岁')-1) &lt;30 </isNotEmpty>-->
+          )
+        </isEmpty>
+        <isEqual prepend=" AND " property="Type" compareValue="1">
+          <!--我的病人-->
+          责任护士=#Nurse#
+        </isEqual>
+        <isEqual prepend=" AND " property="Type" compareValue="2">
+          <!--所有病人-->
+          1=1
+        </isEqual>
+        <isEqual prepend=" AND " property="Type" compareValue="3">
+          <!--转出病人-->
+          jbxx.id not in(select distinct 病人相关ID from pub_病人变动记录 where 开始时间>add_months(sysdate,-6) and 开始原因=3 and 病区相关ID=#LesionID#)
+        </isEqual>
+        <isEqual prepend=" AND " property="Type" compareValue="4">
+          <!--出院病人-->
+          jbxx.出院日期 is not null
+          <isNotEmpty prepend=" AND " property="StartTime" >
+            jbxx.出院日期 Between Trunc(TO_DATE(#StartTime#, 'yyyy-MM-dd')) And TO_DATE(#EndTime#, 'yyyy-MM-dd')
+          </isNotEmpty>
+          <isNotEmpty prepend=" AND " property="FullName" >姓名=#FullName#</isNotEmpty>
+          <isNotEmpty prepend=" AND " property="BedNumber" >床号=#BedNumber#</isNotEmpty>
+          <isNotEmpty prepend=" AND " property="AdmissionNumber" >住院号=#AdmissionNumber#</isNotEmpty>
+        </isEqual>
+      </dynamic>
+    </select>
+
+    <!--获取病人基本信息关联补充信息-->
+    <select id="LIST_NursingPatient1" parameterClass="StrObjDict" resultClass="StrObjDict">
+      select a.ID,a.相关ID "RelatID", a.相关住院次数 "InTimes",a.住院号 "AdmissionNumber", a.姓名 "FullName",
+      a.性别 "Sex",a.出生日期 "BirthDay",a.入院日期 "InDay",a.出院日期 "OutDay",a.当前病区相关ID "LesionID",
+      a.当前科室相关ID "DepartmentID",a.责任护士 "Nurse",a.床号 "BedNumber",a.状态 "Status",a.是否危重 "IsCritical",
+      a.护理等级 "NursingLevel",a.年龄 "Age",a.相关婴儿 "BabyNum",b.信息值 "Doctor"
+      from pub_病人基本信息 a
+      left join (
+      select 对象相关ID,信息值
+      from pub_病人补充信息
+      where 信息名='主治医生'
+      ) b on b.对象相关ID=a.ID
+      <dynamic  prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="LesionID" >当前病区相关ID=#LesionID#</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+    <select id="COUNT_NursingPatient1" parameterClass="StrObjDict" resultClass="int">
+      select count(1)
+      from pub_病人基本信息 a
+      left join (
+      select 对象相关ID,信息值
+      from pub_病人补充信息
+      where 信息名='主治医生'
+      ) b on b.对象相关ID=a.ID
+      <dynamic  prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="LesionID" >当前病区相关ID=#LesionID#</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="GetNurseLeavelCount" parameterClass="StrObjDict"  resultClass="StrObjDict">
+      SELECT sum(case when 护理等级='Ⅰ级护理' then 1 else 0 end) Ⅰ级护理,
+      sum(case when 护理等级='Ⅱ级护理' then 1 else 0 end) Ⅱ级护理,
+      sum(case when 护理等级='Ⅲ级护理' then 1 else 0 end) Ⅲ级护理,
+      sum(case when 护理等级='特级护理' then 1 else 0 end) 特级护理,
+      sum(case when 护理等级 is null then 1 else 0 end) 无护理,
+      sum(case when 是否危重=1 then 1 else 0 end) 危重病人
+      FROM pub_病人基本信息 WHERE  当前病区相关ID=#LesionID# and 出院日期 is null
+    </select>
+
+
+    <select id="COUNT_NursingPatient" parameterClass="StrObjDict" resultClass="int" >
+      select count(1)
+      from pub_病人基本信息 jbxx
+      join (
+      select 对象相关ID,LISTAGG(信息名||'_'||信息值,',') WITHIN GROUP (ORDER BY 对象相关ID) ExtraInfo
+      from pub_病人补充信息
+      group by 对象相关ID
+      ) bcxx on bcxx.对象相关ID=jbxx.ID
+      left join pub_待办事项明细 mx on jbxx.id=mx.对象ID
+      left join 系统_待办事项 dbsx on dbsx.ID=mx.待办事项ID
+      left join PUB_表单 bd on bd.id=mx.表单ID
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" OR " property="DepartmentID" >当前科室相关ID=#DepartmentID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="LesionID" >当前病区相关ID=#LesionID#</isPropertyAvailable>
+
+      </dynamic>
+      <dynamic prepend="AND">
+        <isEmpty property="IsContain">
+          (
+          <isPropertyAvailable prepend=" OR " property="LstLevel" >
+            jbxx.护理等级 IN
+            <iterate property="LstLevel" open="(" close=")" conjunction=",">
+              #LstLevel[]#
+            </iterate>
+          </isPropertyAvailable>
+          <isNotEmpty prepend=" OR " property="IsCritical" >jbxx.是否危重=#IsCritical#</isNotEmpty>
+          <isNotEmpty prepend="OR" property="NursingLevel">jbxx.护理等级 is null</isNotEmpty>
+          <!--<isNotEmpty prepend="OR" property="Age"> SUBSTR(年龄,0,INSTR(年龄,'岁')-1) &lt;30 </isNotEmpty>-->
+          )
+        </isEmpty>
+        <isEqual prepend=" AND " property="Type" compareValue="1">
+          <!--我的病人-->
+          责任护士=#Nurse#
+        </isEqual>
+        <isEqual prepend=" AND " property="Type" compareValue="2">
+          <!--所有病人-->
+          1=1
+        </isEqual>
+        <isEqual prepend=" AND " property="Type" compareValue="3">
+          <!--转出病人-->
+          jbxx.id not in(select distinct 病人相关ID from pub_病人变动记录 where 开始时间>add_months(sysdate,-6) and 开始原因=3 and 病区相关ID=#LesionID#)
+        </isEqual>
+        <isEqual prepend=" AND " property="Type" compareValue="4">
+          <!--出院病人-->
+          jbxx.出院日期 is not null
+          <isNotEmpty prepend=" AND " property="StartTime" >
+            jbxx.出院日期 Between Trunc(TO_DATE(#StartTime#, 'yyyy-MM-dd')) And TO_DATE(#EndTime#, 'yyyy-MM-dd')
+          </isNotEmpty>
+          <isNotEmpty prepend=" AND " property="FullName" >姓名=#FullName#</isNotEmpty>
+          <isNotEmpty prepend=" AND " property="BedNumber" >床号=#BedNumber#</isNotEmpty>
+          <isNotEmpty prepend=" AND " property="AdmissionNumber" >住院号=#AdmissionNumber#</isNotEmpty>
+        </isEqual>
+      </dynamic>
+    </select>
+
+
+    <!-- 根据部门获取对应有护理计划的病人信息  And b.部门id = #DeptID#-->
+    <select id="Getpatiplan" parameterClass="StrObjDict" resultClass="StrObjDict">
+      Select a.ID, a.相关住院次数 "InTimes", a.床号 "BedNumber", a.姓名 "FullName", a.性别 "Sex" ,a.状态 "Status",
+      a.年龄 "Age", To_Char(a.出生日期, 'yyyy-MM-dd hh24:mi:ss') "BirthDay",
+      To_Char(a.入院日期, 'yyyy-MM-dd hh24:mi:ss') "InDay  ",
+      To_Char(a.出院日期, 'yyyy-MM-dd hh24:mi:ss') "OutDay", a.住院号 "AdmissionNumber", a.责任护士 "Nurse"
+      From PUB_病人基本信息 a, HNS_病人护理计划 b
+      Where a.ID = b.对象id And a.状态 = 1
+      AND (#InputCode# IS NULL OR (a.床号 LIKE '%$InputCode$%' OR a.姓名 LIKE '%$InputCode$%' OR a.住院号  Like '%$InputCode$%'))
+    </select>
+
+  </statements>
+</sqlMap>

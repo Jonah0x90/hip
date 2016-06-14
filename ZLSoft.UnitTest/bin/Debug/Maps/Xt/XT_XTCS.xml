@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+        <typeAlias alias="XT_XTCS" type="ZLSoft.Model.System.XT_XTCS,ZLSoft.Model" />
+        <typeAlias alias="PK_XT_XTCS" type="ZLSoft.Model.System.PK_XT_XTCS, ZLSoft.Model" />
+    </alias>
+    <statements>
+        <insert id="INSERT_XT_XTCS" parameterClass="StrObjDict" >
+            insert into XT_XTCS(CSID,CSMC,CSSM,CSZSM,MRZ,SRM1,SRM2,SRM3,XGRQ,XGRQ,LBID,SLBZ,SLSQL)
+            values(
+            #CSID#,#CSMC#,#CSSM#,#CSZSM#,#MRZ#,#SRM1#,#SRM2#,#SRM3#,#XGYH#,#XGRQ#,#LBID#,#SLBZ#,#SLSQL#)
+        </insert>
+        <update id="UPDATE_XT_XTCS" parameterClass="StrObjDict" >
+            update XT_XTCS
+            set
+            <dynamic prepend=" ">
+                <isPropertyAvailable prepend=" , " property="CSMC" >CSMC=#CSMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="CSSM" >CSSM=#CSSM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="CSZSM" >CSZSM=#CSZSM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="MRZ" >MRZ=#MRZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SRM1" >SRM1=#SRM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SRM2" >SRM2=#SRM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SRM3" >SRM3=#SRM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="XGYH" >XGYH=#XGYH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="XGRQ" >XGRQ=#XGRQ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="LBID" >LBID=#LBID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SLBZ" >SLBZ=#SLBZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SLSQL" >SLSQL=#SLSQL#</isPropertyAvailable>
+            </dynamic>
+            where CSID=#CSID#
+        </update>
+        <delete id="DELETE_XT_XTCS" parameterClass="StrObjDict" >
+            delete XT_XTCS
+            where CSID=#CSID#
+        </delete>
+        <select id="LOAD_XT_XTCS" parameterClass="PK_XT_XTCS" resultClass="XT_XTCS" >
+            select CSID,CSMC,CSSM,CSZSM,MRZ,SRM1,SRM2,SRM3,XGYH,XGRQ,LBID,SLBZ,SLSQL from XT_XTCS
+            where CSID=#CSID#
+        </select>
+        <select id="LIST_XT_XTCS" parameterClass="StrObjDict" resultClass="XT_XTCS" >
+            select CSID,CSMC,CSSM,CSZSM,MRZ,SRM1,SRM2,SRM3,XGYH,XGRQ,LBID,SLBZ,SLSQL from XT_XTCS
+            <dynamic prepend=" WHERE ">
+                <isPropertyAvailable prepend=" AND " property="CSID" >CSID=#CSID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CSMC" >CSMC=#CSMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CSSM" >CSSM=#CSSM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CSZSM" >CSZSM=#CSZSM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MRZ" >MRZ=#MRZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM1" >SRM1=#SRM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM2" >SRM2=#SRM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM3" >SRM3=#SRM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGYH" >XGYH=#XGYH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_START" >XGRQ>=${ibatis_key_todate}#XGRQ_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_END" >XGRQ&lt;=${ibatis_key_todate}#XGRQ_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="LBID" >LBID=#LBID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SLBZ" >SLBZ=#SLBZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SLSQL" >SLSQL=#SLSQL#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+            <dynamic prepend=" ORDER BY ">
+                <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+        </select>
+
+        <select id="LIST2_XT_XTCS" parameterClass="StrObjDict" resultClass="StrObjDict" >
+            select CSID,CSMC,CSSM,CSZSM,MRZ,SRM1,SRM2,SRM3,XGYH,XGYH,LBID,SLBZ,SLSQL from XT_XTCS
+            <dynamic prepend=" WHERE ">
+                <isPropertyAvailable prepend=" AND " property="CSID" >CSID=#CSID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CSMC" >CSMC=#CSMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CSSM" >CSSM=#CSSM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CSZSM" >CSZSM=#CSZSM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MRZ" >MRZ=#MRZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM1" >SRM1=#SRM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM2" >SRM2=#SRM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM3" >SRM3=#SRM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGYH" >XGYH=#XGYH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_START" >XGYH>=${ibatis_key_todate}#XGRQ_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_END" >XGRQ&lt;=${ibatis_key_todate}#XGRQ_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="LBID" >LBID=#LBID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SLBZ" >SLBZ=#SLBZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SLSQL" >SLSQL=#SLSQL#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+            <dynamic prepend=" ORDER BY ">
+                <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+        </select>
+        <select id="LIST_XT_XTCS_BY_LB" parameterClass="StrObjDict" resultClass="StrObjDict" >
+            SELECT C.*
+            FROM XT_XTXX A, XT_GGDMMX B, XT_XTCS C
+            WHERE A.XTID = B.CHAR1
+            AND B.DMID = '01001'
+            AND C.LBID = B.MXID
+            <dynamic>
+                <isPropertyAvailable prepend=" AND " property="XTID" >A.XTID=#XTID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MXID" >B.MXID=#MXID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="LBID" >C.LBID=#LBID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+            <dynamic prepend=" ORDER BY ">
+                <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+        </select>
+    </statements>
+</sqlMap>

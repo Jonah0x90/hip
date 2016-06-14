@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="Annex" type="ZLSoft.Model.SYS.Annex, ZLSoft.Model" />
+    <typeAlias alias="PK_Annex" type="ZLSoft.Model.SYS.PK_Annex, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="AnnexResult" class="Annex">
+      <result property="ID" column="ID" />
+      <result property="Code" column="代码"/>
+      <result property="AnnexType" column="附件类别"/>
+      <result property="Size" column="大小"/>
+      <result property="Suffix" column="后缀名"/>
+      <result property="SourceName" column="原始名称"/>
+      <result property="UploadName" column="上传后的名称"/>
+      <result property="ThumbnailName" column="缩略图名称"/>
+      <result property="Modifier" column="修改者"/>
+      <result property="ModifiTime" column="修改时间"/>
+      <result property="Remarks" column="备注"/>
+      <result property="IsNullify" column="是否作废"/>
+      <result property="DownLoadNumber" column="下载次数"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+
+    <select id="LOAD_Annex" parameterClass="PK_Annex" resultMap="AnnexResult" resultClass="Annex" >
+      select * from 系统_附件
+      where ID=#ID#
+    </select>
+
+
+
+  </statements>
+</sqlMap>

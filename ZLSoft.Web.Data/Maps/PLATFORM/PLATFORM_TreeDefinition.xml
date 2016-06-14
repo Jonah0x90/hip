@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="TreeDefinition" type="ZLSoft.Model.SYS.TreeDefinition, ZLSoft.Model" />
+    <typeAlias alias="PK_TreeDefinition" type="ZLSoft.Model.SYS.PK_TreeDefinition, ZLSoft.Model" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="TreeDefinition_Result" class="TreeDefinition">
+      <result property="IsRootVisable" column="是否显示根节点" />
+      <result property="RootBuildMethod" column="根节点生成方式" />
+      <result property="InvalidTime" column="作废时间" />
+      <result property="ID" column="ID" />
+      <result property="Name" column="名称" />
+      <result property="OrcScript" column="脚本_ORC" />
+      <result property="MssqlScript" column="脚本_MSSQL" />
+      <result property="MysqlScript" column="脚本_MYSQL" />
+      <result property="IsInvalid" column="是否作废" />
+      <result property="IsSysTree" column="是否系统树" />
+      <result property="Explain" column="说明" />
+      <result property="IsMultilayer" column="是否多级" />
+      <result property="RootName" column="根节点名称" />
+      <result property="NodeFormat" column="节点格式" />
+      <result property="InputCode" column="输入码" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="ModifyTime" column="修改时间" />
+      <result property="SeqNo" column="排序序号" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <update id="INSERT_TreeDefinition" parameterClass="StrObjDict">
+      INSERT INTO 系统_树定义(是否显示根节点,根节点生成方式,作废时间,ID,名称,脚本_ORC,脚本_MSSQL,脚本_MYSQL,是否作废,是否系统树,说明,是否多级,根节点名称,节点格式,输入码,修改用户,修改时间,排序序号)
+      VALUES (#IsRootVisable#,#RootBuildMethod#,#InvalidTime#,#ID#,#Name#,#OrcScript#,#MssqlScript#,#MysqlScript#,#IsInvalid#,#IsSysTree#,#Explain#,#IsMultilayer#,#RootName#,#NodeFormat#,#InputCode#,#ModifyUser#,#ModifyTime#,#SeqNo#)
+    </update>
+
+    <update id="UPDATE_TreeDefinition" parameterClass="StrObjDict" >
+      update 系统_树定义
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="IsRootVisable" >是否显示根节点=#IsRootVisable#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="RootBuildMethod" >根节点生成方式=#RootBuildMethod#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InvalidTime" >作废时间=#InvalidTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="OrcScript" >脚本_ORC=#OrcScript#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="MssqlScript" >脚本_MSSQL=#MssqlScript#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="MysqlScript" >脚本_MYSQL=#MysqlScript#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsSysTree" >是否系统树=#IsSysTree#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Explain" >说明=#Explain#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsMultilayer" >是否多级=#IsMultilayer#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="RootName" >根节点名称=#RootName#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="NodeFormat" >节点格式=#NodeFormat#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InputCode" >输入码=#InputCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SeqNo" >排序序号=#SeqNo#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_TreeDefinition" parameterClass="StrObjDict" >
+      delete from 系统_树定义
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_TreeDefinition" parameterClass="PK_TreeDefinition" resultMap="TreeDefinition_Result" resultClass="TreeDefinition" >
+      SELECT * FROM 系统_树定义
+      WHERE ID=#ID#
+    </select>
+
+    <select id="GetAll_TreeDefinition" parameterClass="StrObjDict" resultClass="StrObjDict">
+      Select ID,名称 AS "Name",脚本_ORC AS "OrcScript",脚本_MSSQL AS "MssqlScript",脚本_MYSQL AS "MysqlScript",
+      是否作废 AS "IsInvalid",是否系统树 AS "IsSysTree",说明 AS "Explain",是否多级 AS "IsMultilayer",
+      根节点名称 AS "RootName",输入码 AS "InputCode",修改用户 AS "ModifyUser",修改时间 AS "ModifyTime",
+      排序序号 AS "SeqNo",是否显示根节点 AS "IsRootVisable",根节点生成方式 AS "RootBuildMethod",作废时间 AS "InvalidTime"
+      From 系统_树定义
+    </select>
+
+    <select id="LIST_TreeDefinition" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      select ID,名称 AS "Name",脚本_ORC AS "OrcScript",脚本_MSSQL AS "MssqlScript",脚本_MYSQL AS "MysqlScript",
+      是否作废 AS "IsInvalid",是否系统树 AS "IsSysTree",说明 AS "Explain",是否多级 AS "IsMultilayer",
+      根节点名称 AS "RootName",输入码 AS "InputCode",修改用户 AS "ModifyUser",修改时间 AS "ModifyTime",
+      排序序号 AS "SeqNo",是否显示根节点 AS "IsRootVisable",根节点生成方式 AS "RootBuildMethod",作废时间 AS "InvalidTime" from 系统_树定义
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsRootVisable" >是否显示根节点 like '%$IsRootVisable$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RootBuildMethod" >根节点生成方式 like '%$RootBuildMethod$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >作废时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >作废时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InvalidTime" >作废时间 like '%$InvalidTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="OrcScript" >脚本_ORC like '%$OrcScript$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MssqlScript" >脚本_MSSQL like '%$MssqlScript$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MysqlScript" >脚本_MYSQL like '%$MysqlScript$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like '%$IsInvalid$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsSysTree" >是否系统树 like '%$IsSysTree$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Explain" >说明 like '%$Explain$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsMultilayer" >是否多级 like '%$IsMultilayer$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RootName" >根节点名称 like '%$RootName$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="NodeFormat" >节点格式 like '%$NodeFormat$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InputCode" >输入码 like '%$InputCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SeqNo" >排序序号 like '%$SeqNo$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_TreeDefinition" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM 系统_树定义
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsRootVisable" >是否显示根节点 like '%$IsRootVisable$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RootBuildMethod" >根节点生成方式 like '%$RootBuildMethod$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >作废时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >作废时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InvalidTime" >作废时间 like '%$InvalidTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="OrcScript" >脚本_ORC like '%$OrcScript$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MssqlScript" >脚本_MSSQL like '%$MssqlScript$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MysqlScript" >脚本_MYSQL like '%$MysqlScript$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like '%$IsInvalid$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsSysTree" >是否系统树 like '%$IsSysTree$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Explain" >说明 like '%$Explain$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsMultilayer" >是否多级 like '%$IsMultilayer$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RootName" >根节点名称 like '%$RootName$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="NodeFormat" >节点格式 like '%$NodeFormat$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InputCode" >输入码 like '%$InputCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SeqNo" >排序序号 like '%$SeqNo$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

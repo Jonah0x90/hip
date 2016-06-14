@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+        <typeAlias alias="XT_SJQX_DY" type="ZLSoft.Model.System.XT_SJQX_DY, ZLSoft.Model" />
+        <typeAlias alias="PK_XT_SJQX_DY" type="ZLSoft.Model.System.PK_XT_SJQX_DY, ZLSoft.Model" />
+    </alias>
+    <statements>
+        <insert id="INSERT_XT_SJQX_DY" parameterClass="StrObjDict" >
+            insert into XT_SJQX_DY(FAID,DYID,DYMC,KCSQL,FYMC,MRZ,PXXH,XGR,XGRQ)
+            values(
+            #FAID#,#DYID#,#DYMC#,#KCSQL#,#FYMC#,#MRZ#,#PXXH#,#XGR#,#XGRQ#)
+        </insert>
+        <update id="UPDATE_XT_SJQX_DY" parameterClass="StrObjDict" >
+            update XT_SJQX_DY
+            set
+            <dynamic prepend=" ">
+                <isPropertyAvailable prepend=" , " property="DYMC" >DYMC=#DYMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="KCSQL" >KCSQL=#KCSQL#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="FYMC" >FYMC=#FYMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="MRZ" >MRZ=#MRZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="PXXH" >PXXH=#PXXH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="XGR" >XGR=#XGR#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="XGRQ" >XGRQ=#XGRQ#</isPropertyAvailable>
+            </dynamic>
+            where FAID=#FAID# and DYID=#DYID#
+        </update>
+        <delete id="DELETE_XT_SJQX_DY" parameterClass="StrObjDict" >
+            delete XT_SJQX_DY
+            where FAID=#FAID# and DYID=#DYID#
+        </delete>
+        <select id="LOAD_XT_SJQX_DY" parameterClass="PK_XT_SJQX_DY" resultClass="XT_SJQX_DY" >
+            select FAID,DYID,DYMC,KCSQL,FYMC,MRZ,PXXH,XGR,XGRQ from XT_SJQX_DY
+            where FAID=#FAID# and DYID=#DYID#
+        </select>
+        <select id="LIST_XT_SJQX_DY" parameterClass="StrObjDict" resultClass="XT_SJQX_DY" >
+            select FAID,DYID,DYMC,KCSQL,FYMC,MRZ,PXXH,XGR,XGRQ from XT_SJQX_DY
+            <dynamic prepend=" WHERE ">
+                <isPropertyAvailable prepend=" AND " property="FAID" >FAID=#FAID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DYID" >DYID=#DYID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DYMC" >DYMC=#DYMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="KCSQL" >KCSQL=#KCSQL#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="FYMC" >FYMC=#FYMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MRZ" >MRZ=#MRZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PXXH" >PXXH=#PXXH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGR" >XGR=#XGR#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_START" >XGRQ>=${ibatis_key_todate}#XGRQ_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_END" >XGRQ&lt;=${ibatis_key_todate}#XGRQ_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+            <dynamic prepend=" ORDER BY ">
+                <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+        </select>
+        <select id="LIST2_XT_SJQX_DY" parameterClass="StrObjDict" resultClass="StrObjDict" >
+            select FAID,DYID,DYMC,KCSQL,FYMC,MRZ,PXXH,XGR,XGRQ from XT_SJQX_DY
+            <dynamic prepend=" WHERE ">
+                <isPropertyAvailable prepend=" AND " property="FAID" >FAID=#FAID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DYID" >DYID=#DYID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DYMC" >DYMC=#DYMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="KCSQL" >KCSQL=#KCSQL#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="FYMC" >FYMC=#FYMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MRZ" >MRZ=#MRZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PXXH" >PXXH=#PXXH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGR" >XGR=#XGR#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_START" >XGRQ>=${ibatis_key_todate}#XGRQ_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_END" >XGRQ&lt;=${ibatis_key_todate}#XGRQ_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+            <dynamic prepend=" ORDER BY ">
+                <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+        </select>
+    </statements>
+</sqlMap>

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="SiteDevice" type="ZLSoft.Model.SYS.SiteDevice, ZLSoft.Model" />
+    <typeAlias alias="SiteVersionInfo" type="ZLSoft.Model.SYS.SiteVersionInfo, ZLSoft.Model" />
+    <typeAlias alias="PK_SiteDevice" type="ZLSoft.Model.SYS.PK_SiteDevice, ZLSoft.Model" />
+    <typeAlias alias="PK_SiteVersionInfo" type="ZLSoft.Model.SYS.PK_SiteVersionInfo, ZLSoft.Model" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="SiteDevice_Result" class="SiteDevice">
+      <result property="DeviceID" column="设备标识" />
+      <result property="Remark" column="说明" />
+      <result property="DeptID" column="所属部门ID" />
+      <result property="RegTime" column="注册时间" />
+      <result property="DeviceInfo" column="设备型号" />
+      <result property="IsMobile" column="是否移动设备" />
+      <result property="MinVersion" column="要求版本" />
+      <result property="Enable" column="是否启用" />
+    </resultMap>
+    <resultMap id="SiteVersionInfo_Result" class="SiteVersionInfo">
+      <result property="ModuleID" column="模块ID" />
+      <result property="CurrentVersion" column="当前版本" />
+      <result property="UpdateVersion" column="升级版本" />
+      <result property="File" column="升级文件地址" />
+      <result property="Account" column="升级帐号" />
+      <result property="Password" column="升级密码" />
+      <result property="UpdateMethod" column="升级方式" />
+    </resultMap>
+  </resultMaps>
+  
+  
+  <statements>
+    <select id="LOAD_SiteDevice" parameterClass="PK_SiteDevice" resultMap="SiteDevice_Result">
+      SELECT * FROM 系统_站点设备
+      WHERE 设备标识=#DeviceID#
+    </select>
+
+    <select id="COUNT_SiteDevice" resultClass="StrObjDict">
+      SELECT COUNT(*) AS DeviceCount FROM 系统_站点设备
+    </select>
+    
+  </statements>
+</sqlMap>

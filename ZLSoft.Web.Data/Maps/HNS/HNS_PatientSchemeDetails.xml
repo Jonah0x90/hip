@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="PatientSchemeDetails" type="ZLSoft.Model.HNS.PatientSchemeDetails, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="PatientSchemeDetails_Result" class="PatientSchemeDetails">
+      <result property="SchemeID" column="方案ID" />
+      <result property="Name" column="名称" />
+      <result property="Code" column="代码" />
+      <result property="Content" column="内容" />
+      <result property="TargetID" column="选项ID" />
+      <result property="IsCustom" column="是否自定义" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="ModifyTime" column="修改时间" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_PatientSchemeDetails" parameterClass="StrObjDict">
+      INSERT INTO HNS_病人护理计划方案明细(方案ID,名称,代码,内容,选项ID,是否自定义,修改用户,修改时间)
+      VALUES (#SchemeID#,#Name#,#Code#,#Content#,#TargetID#,#IsCustom#,#ModifyUser#,#ModifyTime#)
+    </update>
+
+    <update id="UPDATE_PatientSchemeDetails" parameterClass="StrObjDict" >
+      update HNS_病人护理计划方案明细
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="SchemeID" >方案ID=#SchemeID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Code" >代码=#Code#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Content" >内容=#Content#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="TargetID" >选项ID=#TargetID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsCustom" >是否自定义=#IsCustom#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+      </dynamic>
+      where 方案ID=#SchemeID#
+    </update>
+
+    <delete id="DELETE_PatientSchemeDetails" parameterClass="StrObjDict" >
+      delete from HNS_病人护理计划方案明细
+      where 方案ID=#SchemeID#
+    </delete>
+
+
+
+    <select id="LOAD_PatientSchemeDetails" parameterClass="StrObjDict" resultMap="PatientSchemeDetails_Result" >
+      SELECT * FROM HNS_病人护理计划方案明细
+      WHERE 方案ID=#SchemeID#
+    </select>
+
+
+    <select id="LIST_PatientSchemeDetails" parameterClass="StrObjDict" resultClass="PatientSchemeDetails" resultMap="PatientSchemeDetails_Result" >
+      select * from HNS_病人护理计划方案明细
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="SchemeID" >方案ID = #SchemeID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Code" >代码 like '%$Code$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Content" >内容 like '%$Content$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="TargetID" >选项ID like '%$TargetID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsCustom" >是否自定义 like '%$IsCustom$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_PatientSchemeDetails" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM HNS_病人护理计划方案明细
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SchemeID" >方案ID like '%$SchemeID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Code" >代码 like '%$Code$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Content" >内容 like '%$Content$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="TargetID" >选项ID like '%$TargetID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsCustom" >是否自定义 like '%$IsCustom$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

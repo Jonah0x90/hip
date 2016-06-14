@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="NursingPatientExtra" type="ZLSoft.Model.HNS.NursingPatientExtra, ZLSoft.Model" />
+    <typeAlias alias="PK_NursingPatientExtra" type="ZLSoft.Model.HNS.PK_NursingPatientExtra, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="NursingPatientExtra_Result" class="NursingPatientExtra">
+      <result property="RelatID" column="对象相关ID" />
+      <result property="InfoName" column="信息名" />
+      <result property="InfoValue" column="信息值" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_NursingPatientExtra" parameterClass="StrObjDict">
+      INSERT INTO PUB_病人补充信息(对象相关ID,信息名,信息值)
+      VALUES (#RelatID#,#InfoName#,#InfoValue#)
+    </update>
+
+    <update id="UPDATE_NursingPatientExtra" parameterClass="StrObjDict" >
+      update PUB_病人补充信息
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="RelatID" >对象相关ID=#RelatID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InfoName" >信息名=#InfoName#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InfoValue" >信息值=#InfoValue#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_NursingPatientExtra" parameterClass="StrObjDict" >
+      delete from PUB_病人补充信息
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_NursingPatientExtra" parameterClass="PK_NursingPatientExtra" resultMap="NursingPatientExtra_Result" >
+      SELECT * FROM PUB_病人补充信息
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="Get_SystemElement" parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT 信息名 As "Name",信息值 As "Value" FROM PUB_病人补充信息
+      WHERE 对象相关ID=#PatientID#
+      <dynamic prepend="AND">
+      <isPropertyAvailable prepend=" AND " property="Name" >信息名=#Name#</isPropertyAvailable>
+    </dynamic>
+    </select>
+
+    <select id="Get_SystemElementName" parameterClass="StrObjDict" resultClass="StrObjDict">
+      Select 名称 As "Name" From HNS_护理元素 Where ID = #NameID#
+    </select>
+    
+
+
+    <select id="LIST_NursingPatientExtra" parameterClass="StrObjDict" resultClass="NursingPatientExtra" resultMap="NursingPatientExtra_Result" >
+      select * from PUB_病人补充信息
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RelatID" >对象相关ID like '%$RelatID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InfoName" >信息名 like '%$InfoName$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InfoValue" >信息值 like '%$InfoValue$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_NursingPatientExtra" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM PUB_病人补充信息
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RelatID" >对象相关ID like '%$RelatID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InfoName" >信息名 like '%$InfoName$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InfoValue" >信息值 like '%$InfoValue$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

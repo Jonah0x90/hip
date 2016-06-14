@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="PatientCareMark" type="ZLSoft.Model.HNS.PatientCareMark, ZLSoft.Model" />
+    <typeAlias alias="PK_PatientCareMark" type="ZLSoft.Model.HNS.PK_PatientCareMark, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="PatientCareMark_Result" class="PatientCareMark">
+      <result property="ID" column="ID" />
+      <result property="MarkTabID" column="评分表ID" />
+      <result property="MarkUser" column="评分人" />
+      <result property="MarkTime" column="评分时间" />
+      <result property="MarkResult" column="评分结果" />
+      <result property="MarkVerdict" column="评分结论" />
+      <result property="PatientID" column="病人ID" />
+      <result property="FormID" column="表单记录ID" />
+      <result property="ModifyTime" column="修改时间" />
+      <result property="QuestionID" column="问题ID" />
+      <result property="DiagnosisID" column="诊断ID" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_PatientCareMark" parameterClass="StrObjDict">
+      INSERT INTO HNS_病人护理评分(ID,评分表ID,评分人,评分时间,评分结果,评分结论,病人ID,表单记录ID,修改时间,问题ID,诊断ID)
+      VALUES (#ID#,#MarkTabID#,#MarkUser#,#MarkTime#,#MarkResult#,#MarkVerdict#,#PatientID#,#FormID#,#ModifyTime#,#QuestionID#,#DiagnosisID#)
+    </update>
+
+    <update id="UPDATE_PatientCareMark" parameterClass="StrObjDict" >
+      update HNS_病人护理评分
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="MarkTabID" >评分表ID=#MarkTabID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="MarkUser" >评分人=#MarkUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="MarkTime" >评分时间=#MarkTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="MarkResult" >评分结果=#MarkResult#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="MarkVerdict" >评分结论=#MarkVerdict#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PatientID" >病人ID=#PatientID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FormID" >表单记录ID=#FormID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="QuestionID" >问题ID=#QuestionID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="DiagnosisID" >诊断ID=#DiagnosisID#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_PatientCareMark" parameterClass="StrObjDict" >
+      delete from HNS_病人护理评分
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_PatientCareMark" parameterClass="PK_PatientCareMark" resultMap="PatientCareMark_Result" >
+      SELECT * FROM HNS_病人护理评分
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_PatientCareMark" parameterClass="StrObjDict" resultClass="PatientCareMark" resultMap="PatientCareMark_Result" >
+      select * from HNS_病人护理评分
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkTabID" >评分表ID like '%$MarkTabID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkUser" >评分人 like '%$MarkUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >评分时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >评分时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkTime" >评分时间 like '%$MarkTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkResult" >评分结果 like '%$MarkResult$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkVerdict" >评分结论 like '%$MarkVerdict$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PatientID" >病人ID = #PatientID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormID" >表单记录ID like '%$FormID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="QuestionID" >问题ID like '%$QuestionID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DiagnosisID" >诊断ID like '%$DiagnosisID$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="LIST" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      Select a.Id, a.评分表id MarkTabID, b.名称 FormName, a.评分人 MarkUser, To_Char(a.评分时间, 'yyyy-MM-dd hh24:mi:ss') MarkTime, a.评分结果 MarkResult,a.表单记录ID FormID,
+      a.评分结论 MarkVerdict, a.问题id QuestionID, a.诊断id DiagnosisID,To_Char(a.修改时间, 'yyyy-MM-dd hh24:mi:ss') ModifyTime
+      From hns_病人护理评分 A, hns_护理评分 B
+      Where a.评分表id = b.Id
+      <dynamic prepend="AND">
+        <isPropertyAvailable prepend=" AND " property="PatientID" >a.病人id =#PatientID#</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id ="GetTriggerResult" parameterClass="StrObjDict" resultClass="StrObjDict">
+      select a.评分结果 "Score",a.评分表ID "MarkTabID",c.结论 "MarkVerdict",c.最小值 "Max",c.最大值 "Min",c.待办事项 "BacklogIds"
+      from hns_病人护理评分 a,hns_护理评分 b,hns_护理评分参考 c
+      where a.病人id = #PatientID# and a.评分表ID=b.id and c.评分表ID=b.id
+      and a.评分结果 &gt;= c.最小值 and a.评分结果 &lt;= c.最大值 and c.是否触发=1 and c.是否风险=1
+    </select>
+
+
+    <select id="GetMarkInfo" parameterClass="StrObjDict" resultClass="StrObjDict">
+      Select c.Id, c.序号 SerialNumber, c.名称 Name, c.说明 Remark, c.数据值域 ValueRange, c.分值 ScoreValue,
+      c.是否多选 IsMultiple, b.选择值 ChooseValue, b.分值 ChooseScore,
+      c.分值说明 ScoreMark,a.表单记录ID FormID
+      From HNS_病人护理评分 A, HNS_病人护理评分明细 B, HNS_护理评分项目 C
+      Where a.Id = #ID# And b.评分id = a.Id
+      And c.评分表id = a.评分表id And b.评分项目id = c.Id
+    </select>
+
+
+    <select id="COUNT_PatientCareMark" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM HNS_病人护理评分
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkTabID" >评分表ID like '%$MarkTabID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkUser" >评分人 like '%$MarkUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >评分时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >评分时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkTime" >评分时间 like '%$MarkTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkResult" >评分结果 like '%$MarkResult$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkVerdict" >评分结论 like '%$MarkVerdict$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PatientID" >病人ID like '%$PatientID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormID" >表单记录ID like '%$FormID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="QuestionID" >问题ID like '%$QuestionID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DiagnosisID" >诊断ID like '%$DiagnosisID$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

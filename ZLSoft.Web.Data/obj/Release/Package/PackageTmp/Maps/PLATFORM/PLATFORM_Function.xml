@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--日志管理-->
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="Function" type="ZLSoft.Model.PLATFORM.Function, ZLSoft.Model" />
+    <typeAlias alias="PK_Function" type="ZLSoft.Model.PLATFORM.PK_Function, ZLSoft.Model" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="Function_Result" class="Function">
+      <result property="ID" column="ID" />
+      <result property="Name" column="名称" />
+      <result property="Url" column="地址" />
+      <result property="MethodType" column="表现方式" />
+      <result property="ParamDesc" column="参数说明" />
+      <result property="DefaultValue" column="默认参数" />
+      <result property="PicUrl" column="图标" />
+      <result property="FunctionCode" column="功能类别代码" />
+      <result property="Remark" column="说明" />
+      <result property="IsSupportMobile" column="是否支持移动" />
+      <result property="IsInvalid" column="是否作废" />
+      <result property="InvalidTime" column="作废时间" />
+      <result property="InputCode" column="输入码" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="ModifyTime" column="修改时间" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="LOAD_Function" parameterClass="PK_Function" resultMap="Function_Result" >
+      SELECT * FROM 系统_功能
+      <dynamic prepend=" WHERE ">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="COUNT_Function" parameterClass="PK_Function" resultClass="int" >
+      SELECT count(*) FROM 系统_功能
+    </select>
+
+    <update id="INSERT_Function" parameterClass="StrObjDict" >
+      INSERT INTO "系统_功能" (ID, "名称", "地址","表现方式", "参数说明", "默认参数", "图标", "功能类别代码", "是否作废", "作废时间", "输入码", "修改用户", "修改时间", "说明", "是否支持移动")
+      VALUES ( #ID#,#Name#,#Url#,#MethodType#,#ParamDesc#,#DefaultValue#,#PicUrl#,#FunctionCode#,#IsInvalid#,#InvalidTime#,#InputCode#,#ModifyUser#,#ModifyTime#,#Remark#,#IsSupportMobile#)
+    </update>
+
+    <update id="UPDATE_Function" parameterClass="StrObjDict" >
+      update 系统_功能
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Url" >地址=#Url#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="MethodType" >表现方式=#MethodType#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ParamDesc" >参数说明=#ParamDesc#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="DefaultValue" >默认参数=#DefaultValue#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PicUrl" >图标=#PicUrl#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FunctionCode" >功能类别代码=#FunctionCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InvalidTime" >作废时间=#InvalidTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InputCode" >输入码=#InputCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Remark" >说明=#Remark#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsSupportMobile" >是否支持移动=#IsSupportMobile#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <select id="LIST_Function" parameterClass="StrObjDict" resultClass="Function" resultMap="Function_Result" >
+      select * from 系统_功能
+
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <delete id="DELETE_Function" parameterClass="StrObjDict" >
+      delete from 系统_功能
+      where ID=#ID#
+    </delete>
+
+  </statements>
+</sqlMap>

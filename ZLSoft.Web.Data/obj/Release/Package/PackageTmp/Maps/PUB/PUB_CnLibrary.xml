@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="CNLibrary" type="ZLSoft.Model.SYS.CNLibrary, ZLSoft.Model" />
+    <typeAlias alias="PK_CNLibrary" type="ZLSoft.Model.SYS.PK_CNLibrary, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="CNLibraryResult" class="CNLibrary">
+      <result property="ID" column="ID" />
+      <result property="Character" column="汉字" />
+      <result property="Spelling" column="全拼" />
+      <result property="PinyinCode" column="拼音码" />
+      <result property="FivePenCode" column="五笔码" />
+      <result property="CornerShapeCode" column="角形码" />
+      <result property="MultiToneMarks" column="多音标志" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="LOAD_CNLibrary" parameterClass="PK_CNLibrary" resultMap="CNLibraryResult" resultClass="CNLibrary" >
+      select * from 系统_汉字库
+      where ID=#ID#
+    </select>
+  </statements>
+</sqlMap>

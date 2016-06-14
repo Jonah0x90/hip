@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="ImportObject" type="ZLSoft.Model.THIRD.ImportObject, ZLSoft.Model" />
+    <typeAlias alias="PK_ImportObject" type="ZLSoft.Model.THIRD.PK_ImportObject, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="ImportObject_Result" class="ImportObject">
+      <result property="ID" column="ID" />
+      <result property="TableName" column="表名" />
+      <result property="ImportTime" column="导入时间" />
+      <result property="ImportDataNumber" column="导入记录数" />
+      <result property="UpdateDataNumber" column="修改记录数" />
+      <result property="IsInvalid" column="是否作废" />
+      <result property="InvalidTime" column="作废时间" />
+      <result property="TakeTime" column="耗时" />
+      <result property="Identifying" column="标识" />
+      <result property="ExtendTable" column="扩展表对象" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_ImportObject" parameterClass="StrObjDict">
+      INSERT INTO 系统_三方数据导入对象(表名,导入时间,导入记录数,修改记录数,是否作废,作废时间,耗时,标识,扩展表对象)
+      VALUES (#TableName#,#ImportTime#,#ImportDataNumber#,#UpdateDataNumber#,#IsInvalid#,#InvalidTime#,DEFAULT,DEFAULT,ExtendTable)
+    </update>
+
+    <update id="UPDATE_ImportObject" parameterClass="StrObjDict" >
+      update 系统_三方数据导入对象
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="ImportTime" >导入时间=#ImportTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ImportDataNumber" >导入记录数=#ImportDataNumber#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="UpdateDataNumber" >修改记录数=#UpdateDataNumber#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InvalidTime" >作废时间=#InvalidTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="TakeTime" >耗时=#TakeTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Identifying" >是否关联对象=#Identifying#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_ImportObject" parameterClass="StrObjDict" >
+      delete from 系统_三方数据导入对象
+      where 表名=#TableName#
+    </delete>
+
+
+
+    <select id="LOAD_ImportObject" parameterClass="PK_ImportObject" resultMap="ImportObject_Result" >
+      SELECT * FROM 系统_三方数据导入对象
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_ImportObject" parameterClass="StrObjDict" resultMap="ImportObject_Result" >
+      select * from 系统_三方数据导入对象
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >表名=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="表名" >表名=#TableName#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >导入时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >导入时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ImportTime" >导入时间 like '%$ImportTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ImportDataNumber" >导入记录数 like '%ImportDataNumber%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="UpdateDataNumber" >修改记录数 like '%UpdateDataNumber%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like '%$IsInvalid$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >作废时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >作废时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InvalidTime" >作废时间 like '%$InvalidTime$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+    <select id="LIST_ImportObjectColumns" parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT COLUMN_NAME AS "ColumnName" FROM USER_TAB_COLUMNS WHERE TABLE_NAME=#TableName#
+    </select>
+
+    <select id="NAMEVALUE_ImportObject" parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT 表名 AS "Name",表名 AS "Value" FROM 系统_三方数据导入对象
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="表名" >表名=#TableName#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >导入时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >导入时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ImportTime" >导入时间 like '%$ImportTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ImportDataNumber" >导入记录数 like '%ImportDataNumber%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="UpdateDataNumber" >修改记录数 like '%UpdateDataNumber%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like '%$IsInvalid$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >作废时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >作废时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InvalidTime" >作废时间 like '%$InvalidTime$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+  </statements>
+</sqlMap>

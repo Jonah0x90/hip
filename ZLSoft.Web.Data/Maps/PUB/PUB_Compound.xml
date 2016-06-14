@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="Compound" type="ZLSoft.Model.SYS.Compound, ZLSoft.Model" />
+    <typeAlias alias="PK_Compound" type="ZLSoft.Model.SYS.PK_Compound, ZLSoft.Model" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="CompoundResult" class="Compound">
+      <result property="ID" column="ID" />
+      <result property="Name" column="名称" />
+      <result property="Description" column="描述" />
+      <result property="Address" column="地址" />
+      <result property="ZipCode" column="邮编" />
+      <result property="Phone" column="电话" />
+      <result property="Fax" column="传真" />
+      <result property="IsNullify" column="是否作废" />
+      <result property="NullifyDate" column="作废日期" />
+      <result property="Modifier" column="修改用户" />
+      <result property="ModifiDate" column="修改日期" />
+      <result property="InputCodes" column="输入码" />
+      <result property="SortNumber" column="排序序号" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="LOAD_Compound" parameterClass="PK_Compound" resultMap="CompoundResult" resultClass="Compound" >
+      select * from 系统_院区
+      where ID=#ID#
+    </select>
+  </statements>
+</sqlMap>

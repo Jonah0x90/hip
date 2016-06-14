@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="NursingMarkRefer" type="ZLSoft.Model.HNS.NursingMarkRefer, ZLSoft.Model" />
+    <typeAlias alias="PK_NursingMarkRefer" type="ZLSoft.Model.HNS.PK_NursingMarkRefer, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="NursingMarkRefer_Result" class="NursingMarkRefer">
+      <result property="ID" column="ID" />
+      <result property="MarkTabID" column="评分表ID" />
+      <result property="Result" column="结论" />
+      <result property="Min" column="最小值" />
+      <result property="Max" column="最大值" />
+      <result property="Remark" column="描述" />
+      <result property="IsTrigger" column="是否触发" />
+      <result property="Backlogs" column="待办事项" />
+      <result property="IsRisk" column="是否风险" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_NursingMarkRefer" parameterClass="StrObjDict">
+      INSERT INTO HNS_护理评分参考(ID,评分表ID,结论,最小值,最大值,描述,是否触发,待办事项,是否风险)
+      VALUES (#ID#,#MarkTabID#,#Result#,#Min#,#Max#,#Remark#,#IsTrigger#,#Backlogs#,#IsRisk#)
+    </update>
+
+    <update id="UPDATE_NursingMarkRefer" parameterClass="StrObjDict" >
+      update HNS_护理评分参考
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="MarkTabID" >评分表ID=#MarkTabID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Result" >结论=#Result#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Min" >最小值=#Min#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Max" >最大值=#Max#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Remark" >描述=#Remark#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsTrigger" >是否触发=#IsTrigger#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsRisk" >是否风险=#IsRisk#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InputCode" >待办事项=#Backlogs#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Backlogs" >待办事项=#Backlogs#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_NursingMarkRefer" parameterClass="StrObjDict" >
+      delete from HNS_护理评分参考
+      where ID=#ID#
+    </delete>
+    
+    <delete id="DeleteReferByMark" parameterClass="StrObjDict" >
+      delete from HNS_护理评分参考
+      where 评分表ID=#MarkTabID#
+    </delete>
+
+
+
+    <select id="LOAD_NursingMarkRefer" parameterClass="PK_NursingMarkRefer" resultMap="NursingMarkRefer_Result" >
+      SELECT * FROM HNS_护理评分参考
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_NursingMarkRefer" parameterClass="StrObjDict" resultClass="NursingMarkRefer" resultMap="NursingMarkRefer_Result" >
+      select * from HNS_护理评分参考
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkTabID" >评分表ID = #MarkTabID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Result" >结论 like '%$Result$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Min" >最小值 like '%$Min$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Max" >最大值 like '%$Max$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remark" >描述 like '%$Remark$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsTrigger" >是否触发 = #IsTrigger#</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="COUNT_NursingMarkRefer" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM HNS_护理评分参考
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkTabID" >评分表ID = #MarkTabID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Result" >结论 like '%$Result$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Min" >最小值 like '%$Min$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Max" >最大值 like '%$Max$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remark" >描述 like '%$Remark$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="GetResultByScore" parameterClass="StrObjDict" resultClass="string" >
+      SELECT 结论 FROM HNS_护理评分参考
+      where 最小值 &lt;= #Score# and 最大值 &gt;= #Score# and 评分表id=#MarkTabID#
+    </select>
+
+  </statements>
+</sqlMap>

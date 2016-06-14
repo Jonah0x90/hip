@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="BacklogDetails" type="ZLSoft.Model.SYS.BacklogDetails, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="BacklogDetails_Result" class="BacklogDetails">
+      <result property="BacklogID" column="待办事项ID" />
+      <result property="ObjectID" column="对象ID" />
+      <result property="FormID" column="表单ID" />
+      <result property="Content" column="内容" />
+      <result property="Hander" column="处理人" />
+      <result property="Status" column="状态" />
+      <result property="ID" column="ID" />
+      <result property="TargetID" column="选项ID" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_BacklogDetails" parameterClass="StrObjDict">
+      INSERT INTO PUB_待办事项明细(ID,待办事项ID,对象ID,表单ID,内容,处理人,状态,选项ID)
+      VALUES (#ID#,#BacklogID#,#ObjectID#,#FormID#,#Content#,#Hander#,#Status#,#TargetID#)
+    </update>
+
+    <update id="UPDATE_BacklogDetails" parameterClass="StrObjDict" >
+      update PUB_待办事项明细
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="BacklogID" >待办事项ID=#BacklogID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ObjectID" >对象ID=#ObjectID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FormID" >表单ID=#FormID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Content" >内容=#Content#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Hander" >处理人=#Hander#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Status" >状态=#Status#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="TargetID" >选项ID=#TargetID#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_BacklogDetails" parameterClass="StrObjDict" >
+      delete from PUB_待办事项明细
+      where 待办事项ID=#BacklogID#
+    </delete>
+
+
+
+    <select id="LOAD_BacklogDetails" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT * FROM PUB_待办事项明细
+      WHERE 待办事项ID=#BacklogID#
+    </select>
+
+
+    <select id="LIST_BacklogDetails" parameterClass="StrObjDict" resultClass="BacklogDetails" resultMap="BacklogDetails_Result" >
+      select * from PUB_待办事项明细
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >待办事项ID = #ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="BacklogID" >待办事项ID like '%$BacklogID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ObjectID" >对象ID like '%$ObjectID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormID" >表单ID like '%$FormID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Content" >内容 like '%$Content$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Hander" >处理人 like '%$Hander$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Status" >状态 like '%$Status$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_BacklogDetails" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM PUB_待办事项明细
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="BacklogID" >待办事项ID like '%$BacklogID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ObjectID" >对象ID like '%$ObjectID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormID" >表单ID like '%$FormID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Content" >内容 like '%$Content$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Hander" >处理人 like '%$Hander$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Status" >状态 like '%$Status$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

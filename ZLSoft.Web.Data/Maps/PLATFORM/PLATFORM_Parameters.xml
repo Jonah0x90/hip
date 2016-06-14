@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+        <typeAlias alias="SysParameters" type="ZLSoft.Model.PLATFORM.SysParameters, ZLSoft.Model" />
+        <typeAlias alias="PK_SysParameters" type="ZLSoft.Model.PLATFORM.PK_SysParameters, ZLSoft.Model" />
+    </alias>
+  
+  <resultMaps>
+    <resultMap id="SysParametersResult" class="SysParameters">
+      <result property="ID" column="ID" />
+      <result property="Name" column="名称" />
+      <result property="Explain" column="说明" />
+      <result property="ValueExplain" column="值说明" />
+      <result property="DefaultValue" column="默认值" />
+      <result property="TypeID" column="模块ID" />
+      <result property="InputCode" column="输入码" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="ModifyTime" column="修改日期" />
+      <result property="IsExtSQL" column="是否SQL扩展" />
+      <result property="ExtSQL" column="扩展SQL" />
+      <result property="IsInvalid" column="是否作废" />
+      <result property="IsSystem" column="是否为系统项" />
+    </resultMap>
+  </resultMaps>
+  
+    <statements>
+        
+        <select id="LOAD_SysParameters" parameterClass="PK_SysParameters" resultMap="SysParametersResult" resultClass="SysParameters" >
+            select * from 系统_系统参数
+            where ID=#ID#
+        </select>
+
+      <update id="INSERT_SysParameters" parameterClass="StrObjDict" >
+        INSERT INTO "系统_系统参数" (ID,"名称","说明","值说明","默认值","输入码","修改用户","修改日期","模块ID","是否SQL扩展","扩展SQL","是否作废","是否为系统项")
+        VALUES ( #ID#,#Name#,#Explain#,#ValueExplain#,#DefaultValue#,#InputCode#,#ModifyUser#,#ModifyTime#,#TypeID#,#IsExtSQL#,#ExtSQL#,#IsInvalid#,#IsSystem#)
+      </update>
+
+      <update id="UPDATE_SysParameters" parameterClass="StrObjDict" >
+        update 系统_系统参数
+        set
+        <dynamic prepend=" ">
+          <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" , " property="Explain" >说明=#Explain#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" , " property="ValueExplain" >值说明=#ValueExplain#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" , " property="DefaultValue" >默认值=#DefaultValue#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" , " property="InputCode" >输入码=#InputCode#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" , " property="ModifyTime" >修改日期=#ModifyTime#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" , " property="TypeID" >模块ID=#TypeID#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" , " property="IsExtSQL" >是否SQL扩展=#IsExtSQL#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" , " property="ExtSQL" >扩展SQL=#ExtSQL#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" , " property="IsSystem" >是否为系统项=#IsSystem#</isPropertyAvailable>
+        </dynamic>
+        where ID=#ID#
+      </update>
+      
+      
+      <delete id="DELETE_SysParameters" parameterClass="StrObjDict" >
+        delete 系统_系统参数
+        where ID=#ID#
+      </delete>
+
+      <select id="LIST_SysParameters" resultMap="SysParametersResult" parameterClass="StrObjDict" resultClass="SysParameters" >
+
+        select * from 系统_系统参数
+        
+        <dynamic prepend="WHERE">
+          <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="Name" >名称=#Name#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="Explain" >说明=#Explain#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="ValueExplain" >值说明=#ValueExplain#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="DefaultValue" >默认值=#DefaultValue#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="InputCode" >输入码=#InputCode#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改日期=#ModifyTime#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="TypeID" >模块ID=#TypeID#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="IsExtSQL" >是否SQL扩展=#IsExtSQL#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="ExtSQL" >扩展SQL=#ExtSQL#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="IsSystem" >是否为系统项=#IsSystem#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+        <dynamic prepend=" ORDER BY ">
+          <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+        </dynamic>
+      </select>
+
+      <select id="LISTfor_SysParameters" parameterClass="StrObjDict" resultClass="StrObjDict" >
+        select ID,名称 as "Name", 说明 as "Explain",默认值 as "DefaultValue",值说明 as "ValueExplain", 输入码 as "InputCode",
+        模块ID as "TypeID",是否SQL扩展 as "IsExtSQL",扩展SQL as "ExtSQL",是否作废 as "IsInvalid",
+        是否为系统项 as "IsSystem"
+        from 系统_系统参数
+      </select>
+      
+      
+      <select id="LIST2_SysParameters" parameterClass="StrObjDict" resultClass="StrObjDict" >
+        select * from 系统_系统参数
+        <dynamic prepend="WHERE">
+          <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="Name" >名称=#Name#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="Explain" >说明=#Explain#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="ValueExplain" >值说明=#ValueExplain#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="DefaultValue" >默认值=#DefaultValue#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="InputCode" >输入码=#InputCode#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改日期=#ModifyTime#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="TypeID" >模块ID=#TypeID#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="IsExtSQL" >是否SQL扩展=#IsExtSQL#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="ExtSQL" >扩展SQL=#ExtSQL#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="IsSystem" >是否为系统项=#IsSystem#</isPropertyAvailable>
+          <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+        </dynamic>
+        <dynamic prepend=" ORDER BY ">
+          <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+        </dynamic>
+      </select>
+
+       
+    
+  </statements>
+</sqlMap>

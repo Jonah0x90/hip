@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="PatientScheme" type="ZLSoft.Model.HNS.PatientScheme, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="PatientScheme_Result" class="PatientScheme">
+      <result property="FormType" column="类型" />
+      <result property="ID" column="ID" />
+      <result property="PatientPlanID" column="病人计划ID" />
+      <result property="QuestionID" column="问题ID" />
+      <result property="IsInvalid" column="是否作废" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_PatientScheme" parameterClass="StrObjDict">
+      INSERT INTO HNS_病人护理计划方案(类型,ID,病人计划ID,问题ID,是否作废)
+      VALUES (#FormType#,#ID#,#PatientPlanID#,#QuestionID#,#IsInvalid#)
+    </update>
+
+    <update id="UPDATE_PatientScheme" parameterClass="StrObjDict" >
+      update HNS_病人护理计划方案
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="FormType" >类型=#FormType#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PatientPlanID" >病人计划ID=#PatientPlanID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="QuestionID" >问题ID=#QuestionID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_PatientScheme" parameterClass="StrObjDict" >
+      delete from HNS_病人护理计划方案
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_PatientScheme" parameterClass="StrObjDict" resultMap="PatientScheme_Result" >
+      SELECT * FROM HNS_病人护理计划方案
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_PatientScheme" parameterClass="StrObjDict" resultClass="PatientScheme" resultMap="PatientScheme_Result" >
+      select * from HNS_病人护理计划方案
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormType" >类型 like '%$FormType$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PatientPlanID" >病人计划ID like '%$PatientPlanID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="QuestionID" >问题ID like '%$QuestionID$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_PatientScheme" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM HNS_病人护理计划方案
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormType" >类型 like '%$FormType$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PatientPlanID" >病人计划ID like '%$PatientPlanID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="QuestionID" >问题ID like '%$QuestionID$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

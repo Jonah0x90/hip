@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>ftp://192.168.0.53</_PublishTargetUrl>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJpaHZJNWOU6S4CNtADRBWAAAAAACAAAAAAAQZgAAAAEAACAAAADZyy+/L5ATQ09KJuf9q8L8t9YGlh/9XSUqHwojjQ514QAAAAAOgAAAAAIAACAAAAAD+Pq4KqJYUOgVMFxSpchEcKb1zzNIfxfe5bF5d2M2jhAAAAAVoJyToUlGdz3M/MkzQ+dXQAAAAJqz/LeKGI1be7j1yctc2OuOd83wqk02smH3g/bWTRTNbFLUSLbn9pQfuTz7+5no9leDpvVK3kI+A7hdEx6EKBA=</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Castle.DynamicProxy.dll">
+      <publishTime>05/29/2015 15:39:33</publishTime>
+    </File>
+    <File Include="bin/DotLiquid.dll">
+      <publishTime>05/29/2015 15:39:33</publishTime>
+    </File>
+    <File Include="bin/DynamicProxy.dll">
+      <publishTime>05/29/2015 15:39:33</publishTime>
+    </File>
+    <File Include="bin/IBatisNet.Common.dll">
+      <publishTime>05/29/2015 15:39:16</publishTime>
+    </File>
+    <File Include="bin/IBatisNet.DataAccess.2005.dll">
+      <publishTime>05/29/2015 15:39:33</publishTime>
+    </File>
+    <File Include="bin/IBatisNet.DataMapper.dll">
+      <publishTime>05/29/2015 15:39:33</publishTime>
+    </File>
+    <File Include="bin/Oracle.DataAccess.dll">
+      <publishTime>07/17/2015 18:32:26</publishTime>
+    </File>
+    <File Include="bin/ZLSoft.AppContext.dll">
+      <publishTime>07/20/2015 14:38:59</publishTime>
+    </File>
+    <File Include="bin/ZLSoft.Cache.dll">
+      <publishTime>07/20/2015 14:38:57</publishTime>
+    </File>
+    <File Include="bin/ZLSoft.DalManager.dll">
+      <publishTime>07/20/2015 14:38:58</publishTime>
+    </File>
+    <File Include="bin/ZLSoft.DataFilterChainManager.dll">
+      <publishTime>07/20/2015 14:38:58</publishTime>
+    </File>
+    <File Include="bin/ZLSoft.HNS.Nurse.dll">
+      <publishTime>07/20/2015 15:24:10</publishTime>
+    </File>
+    <File Include="bin/ZLSoft.HNS.NurseDalManager.dll">
+      <publishTime>07/20/2015 15:24:09</publishTime>
+    </File>
+    <File Include="bin/ZLSoft.HrMng.dll">
+      <publishTime>07/20/2015 14:39:00</publishTime>
+    </File>
+    <File Include="bin/ZLSoft.Model.dll">
+      <publishTime>07/20/2015 14:38:57</publishTime>
+    </File>
+    <File Include="bin/ZLSoft.Platform.dll">
+      <publishTime>07/20/2015 14:39:00</publishTime>
+    </File>
+    <File Include="bin/ZLSoft.Pub.dll">
+      <publishTime>07/20/2015 14:38:57</publishTime>
+    </File>
+    <File Include="bin/ZLSoft.Public.dll">
+      <publishTime>07/20/2015 14:39:00</publishTime>
+    </File>
+    <File Include="bin/ZLSoft.Sys.dll">
+      <publishTime>07/20/2015 15:02:39</publishTime>
+    </File>
+    <File Include="bin/ZLSoft.Third.dll">
+      <publishTime>07/20/2015 14:39:00</publishTime>
+    </File>
+    <File Include="bin/ZLSoft.ThirdInterface.dll">
+      <publishTime>07/20/2015 14:38:58</publishTime>
+    </File>
+    <File Include="bin/ZLSoft.Web.NursePlatform.dll">
+      <publishTime>07/20/2015 15:24:11</publishTime>
+    </File>
+    <File Include="dbconfig/dao.config">
+      <publishTime>07/20/2015 15:00:55</publishTime>
+    </File>
+    <File Include="dbconfig/providers.config">
+      <publishTime>07/20/2015 15:00:50</publishTime>
+    </File>
+    <File Include="dbconfig/SqlMap.config">
+      <publishTime>07/17/2015 14:59:25</publishTime>
+    </File>
+    <File Include="dbconfig/SqlMap_Interface.config">
+      <publishTime>05/29/2015 15:39:35</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Maps/Hl/HL_HLDY.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/HNS/HNS_ElementType.xml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Maps/HNS/HNS_Form.xml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Maps/HNS/HNS_NursingMark.xml">
+      <publishTime>07/20/2015 15:21:54</publishTime>
+    </File>
+    <File Include="Maps/HNS/HNS_NursingMarkRefer.xml">
+      <publishTime>07/17/2015 17:44:57</publishTime>
+    </File>
+    <File Include="Maps/HNS/HNS_NursingMarkTarget.xml">
+      <publishTime>07/17/2015 18:36:11</publishTime>
+    </File>
+    <File Include="Maps/HNS/HNS_NursingPlan.xml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Maps/HNS/HNS_NursingPlanDetails.xml">
+      <publishTime>07/17/2015 17:44:57</publishTime>
+    </File>
+    <File Include="Maps/HNS/HNS_NursingPlanTarget.xml">
+      <publishTime>07/17/2015 17:44:57</publishTime>
+    </File>
+    <File Include="Maps/HNS/HNS_NursingQuestion.xml">
+      <publishTime>07/17/2015 17:44:57</publishTime>
+    </File>
+    <File Include="Maps/HNS/HNS_QuestionRelation.xml">
+      <publishTime>07/17/2015 17:44:57</publishTime>
+    </File>
+    <File Include="Maps/HR/HR_BaseEmployeeInfo.xml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Maps/HR/HR_Employee.xml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_BPM.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_BPMLog.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_ColumnMap.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_CommonCode.xml">
+      <publishTime>07/16/2015 10:20:28</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_CommonCodeDetail.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_DataSource.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_ExternalService.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_Function.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_FunctionOption.xml">
+      <publishTime>07/17/2015 11:14:10</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_Log.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_Menu.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_MenuOption.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_MessageLog.xml">
+      <publishTime>06/03/2015 17:17:00</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_Module.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_OtherDataSource.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_OtherService.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_Parameters.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PLATFORM/PLATFORM_TreeDefinition.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PUB/PUB_Annex.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PUB/PUB_CnLibrary.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PUB/PUB_Compound.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PUB/PUB_Customer.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PUB/PUB_KeyValue.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PUB/PUB_Organization.xml">
+      <publishTime>07/15/2015 14:22:21</publishTime>
+    </File>
+    <File Include="Maps/PUB/PUB_Role.xml">
+      <publishTime>07/17/2015 17:42:19</publishTime>
+    </File>
+    <File Include="Maps/PUB/PUB_RoleMember.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/PUB/PUB_UserInfo.xml">
+      <publishTime>07/16/2015 12:22:25</publishTime>
+    </File>
+    <File Include="Maps/PUB/PUB_WorkItem.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/SYS/PubSql.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/SYS/SYS_MessageLog.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/SYS/SYS_SiteDevice.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/THIRD/THIRD_Import.xml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Maps/THIRD/THIRD_ImportExtend.xml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Maps/THIRD/THIRD_ImportObject.xml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Maps/Xt/PubSql.xml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Maps/Xt/XT_GGDM.xml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Maps/Xt/XT_GGDMMX.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/Xt/XT_KS.xml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Maps/Xt/XT_MENU.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/Xt/XT_SJQX_DX.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/Xt/XT_SJQX_DY.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/Xt/XT_SJQX_DY_XX.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/Xt/XT_SJQX_QX.xml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Maps/Xt/XT_THIRD_CON.xml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Maps/Xt/XT_TREE.xml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Maps/Xt/XT_XTCS.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/Xt/XT_YHXX.xml">
+      <publishTime>07/14/2015 18:12:27</publishTime>
+    </File>
+    <File Include="Maps/Xt/XT_YQ.xml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Maps/Xt/副本 PubSql.xml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="SqlMap_Interface.config">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>07/14/2015 18:12:26</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>07/20/2015 15:24:11</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

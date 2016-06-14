@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+        <typeAlias alias="XT_MENU" type="ZLSoft.Model.System.XT_MENU, ZLSoft.Model" />
+        <typeAlias alias="PK_XT_MENU" type="ZLSoft.Model.System.PK_XT_MENU, ZLSoft.Model" />
+    </alias>
+    <statements>
+        <insert id="INSERT_XT_MENU" parameterClass="StrObjDict" >
+            INSERT INTO XT_MENU(ID,BM,MC,YYID,MS,SJID,JC,SFMJ,GLGN,GNID,PIC,CSZ,DKFS,QXKZPB,SFZF,ZFRQ,SRM1,SRM2,SRM3,XGYH,XGRQ,PXXH,PICBIG,SFM,MLBID,MMC,MCSZ,MPXXH)
+            VALUES(
+            #ID#,#BM#,#MC#,#YYID#,#MS#,#SJID#,#JC#,#SFMJ#,#GLGN#,#GNID#,#PIC#,#CSZ#,#DKFS#,#QXKZPB#,#SFZF#,#ZFRQ#,#SRM1#,#SRM2#,#SRM3#,#XGYH#,#XGRQ#,#PXXH#,#PICBIG#,#SFM#,#MLBID#,#MMC#,#MCSZ#,#MPXXH#)
+        </insert>
+        <update id="UPDATE_XT_MENU" parameterClass="StrObjDict" >
+            UPDATE XT_MENU
+            SET
+            <dynamic prepend=" ">
+                <isPropertyAvailable prepend=" , " property="BM" >BM=#BM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="MC" >MC=#MC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="YYID" >YYID=#YYID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="MS" >MS=#MS#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SJID" >SJID=#SJID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="JC" >JC=#JC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SFMJ" >SFMJ=#SFMJ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="GLGN" >GLGN=#GLGN#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="GNID" >GNID=#GNID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="PIC" >PIC=#PIC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="CSZ" >CSZ=#CSZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="DKFS" >DKFS=#DKFS#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="QXKZPB" >QXKZPB=#QXKZPB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SFZF" >SFZF=#SFZF#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="ZFRQ" >ZFRQ=#ZFRQ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SRM1" >SRM1=#SRM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SRM2" >SRM2=#SRM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SRM3" >SRM3=#SRM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="XGYH" >XGYH=#XGYH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="XGRQ" >XGRQ=#XGRQ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="PXXH" >PXXH=#PXXH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="PICBIG" >PICBIG=#PICBIG#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SFM" >SFM=#SFM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="MLBID" >MLBID=#MLBID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="MMC" >MMC=#MMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="MCSZ" >MCSZ=#MCSZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="MPXXH" >MPXXH=#MPXXH#</isPropertyAvailable>
+            </dynamic>
+            where ID=#ID#
+        </update>
+        <delete id="DELETE_XT_MENU" parameterClass="StrObjDict" >
+            delete XT_MENU
+            where ID=#ID#
+        </delete>
+        <select id="LOAD_XT_MENU" parameterClass="PK_XT_MENU" resultClass="XT_MENU" >
+            select ID,BM,MC,YYID,MS,SJID,JC,SFMJ,GLGN,GNID,PIC,CSZ,DKFS,QXKZPB,SFZF,ZFRQ,SRM1,SRM2,SRM3,XGR,XGRQ,PXXH,PICBIG,SFM,MLBID,MMC,MCSZ,MPXXH from XT_MENU
+            where ID=#ID#
+        </select>
+        <select id="LIST_XT_MENU" parameterClass="StrObjDict" resultClass="XT_MENU" >
+            select ID,BM,MC,YYID,MS,SJID,JC,SFMJ,GLGN,GNID,PIC,CSZ,DKFS,QXKZPB,SFZF,ZFRQ,SRM1,SRM2,SRM3,XGR,XGRQ,PXXH,PICBIG,SFM,MLBID,MMC,MCSZ,MPXXH from XT_MENU
+            <dynamic prepend=" WHERE ">
+                <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="BM" >BM=#BM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MC" >MC=#MC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="YYID" >YYID=#YYID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MS" >MS=#MS#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SJID" >SJID=#SJID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="JC" >JC=#JC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SFMJ" >SFMJ=#SFMJ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="GLGN" >GLGN=#GLGN#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="GNID" >GNID=#GNID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PIC" >PIC=#PIC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CSZ" >CSZ=#CSZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DKFS" >DKFS=#DKFS#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="QXKZPB" >QXKZPB=#QXKZPB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SFZF" >SFZF=#SFZF#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ZFRQ_START" >ZFRQ>=${ibatis_key_todate}#ZFRQ_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ZFRQ_END" >ZFRQ&lt;=${ibatis_key_todate}#ZFRQ_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM1" >SRM1=#SRM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM2" >SRM2=#SRM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM3" >SRM3=#SRM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGYH" >XGYH=#XGYH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_START" >XGRQ>=${ibatis_key_todate}#XGRQ_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_END" >XGRQ&lt;=${ibatis_key_todate}#XGRQ_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PXXH" >PXXH=#PXXH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PICBIG" >PICBIG=#PICBIG#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SFM" >SFM=#SFM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MLBID" >MLBID=#MLBID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MMC" >MMC=#MMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MCSZ" >MCSZ=#MCSZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MPXXH" >MPXXH=#MPXXH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+            <dynamic prepend=" ORDER BY ">
+                <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+        </select>
+
+        <select id="LIST2_XT_MENU" parameterClass="StrObjDict" resultClass="StrObjDict" >
+            select ID,BM,MC,YYID,MS,SJID,JC,SFMJ,GLGN,GNID,PIC,CSZ,DKFS,QXKZPB,SFZF,ZFRQ,SRM1,SRM2,SRM3,XGR,XGRQ,PXXH,PICBIG,SFM,MLBID,MMC,MCSZ,MPXXH from XT_MENU
+            <dynamic prepend=" WHERE ">
+                <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="BM" >BM=#BM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MC" >MC=#MC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="YYID" >YYID=#YYID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MS" >MS=#MS#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SJID" >SJID=#SJID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="JC" >JC=#JC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SFMJ" >SFMJ=#SFMJ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="GLGN" >GLGN=#GLGN#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="GNID" >GNID=#GNID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PIC" >PIC=#PIC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CSZ" >CSZ=#CSZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DKFS" >DKFS=#DKFS#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="QXKZPB" >QXKZPB=#QXKZPB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SFZF" >SFZF=#SFZF#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ZFRQ_START" >ZFRQ>=${ibatis_key_todate}#ZFRQ_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ZFRQ_END" >ZFRQ&lt;=${ibatis_key_todate}#ZFRQ_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM1" >SRM1=#SRM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM2" >SRM2=#SRM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM3" >SRM3=#SRM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGYH" >XGYH=#XGYH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_START" >XGRQ>=${ibatis_key_todate}#XGRQ_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_END" >XGRQ&lt;=${ibatis_key_todate}#XGRQ_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PXXH" >PXXH=#PXXH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PICBIG" >PICBIG=#PICBIG#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SFM" >SFM=#SFM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MLBID" >MLBID=#MLBID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MMC" >MMC=#MMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MCSZ" >MCSZ=#MCSZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MPXXH" >MPXXH=#MPXXH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+            <dynamic prepend=" ORDER BY ">
+                <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+        </select>
+
+        <select id="get_menu_op" parameterClass="StrObjDict" resultClass="StrObjDict" >
+            SELECT A.GNID,B.ID,A.OPID,A.OPMC,(CASE WHEN B.ID IS NULL THEN 1 ELSE B.QXKZPB END) AS QXKZPB,a.pxxh FROM XT_GNMK_OP A LEFT JOIN XT_MENU_OP B
+            ON A.GNID=B.GNID AND B.ID='$ID$'  and A.OPID=B.OPID
+            where A.GNID='$GNID$' and a.SFzf=0
+            union all
+            select gnid,ID,opid,opmc,qxkzpb,pxxh from XT_MENU_OP  where ID='$ID$'
+            and (gnid is null or gnid ='')
+            ORDER BY PXXH
+        </select>
+        <!--待优化-->
+        <select id="list_menu_by_yhid" parameterClass="StrObjDict" resultClass="StrObjDict" >
+            SELECT DISTINCT X.URL,X.SJID,X.ID,X.MC,X.YYID,X.PIC,X.PICBIG,X.DKFS,X.CSZ,X.GLGN,X.GNID,X.SRM1,X.SRM2,X.PXXH
+            FROM
+            (
+            SELECT  E.URL,A.SJID,A.ID,A.MC,A.YYID,A.PIC,A.PICBIG,A.DKFS,A.CSZ,A.GLGN,A.GNID,A.SRM1,A.SRM2,A.PXXH FROM XT_MENU A
+            INNER JOIN XT_YHZQX B ON A.ID=B.MENUID
+            INNER JOIN XT_YHZYH C ON B.YHZID=C.YHZID
+            LEFT JOIN XT_GN E ON A.GNID=E.ID
+            WHERE C.YHID=#YHID# AND A.SFZF=0 AND A.QXKZPB=1 AND A.YYID=#YYID#
+            UNION
+            SELECT E.URL,A.SJID,A.ID,A.MC,A.YYID,A.PIC,A.PICBIG,A.DKFS,A.CSZ,A.GLGN,A.GNID,A.SRM1,A.SRM2,A.PXXH FROM XT_MENU A
+            LEFT JOIN XT_GN E ON A.GNID=E.ID
+            WHERE  A.QXKZPB=0 AND A.SFZF=0 AND A.YYID=#YYID#
+            ) X
+            ORDER BY X.PXXH ASC
+        </select>
+        <select id="list_menu_by_yhid_for_mobile" parameterClass="StrObjDict" resultClass="StrObjDict" >
+            select distinct x.murl, x.mid, x.mmc, x.mcsz, x.pxxh, x.MLBID,x.mpxxh
+            from (select e.murl,
+            a.ID as mid,
+            case
+            when a.mmc is null then
+            a.MC
+            else
+            a.mmc
+            end as mmc,
+            case
+            when a.mcsz is null then
+            a.csz
+            else
+            a.mcsz
+            end as mcsz,
+            a.pxxh,
+            a.MLBID,
+            a.mpxxh
+            from xt_menu a
+            inner join xt_yhzqx b on a.ID = b.ID
+            inner join xt_yhzcy c on b.yhzid = c.yhzid
+            left join xt_gnmk e on a.gnid = e.gnid
+            where c.yhid = #YHID#
+            and a.SFzf = 0
+            and a.qxkzpb = 1
+            and a.SFM = 1
+            and e.SFM = 1
+            union
+            select e.murl,
+            a.ID as mid,
+            case
+            when a.mmc is null then
+            a.MC
+            else
+            a.mmc
+            end as mmc,
+            case
+            when a.mcsz is null then
+            a.csz
+            else
+            a.mcsz
+            end as mcsz,
+            a.pxxh,
+            a.MLBID,
+            a.mpxxh
+            from xt_menu a
+            left join xt_gnmk e on a.gnid = e.gnid
+            where a.qxkzpb = 0
+            and a.SFzf = 0
+            and a.SFM = 1
+            and e.SFM = 1) x
+            order by x.mpxxh asc
+        </select>
+
+        <select id="list_allmenu_by_yhid_oracle" parameterClass="StrObjDict" resultClass="StrObjDict" >
+            select distinct x.qxkz, X.url,x.sjid,x.ID,x.MC,x.yyid,x.pic,x.picbig,x.dkfs,x.csz,x.GLgn,x.gnid,x.srm1,x.srm2,x.pxxh,x.yhzmc
+            from
+            (
+            select 0 as qxkz, e.url,a.sjid,a.ID,a.MC,a.yyid,a.pic,a.picbig,a.dkfs,a.csz,a.GLgn,a.gnid,a.srm1,a.srm2,a.pxxh,null as yhzmc from xt_menu a
+            left join xt_gnmk e on a.gnid=e.gnid
+            where  a.SFzf=0 and a.qxkzpb=1 and a.yyid=#YYID#
+            and a.ID not in (
+            select  a.ID from xt_menu a
+            inner join xt_yhzqx b on a.ID=b.ID
+            inner join xt_yhzcy c on b.yhzid=c.yhzid
+            left join xt_gnmk e on a.gnid=e.gnid
+            where c.yhid=#YHID# and a.SFzf=0 and a.qxkzpb=1 and a.yyid=#YYID#
+            )
+            UNION ALL
+            select 1 as qxkz, e.url,a.sjid,a.ID,a.MC,a.yyid,a.pic,a.picbig,a.dkfs,a.csz,a.GLgn,a.gnid,a.srm1,a.srm2,a.pxxh,wmsys.wm_concat(f.yhzmc) as yhzmc from xt_menu a
+            inner join xt_yhzqx b on a.ID=b.ID
+            inner join xt_yhzcy c on b.yhzid=c.yhzid
+            inner join xt_yhz f on c.yhzid=f.yhzid
+            left join xt_gnmk e on a.gnid=e.gnid
+            where c.yhid=#YHID# and a.SFzf=0 and a.qxkzpb=1 and a.yyid=#YYID#
+            group by e.url,a.sjid,a.ID,a.MC,a.yyid,a.pic,a.picbig,a.dkfs,a.csz,a.GLgn,a.gnid,a.srm1,a.srm2,a.pxxh
+            union
+            select 2 as qxkz,e.url,a.sjid,a.ID,a.MC,a.yyid,a.pic,a.picbig,a.dkfs,a.csz,a.GLgn,a.gnid,a.srm1,a.srm2,a.pxxh,null as yhzmc from xt_menu a
+            left join xt_gnmk e on a.gnid=e.gnid
+            where  a.qxkzpb=0 and a.SFzf=0 and a.yyid=#YYID#
+            ) x
+            order by x.pxxh asc
+        </select>
+
+        <select id="list_allmenu_by_yhid_mssql" parameterClass="StrObjDict" resultClass="StrObjDict" >
+            select distinct x.qxkz, X.url,x.sjid,x.ID,x.MC,x.yyid,x.pic,x.picbig,x.dkfs,x.csz,x.GLgn,x.gnid,x.srm1,x.srm2,x.pxxh,x.yhzmc
+            from
+            (
+            select 0 as qxkz, e.url,a.sjid,a.ID,a.MC,a.yyid,a.pic,a.picbig,a.dkfs,a.csz,a.GLgn,a.gnid,a.srm1,a.srm2,a.pxxh,null as yhzmc from xt_menu a
+            left join xt_gnmk e on a.gnid=e.gnid
+            where  a.SFzf=0 and a.qxkzpb=1 and a.yyid=#YYID#
+            and a.ID not in (
+            select  a.ID from xt_menu a
+            inner join xt_yhzqx b on a.ID=b.ID
+            inner join xt_yhzcy c on b.yhzid=c.yhzid
+            left join xt_gnmk e on a.gnid=e.gnid
+            where c.yhid=#YHID# and a.SFzf=0 and a.qxkzpb=1 and a.yyid=#YYID#
+            )
+            UNION ALL
+            select 1 as qxkz, e.url,a.sjid,a.ID,a.MC,a.yyid,a.pic,a.picbig,a.dkfs,a.csz,a.GLgn,a.gnid,a.srm1,a.srm2,a.pxxh, yhzmc=stuff((select ','+K.yhzmc from xt_yhzqx m,xt_yhzcy n,xt_yhz k where n.yhzid=k.yhzid and m.ID=a.ID and m.yhzid=n.yhzid and n.yhid=#YHID#  for xml path('')), 1, 1, '') from xt_menu a
+            inner join xt_yhzqx b on a.ID=b.ID
+            inner join xt_yhzcy c on b.yhzid=c.yhzid
+            inner join xt_yhz f on c.yhzid=f.yhzid
+            left join xt_gnmk e on a.gnid=e.gnid
+            where c.yhid=#YHID# and a.SFzf=0 and a.qxkzpb=1 and a.yyid=#YYID#
+            group by e.url,a.sjid,a.ID,a.MC,a.yyid,a.pic,a.picbig,a.dkfs,a.csz,a.GLgn,a.gnid,a.srm1,a.srm2,a.pxxh
+            union
+            select 2 as qxkz,e.url,a.sjid,a.ID,a.MC,a.yyid,a.pic,a.picbig,a.dkfs,a.csz,a.GLgn,a.gnid,a.srm1,a.srm2,a.pxxh,null as yhzmc from xt_menu a
+            left join xt_gnmk e on a.gnid=e.gnid
+            where  a.qxkzpb=0 and a.SFzf=0 and a.yyid=#YYID#
+            ) x
+            order by x.pxxh asc
+        </select>
+
+        <select id="list_gnmk_menu_by_menuid" parameterClass="StrObjDict" resultClass="StrObjDict">
+            select b.url,a.csz from xt_menu a,xt_gnmk b where a.gnid=b.gnid and a.ID=#ID#
+        </select>
+
+        <!--待优化-->
+        <select id="list_menu_op_by_yhid" parameterClass="StrObjDict" resultClass="StrObjDict" >
+            select a.ID,a.opid,a.opdm from xt_menu_op a where qxkzpb=1 and a.ID=#ID# and a.opid not in (
+            select a.opid from xt_menu_op a
+            inner join xt_yhzqx b on a.ID${ibatis_key_plus}'_'${ibatis_key_plus}A.OPID=b.ID
+            inner join xt_yhzcy c on b.yhzid=c.yhzid
+            where c.yhid=#YHID# and a.ID=#ID#
+            )
+        </select>
+        <!--待优化-->
+        <select id="list_yy_by_yhid" parameterClass="StrObjDict" resultClass="StrObjDict" >
+            SELECT DISTINCT X.YYID,X.YYMC,X.PXXH
+            FROM
+            (
+            SELECT  A.YYID,E.MC AS YYMC,E.PXXH FROM XT_MENU A
+            INNER JOIN XT_YHZQX B ON A.ID=B.MENUID
+            INNER JOIN XT_YHZYH C ON B.YHZID=C.YHZID
+            INNER JOIN  XT_YY E ON A.YYID=E.ID
+            WHERE C.YHID=1 AND A.SFZF=0 AND A.QXKZPB=1  AND E.SFZF=0
+            UNION
+            SELECT A.YYID,B.MC AS YYMC,B.PXXH FROM XT_MENU A, XT_YY B
+            WHERE  A.QXKZPB=0 AND A.SFZF=0  AND A.YYID=B.ID  AND B.SFZF=0
+            ) X
+            ORDER BY X.PXXH ASC
+        </select>
+    </statements>
+</sqlMap>

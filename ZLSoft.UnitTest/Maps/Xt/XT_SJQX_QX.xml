@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+        <typeAlias alias="XT_SJQX_QX" type="ZLSoft.Model.System.XT_SJQX_QX, ZLSoft.Model" />
+        <typeAlias alias="PK_XT_SJQX_QX" type="ZLSoft.Model.System.PK_XT_SJQX_QX, ZLSoft.Model" />
+    </alias>
+    <statements>
+        <insert id="INSERT_XT_SJQX_QX" parameterClass="StrObjDict" >
+            insert into XT_SJQX_QX(FAID,DXID,DXMXID,DYID,KCID,XXID,XGR,XGRQ)
+            values(
+            #FAID#,#DXID#,#DXMXID#,#DYID#,#KCID#,#XXID#,#XGR#,#XGRQ#)
+        </insert>
+        <update id="UPDATE_XT_SJQX_QX" parameterClass="StrObjDict" >
+            update XT_SJQX_QX
+            set
+            <dynamic prepend=" ">
+                <isPropertyAvailable prepend=" , " property="XGR" >XGR=#XGR#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="XGRQ" >XGRQ=#XGRQ#</isPropertyAvailable>
+            </dynamic>
+            where FAID=#FAID# and DXID=#DXID# and DXMXID=#DXMXID# and DYID=#DYID# and KCID=#KCID# and XXID=#XXID#
+        </update>
+        <delete id="DELETE_XT_SJQX_QX" parameterClass="StrObjDict" >
+            delete XT_SJQX_QX
+            where FAID=#FAID# and DXID=#DXID# and DXMXID=#DXMXID# and DYID=#DYID# and KCID=#KCID# and XXID=#XXID#
+        </delete>
+        <select id="LOAD_XT_SJQX_QX" parameterClass="PK_XT_SJQX_QX" resultClass="XT_SJQX_QX" >
+            select FAID,DXID,DXMXID,DYID,KCID,XXID,XGR,XGRQ from XT_SJQX_QX
+            where FAID=#FAID# and DXID=#DXID# and DXMXID=#DXMXID# and DYID=#DYID# and KCID=#KCID# and XXID=#XXID#
+        </select>
+        <select id="LIST_XT_SJQX_QX" parameterClass="StrObjDict" resultClass="XT_SJQX_QX" >
+            select FAID,DXID,DXMXID,DYID,KCID,XXID,XGR,XGRQ from XT_SJQX_QX
+            <dynamic prepend=" WHERE ">
+                <isPropertyAvailable prepend=" AND " property="FAID" >FAID=#FAID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DXID" >DXID=#DXID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DXMXID" >DXMXID=#DXMXID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DYID" >DYID=#DYID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="KCID" >KCID=#KCID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XXID" >XXID=#XXID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGR" >XGR=#XGR#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_START" >XGRQ>=${ibatis_key_todate}#XGRQ_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_END" >XGRQ&lt;=${ibatis_key_todate}#XGRQ_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+            <dynamic prepend=" ORDER BY ">
+                <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+        </select>
+
+        <select id="LIST2_XT_SJQX_QX" parameterClass="StrObjDict" resultClass="StrObjDict" >
+            select FAID,DXID,DXMXID,DYID,KCID,XXID,XGR,XGRQ from XT_SJQX_QX
+            <dynamic prepend=" WHERE ">
+                <isPropertyAvailable prepend=" AND " property="FAID" >FAID=#FAID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DXID" >DXID=#DXID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DXMXID" >DXMXID=#DXMXID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DYID" >DYID=#DYID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="KCID" >KCID=#KCID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XXID" >XXID=#XXID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGR" >XGR=#XGR#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_START" >XGRQ>=${ibatis_key_todate}#XGRQ_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_END" >XGRQ&lt;=${ibatis_key_todate}#XGRQ_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+            <dynamic prepend=" ORDER BY ">
+                <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+        </select>
+        <delete id="DELETE_XT_SJQX_QX_BY_DXMXID" parameterClass="StrObjDict" >
+            delete XT_SJQX_QX
+            where FAID=#FAID# and DXID=#DXID# and DXMXID=#DXMXID#
+        </delete>
+        <select id="LIST_XT_SJQX_QX_BY_DY" parameterClass="StrObjDict" resultClass="StrObjDict" >
+            SELECT A.*,C.XXLX,C.ZSQL,C.GLSQL,B.PXXH
+            FROM XT_SJQX_QX A ,($DXSQL$) B,XT_SJQX_DY_XX C
+            WHERE A.DXID=B.DXID AND A.DXMXID=B.DXMXID
+            AND A.FAID=C.FAID AND C.DYID=A.DYID AND C.XXID=A.XXID
+            AND A.FAID=#FAID# AND A.DYID=#DYID#
+            <dynamic prepend=" AND ">
+                <isPropertyAvailable prepend=" AND " property="KZID" >KCID=#KZID#</isPropertyAvailable>
+            </dynamic>
+        </select>
+    </statements>
+</sqlMap>

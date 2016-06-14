@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="ElementType" type="ZLSoft.Model.PUB.ElementType, ZLSoft.Model" />
+    <typeAlias alias="PK_ElementType" type="ZLSoft.Model.PUB.PK_ElementType, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="ElementType_Result" class="ElementType">
+      <result property="ID" column="ID" />
+      <result property="TypeID" column="分类ID" />
+      <result property="Name" column="名称" />
+      <result property="FormType" column="类型" />
+      <result property="FastCode" column="快捷码" />
+      <result property="ValidationRules" column="校验规则" />
+      <result property="FormOfExpression" column="表现形式" />
+      <result property="FormatString" column="格式串" />
+      <result property="DataField" column="数据字段" />
+      <result property="ValueRange" column="数据值域" />
+      <result property="ProjectID" column="项目ID" />
+      <result property="Implication" column="业务含义" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_ElementType" parameterClass="StrObjDict">
+      INSERT INTO HNS_护理元素(ID,分类ID,名称,类型,快捷码,校验规则,表现形式,格式串,数据字段,数据值域,项目ID,业务含义)
+      VALUES (#ID#,#TypeID#,#Name#,#FormType#,#FastCode#,#ValidationRules#,#FormOfExpression#,#FormatString#,#DataField#,#ValueRange#,#ProjectID#,#Implication#)
+    </update>
+
+    <update id="UPDATE_ElementType" parameterClass="StrObjDict" >
+      update HNS_护理元素
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="TypeID" >分类ID=#TypeID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FormType" >类型=#FormType#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FastCode" >快捷码=#FastCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ValidationRules" >校验规则=#ValidationRules#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FormOfExpression" >表现形式=#FormOfExpression#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FormatString" >格式串=#FormatString#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="DataField" >数据字段=#DataField#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ValueRange" >数据值域=#ValueRange#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ProjectID" >项目ID=#ProjectID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Implication" >业务含义=#Implication#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_ElementType" parameterClass="StrObjDict" >
+      delete from HNS_护理元素
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_ElementType" parameterClass="PK_ElementType" resultMap="ElementType_Result" >
+      SELECT * FROM HNS_护理元素
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_ElementType" parameterClass="StrObjDict" resultClass="ElementType" resultMap="ElementType_Result" >
+      select * from HNS_护理元素
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="TypeID" >分类ID like '%$TypeID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormType" >类型 like '%$FormType$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FastCode" >快捷码 like '%$FastCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ValidationRules" >校验规则 like '%$ValidationRules$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormOfExpression" >表现形式 like '%$FormOfExpression$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormatString" >格式串 like '%$FormatString$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DataField" >数据字段 like '%$DataField$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ValueRange" >数据值域 like '%$ValueRange$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ProjectID" >项目ID like '%$ProjectID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Implication" >业务含义 like '%$Implication$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_ElementType" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM HNS_护理元素
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="TypeID" >分类ID like '%$TypeID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormType" >类型 like '%$FormType$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FastCode" >快捷码 like '%$FastCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ValidationRules" >校验规则 like '%$ValidationRules$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormOfExpression" >表现形式 like '%$FormOfExpression$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormatString" >格式串 like '%$FormatString$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DataField" >数据字段 like '%$DataField$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ValueRange" >数据值域 like '%$ValueRange$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ProjectID" >项目ID like '%$ProjectID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Implication" >业务含义 like '%$Implication$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="Get_TypeElementsAll" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT A.ID,B.ID As "FLID",B.名称 As "FLMC",A.名称 as "MC",A.类型 as "LX",A.快捷码 as "KJM",A.校验规则 as "XYGZ",A.表现形式 as "BXXS",A.格式串 as "GSC",A.数据字段 as "SJZD",A.数据值域 as "SJZY",A.项目ID as "XMID",A.业务含义 as "YWHY"
+      FROM HNS_护理元素 A,HNS_护理元素分类 B
+      WHERE A.分类ID=B.ID AND (#FastCode# IS NULL OR (A.名称 Like #FastCode# OR A.快捷码 LIKE #FastCode#))
+    </select>
+
+    <select id="Get_TypeElementsByID" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT A.ID,B.ID As "FLID",B.名称 As "FLMC",A.名称 as "MC",A.类型 as "LX",A.快捷码 as "KJM",A.校验规则 as "XYGZ",A.表现形式 as "BXXS",A.格式串 as "GSC",A.数据字段 as "SJZD",A.数据值域 as "SJZY",A.项目ID as "XMID",A.业务含义 as "YWHY"
+      FROM HNS_护理元素 A,HNS_护理元素分类 B
+      WHERE A.分类ID=B.ID And A.分类ID=#TypeID#
+       <dynamic prepend="AND ">
+        <isPropertyAvailable prepend="AND" property="FastCode">A.快捷码 LIKE  '%$FastCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend="AND" property="Name">A.名称 LIKE  '%$FastCode$%'</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="Get_TypeElementsGroupByID" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT A.ID,B.ID As "FLID",B.名称 As "FLMC",A.名称 as "MC",A.快捷码 as "KJM",上次应用表单 as "SCYYBD",分辨率 as "FBL"
+      FROM HNS_护理要素 A,HNS_护理要素分类 B
+      WHERE A.分类ID=B.ID And A.分类ID=#TypeID#
+      <dynamic prepend="AND ">
+        <isPropertyAvailable prepend="AND" property="FastCode">A.快捷码 LIKE  '%$FastCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend="AND" property="Name">A.名称 LIKE  '%$FastCode$%'</isPropertyAvailable>
+      </dynamic>
+    </select>
+    
+
+  </statements>
+</sqlMap>

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="PatientMarkDetails" type="ZLSoft.Model.HNS.PatientMarkDetails, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="PatientMarkDetails_Result" class="PatientMarkDetails">
+      <result property="MarkID" column="评分ID" />
+      <result property="TargetID" column="评分项目ID" />
+      <result property="ChoseValue" column="选择值" />
+      <result property="ScoreValue" column="分值" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_PatientMarkDetails" parameterClass="StrObjDict">
+      INSERT INTO HNS_病人护理评分明细(评分ID,评分项目ID,选择值,分值)
+      VALUES (#MarkID#,#TargetID#,#ChoseValue#,#ScoreValue#)
+    </update>
+
+    <update id="UPDATE_PatientMarkDetails" parameterClass="StrObjDict" >
+      update HNS_病人护理评分明细
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="MarkID" >评分ID=#MarkID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="TargetID" >评分项目ID=#TargetID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ChoseValue" >选择值=#ChoseValue#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ScoreValue" >分值=#ScoreValue#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_PatientMarkDetails" parameterClass="StrObjDict" >
+      delete from HNS_病人护理评分明细
+      where 评分ID =#MarkID#
+    </delete>
+
+
+    <select id="LIST_PatientMarkDetails" parameterClass="StrObjDict" resultClass="PatientMarkDetails" resultMap="PatientMarkDetails_Result" >
+      select * from HNS_病人护理评分明细
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkID" >评分ID like '%$MarkID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="TargetID" >评分项目ID like '%$TargetID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ChoseValue" >选择值 like '%$ChoseValue$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ScoreValue" >分值 like '%$ScoreValue$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_PatientMarkDetails" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM HNS_病人护理评分明细
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkID" >评分ID like '%$MarkID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="TargetID" >评分项目ID like '%$TargetID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ChoseValue" >选择值 like '%$ChoseValue$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ScoreValue" >分值 like '%$ScoreValue$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

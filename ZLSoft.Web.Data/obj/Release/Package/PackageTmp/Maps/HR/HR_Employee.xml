@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--日志管理-->
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="Employee" type="ZLSoft.Model.HR.Employee, ZLSoft.Model" />
+    <typeAlias alias="PK_Employee" type="ZLSoft.Model.HR.PK_Employee, ZLSoft.Model" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="Employee_Result" class="Employee">
+      <result property="ID" column="ID" />
+      <result property="RelatID" column="相关ID" />
+      <result property="InputCode" column="输入码" />
+      <result property="IsBaseThird" column="是否对照" />
+      <result property="FullName" column="姓名" />
+      <result property="Sex" column="性别" />
+      <result property="BirthDay" column="出生日期" />
+      <result property="Code" column="编码" />
+      <result property="Nation" column="民族" />
+      <result property="IDCard" column="身份证" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="LIST_Employee" parameterClass="StrObjDict" resultMap="Employee_Result" >
+      SELECT * FROM 人事_职工信息
+      <dynamic prepend=" WHERE ">
+        <isPropertyAvailable prepend=" AND " property="InputCode" >输入码 LIKE #InputCode#</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="LIST2_Employee" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT d.姓名 AS "Name",d.性别 AS "Sex",e.所属部门 AS "Org",d.相关ID AS "RelatID" FROM 人事_职工信息 d,
+      (
+      SELECT a.人员相关ID,LISTAGG(a.部门相关ID||'-'||b.名称, ',') WITHIN GROUP (ORDER BY a.部门相关ID) AS 所属部门
+      FROM  系统_组织机构_部门人员关联 a,系统_组织机构 b
+      WHERE a.部门相关ID = b.相关ID GROUP BY a.人员相关ID
+      ) e
+      WHERE d.相关ID = e.人员相关ID
+      <dynamic prepend=" AND ">
+        <isPropertyAvailable prepend=" AND " property="KeyWord" >d.输入码 LIKE #KeyWord#</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="LIST3_Employee" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT a.ID,a.姓名 AS "Name",c.名称 AS "Org",a.相关ID AS "RelatID"
+      FROM 人事_职工信息 a ,
+      系统_组织机构_部门人员关联 b,
+      (SELECT * FROM 系统_组织机构 START WITH 相关ID=#OrgID# CONNECT BY PRIOR 相关ID=上级相关ID) c
+      WHERE a.相关ID = b.人员相关ID AND b.部门相关ID = c.相关ID
+      <dynamic prepend=" AND ">
+        <isPropertyAvailable prepend=" AND " property="KeyWord" >a.输入码 LIKE #KeyWord#</isPropertyAvailable>
+      </dynamic>
+    </select>
+   
+  </statements>
+</sqlMap>

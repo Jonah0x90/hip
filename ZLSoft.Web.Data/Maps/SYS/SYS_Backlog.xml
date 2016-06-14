@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="Backlog" type="ZLSoft.Model.SYS.Backlog, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="Backlog_Result" class="Backlog">
+      <result property="ID" column="ID" />
+      <result property="Name" column="名称" />
+      <result property="ObjectID" column="对象ID" />
+      <result property="Content" column="内容" />
+      <result property="ModifyTime" column="修改时间" />
+      <result property="UpdateUser" column="修改人" />
+      <result property="FormType" column="类型" />
+      <result property="HanderType" column="处理者类型" />
+      <result property="DefaultObject" column="默认处理对象" />
+      <result property="Range" column="所属范围" />
+      <result property="IsInvalid" column="是否作废" />
+      <result property="URL" column="URL" />
+      <result property="Params" column="参数" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_Backlog" parameterClass="StrObjDict">
+      INSERT INTO 系统_待办事项(ID,名称,对象ID,内容,修改时间,修改人,类型,处理者类型,默认处理对象,所属范围,是否作废,URL,参数)
+      VALUES (#ID#,#Name#,#ObjectID#,#Content#,#ModifyTime#,#UpdateUser#,#FormType#,#HanderType#,#DefaultObject#,#Range#,#IsInvalid#,#URL#,#Params#)
+    </update>
+
+    <update id="UPDATE_Backlog" parameterClass="StrObjDict" >
+      update 系统_待办事项
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ObjectID" >对象ID=#ObjectID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Content" >内容=#Content#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="UpdateUser" >修改人=#UpdateUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FormType" >类型=#FormType#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="HanderType" >处理者类型=#HanderType#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="DefaultObject" >默认处理对象=#DefaultObject#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Range" >所属范围=#Range#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="URL" >URL=#URL#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Params" >参数=#Params#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_Backlog" parameterClass="StrObjDict" >
+      delete from 系统_待办事项
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_Backlog" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT * FROM 系统_待办事项
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_Backlog" parameterClass="StrObjDict" resultClass="Backlog" resultMap="Backlog_Result" >
+      select * from 系统_待办事项
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ObjectID" >对象ID like '%$ObjectID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Content" >内容 like '%$Content$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="UpdateUser" >修改人 like '%$UpdateUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormType" >类型 like '%$FormType$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="HanderType" >处理者类型 like '%$HanderType$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DefaultObject" >默认处理对象 like '%$DefaultObject$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Range" >所属范围 like '%$Range$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_Backlog" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM 系统_待办事项
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ObjectID" >对象ID like '%$ObjectID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Content" >内容 like '%$Content$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="UpdateUser" >修改人 like '%$UpdateUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormType" >类型 like '%$FormType$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="HanderType" >处理者类型 like '%$HanderType$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DefaultObject" >默认处理对象 like '%$DefaultObject$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Range" >所属范围 like '%$Range$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="GetBacklogsByDetails" parameterClass="StrObjDict" resultClass="StrObjDict">
+      select distinct a.ID,a.名称 "Name",a.URL,a.参数 "Params"
+      from 系统_待办事项 a, pub_待办事项明细 b
+      where a.ID=b.待办事项ID and b.对象ID=#PatientID#
+    </select>
+
+
+  </statements>
+</sqlMap>

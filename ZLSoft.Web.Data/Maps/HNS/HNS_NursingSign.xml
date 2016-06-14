@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="NursingSign" type="ZLSoft.Model.HNS.NursingSign, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="NursingSign_Result" class="NursingSign">
+      <result property="ID" column="ID" />
+      <result property="Nature" column="性质" />
+      <result property="SourceID" column="源ID" />
+      <result property="CertificateID" column="证书ID" />
+      <result property="Timestamp" column="时间戳" />
+      <result property="Signer" column="签名人" />
+      <result property="SignedTime" column="签名时间" />
+      <result property="SignContent" column="签名内容" />
+      <result property="IsInvalid" column="是否作废" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_NursingSign" parameterClass="StrObjDict">
+      INSERT INTO HNS_病人护理签名(ID,性质,源ID,证书ID,时间戳,签名人,签名时间,签名内容,是否作废)
+      VALUES (#ID#,#Nature#,#SourceID#,#CertificateID#,#Timestamp#,#Signer#,#SignedTime#,#SignContent#,#IsInvalid#)
+    </update>
+
+    <update id="UPDATE_NursingSign" parameterClass="StrObjDict" >
+      update HNS_病人护理签名
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="Nature" >性质=#Nature#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SourceID" >源ID=#SourceID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="CertificateID" >证书ID=#CertificateID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Timestamp" >时间戳=#Timestamp#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Signer" >签名人=#Signer#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SignedTime" >签名时间=#SignedTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SignContent" >签名内容=#SignContent#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_NursingSign" parameterClass="StrObjDict" >
+      delete from HNS_病人护理签名
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_NursingSign" parameterClass="StrObjDict" resultMap="NursingSign_Result" >
+      SELECT * FROM HNS_病人护理签名
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_NursingSign" parameterClass="StrObjDict" resultClass="NursingSign" resultMap="NursingSign_Result" >
+      select * from HNS_病人护理签名
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Nature" >性质 like '%$Nature$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SourceID" >源ID like '%$SourceID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="CertificateID" >证书ID like '%$CertificateID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >时间戳 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >时间戳 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Timestamp" >时间戳 like '%$Timestamp$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Signer" >签名人 like '%$Signer$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >签名时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >签名时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SignedTime" >签名时间 like '%$SignedTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SignContent" >签名内容 like '%$SignContent$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_NursingSign" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM HNS_病人护理签名
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Nature" >性质 like '%$Nature$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SourceID" >源ID like '%$SourceID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="CertificateID" >证书ID like '%$CertificateID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >时间戳 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >时间戳 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Timestamp" >时间戳 like '%$Timestamp$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Signer" >签名人 like '%$Signer$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >签名时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >签名时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SignedTime" >签名时间 like '%$SignedTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SignContent" >签名内容 like '%$SignContent$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="Bulletin" type="ZLSoft.Model.PUB.Bulletin, ZLSoft.Model" />
+    <typeAlias alias="PK_Bulletin" type="ZLSoft.Model.PUB.PK_Bulletin, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="Bulletin_Result" class="Bulletin">
+      <result property="ID" column="ID" />
+      <result property="SuperID" column="上级ID" />
+      <result property="Name" column="名称" />
+      <result property="InputCode" column="输入码" />
+      <result property="IsInvalid" column="是否作废" />
+      <result property="Remark" column="说明" />
+      <result property="DeptRange" column="适用科室" />
+      <result property="ExtSQL" column="扩展SQL" />
+      <result property="Type" column="类型" />
+      <result property="Style" column="样式" />
+      <result property="FontSize" column="字号" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_Bulletin" parameterClass="StrObjDict">
+      INSERT INTO PUB_公告栏(ID,上级ID,名称,输入码,是否作废,说明,适用科室,扩展SQL,类型,样式,字号)
+      VALUES (#ID#,#SuperID#,#Name#,#InputCode#,#IsInvalid#,#Remark#,#DeptRange#,#ExtSQL#,#Type#,#Style#,#FontSize#)
+    </update>
+
+    <update id="UPDATE_Bulletin" parameterClass="StrObjDict" >
+      update PUB_公告栏
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="SuperID" >上级ID=#SuperID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InputCode" >输入码=#InputCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Remark" >说明=#Remark#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="DeptRange" >适用科室=#DeptRange#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ExtSQL" >扩展SQL=#ExtSQL#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Type" >类型=#Type#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Style" >样式=#Style#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FontSize" >字号=#FontSize#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_Bulletin" parameterClass="StrObjDict" >
+      delete from PUB_公告栏
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="Get_ALlBulletin" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT ID,上级ID As "SuperID",名称 As "Name",输入码 As "InputCode",是否作废 As "IsInvalid",说明 As "Remark",
+      适用科室 As "DeptRange",扩展SQL As "ExtSQL",类型 As "Type",样式 As "Style",字号 As "FontSize"
+      FROM PUB_公告栏
+    </select>
+
+    <select id="LOAD_Bulletin" parameterClass="PK_Bulletin" resultMap="Bulletin_Result" >
+      SELECT * FROM PUB_公告栏
+      WHERE ID=#ID#
+    </select>
+
+    <select id="GetList_Bulletin" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SElECT ID,上级ID As "SuperID",名称 As "Name",说明 As "ReMark", 输入码 As "InputCode",是否作废 As "IsInvalid",
+      适用科室 As "DeptRange",扩展SQL As "ExtSQL",类型 As "Type",样式 As "Style",字号 As "FontSize"
+      From PUB_公告栏 Where 是否作废 ='0'
+    </select>
+
+    <select id="GetID_Bulletin" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SElECT ID From PUB_公告栏 Where  是否作废 ='0' And 上级ID != 'Top'
+    </select>
+
+    <select id="GetSQL_Bulletin" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SElECT 扩展SQL as "ExtSQL" From PUB_公告栏 Where 是否作废 = '0' And ID=#ID#
+    </select>
+
+    <select id="GetSQL_ALLBulletin" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SElECT 扩展SQL as "ExtSQL" From PUB_公告栏 Where 是否作废 = '0' And 上级ID != 'Top'
+    </select>
+
+
+    <select id="LIST_Bulletin" parameterClass="StrObjDict" resultClass="Bulletin" resultMap="Bulletin_Result" >
+      select * from PUB_公告栏
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SuperID" >上级ID like '%$SuperID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InputCode" >输入码 like '%$InputCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like '%$IsInvalid$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remark" >说明 like '%$Remark$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DeptRange" >适用科室 like '%$DeptRange$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ExtSQL" >扩展SQL like '%$ExtSQL$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Type" >类型 like '%$Type$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Style" >样式 like '%$Style$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FontSize" >字号 like '%$FontSize$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_Bulletin" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM PUB_公告栏
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SuperID" >上级ID like '%$SuperID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InputCode" >输入码 like '%$InputCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like '%$IsInvalid$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remark" >说明 like '%$Remark$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DeptRange" >适用科室 like '%$DeptRange$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ExtSQL" >扩展SQL like '%$ExtSQL$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Type" >类型 like '%$Type$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Style" >样式 like '%$Style$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FontSize" >字号 like '%$FontSize$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

@@ -1,0 +1,13 @@
+E:\Application\trunk\mhome\HIP\ZLSoft.DalManager\bin\Debug\ZLSoft.DalManager.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.DalManager\bin\Debug\ZLSoft.DalManager.pdb
+E:\Application\trunk\mhome\HIP\ZLSoft.DalManager\bin\Debug\IBatisNet.DataMapper.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.DalManager\bin\Debug\ZLSoft.Model.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.DalManager\bin\Debug\ZLSoft.Pub.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.DalManager\bin\Debug\IBatisNet.DataAccess.2005.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.DalManager\bin\Debug\IBatisNet.Common.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.DalManager\bin\Debug\Castle.DynamicProxy.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.DalManager\bin\Debug\ZLSoft.Model.pdb
+E:\Application\trunk\mhome\HIP\ZLSoft.DalManager\bin\Debug\ZLSoft.Pub.pdb
+E:\Application\trunk\mhome\HIP\ZLSoft.DalManager\obj\Debug\ZLSoft.DalManager.csprojResolveAssemblyReference.cache
+E:\Application\trunk\mhome\HIP\ZLSoft.DalManager\obj\Debug\ZLSoft.DalManager.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.DalManager\obj\Debug\ZLSoft.DalManager.pdb

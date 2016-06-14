@@ -1,0 +1,8 @@
+E:\Application\trunk\mhome\HIP\ZLSoft.Soa.ServiceBus\bin\Debug\ZLSoft.Soa.ServiceBus.exe
+E:\Application\trunk\mhome\HIP\ZLSoft.Soa.ServiceBus\bin\Debug\ZLSoft.Soa.ServiceBus.pdb
+E:\Application\trunk\mhome\HIP\ZLSoft.Soa.ServiceBus\bin\Debug\HybridDSP.Net.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.Soa.ServiceBus\obj\Debug\ZLSoft.Soa.ServiceBus.ControlForm.resources
+E:\Application\trunk\mhome\HIP\ZLSoft.Soa.ServiceBus\obj\Debug\ZLSoft.Soa.ServiceBus.Properties.Resources.resources
+E:\Application\trunk\mhome\HIP\ZLSoft.Soa.ServiceBus\obj\Debug\ZLSoft.Soa.ServiceBus.csproj.GenerateResource.Cache
+E:\Application\trunk\mhome\HIP\ZLSoft.Soa.ServiceBus\obj\Debug\ZLSoft.Soa.ServiceBus.exe
+E:\Application\trunk\mhome\HIP\ZLSoft.Soa.ServiceBus\obj\Debug\ZLSoft.Soa.ServiceBus.pdb

@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="DataService" type="ZLSoft.Model.PLATFORM.DataService, ZLSoft.Model" />
+    <typeAlias alias="PK_DataService" type="ZLSoft.Model.PLATFORM.PK_DataService, ZLSoft.Model" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="DataService_Result" class="DataService">
+      <result property="ID" column="ID" />
+      <result property="Name" column="名称" />
+      <result property="Type" column="类型" />
+      <result property="Remark" column="说明" />
+      <result property="InputTemplate" column="入参模板" />
+      <result property="OutputTemplate" column="出参模板" />
+      <result property="IsAsync" column="异步" />
+      <result property="DataSource" column="数据源" />
+      <result property="IsInvalid" column="是否作废" />
+      <result property="InvalidTime" column="作废时间" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="ModifyTime" column="修改时间" />
+      <result property="IsLocalStorage" column="是否本地存储" />
+      <result property="IsSystem" column="是否系统内置" />
+      <result property="IsRef" column="是否对照表对象" />
+      <result property="RefObject" column="对照对象ID" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="LOAD_DataService" parameterClass="PK_DataService" resultMap="DataService_Result">
+      SELECT * FROM 系统_服务定义
+      WHERE ID=#ID#
+    </select>
+
+    <select id="LISTSOD_DataService" parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT
+      ID,
+      名称 AS "Name",
+      类型 AS "Type",
+      说明 AS "Remark",
+      入参模板 AS "InputTemplate",
+      出参模板 AS "OutputTemplate",
+      异步 AS "IsAsync",
+      数据源 AS "DataSource",
+      是否作废 AS "IsInvalid",
+      作废时间 AS "InvalidTime",
+      修改用户 AS "ModifyUser",
+      修改时间 AS "ModifyTime",
+      是否本地存储 AS "IsLocalStorage",
+      是否系统内置 AS "IsSystem",
+      是否对照表对象 AS "IsRef",
+      对照对象ID AS "RefObject"
+      FROM 系统_服务定义
+      WHERE 是否作废 &lt;> 1
+    </select>
+    <update id="UPDATE_DataService"  parameterClass="StrObjDict">
+      UPDATE 系统_服务定义 SET
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Type" >类型=#Type#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Remark" >说明=#Remark#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InputTemplate" >入参模板=#InputTemplate#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="OutputTemplate" >出参模板=#OutputTemplate#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsAsync" >异步=#IsAsync#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ServiceUrl" >数据源=#DataSource#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InvalidTime" >作废时间=#InvalidTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsLocalStorage" >是否本地存储=#IsLocalStorage#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsRef" >是否对照表对象=#IsRef#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="RefObject" >对照对象ID=#RefObject#</isPropertyAvailable>
+      </dynamic>
+      WHERE ID=#ID# AND 是否系统内置&lt;>1
+    </update>
+
+    <update id="INSERT_DataService" parameterClass="StrObjDict">
+      INSERT INTO 系统_服务定义(ID,名称,类型,说明,入参模板,出参模板,异步,数据源,是否本地存储,是否系统内置,是否对照表对象,对照对象ID)
+      VALUES(#ID#,#Name#,#Type#,#Remark#,#InputTemplate#,#OutputTemplate#,#IsAsync#,#DataSource#,#IsLocalStorage#,1,#IsRef#,#RefObject#)
+    </update>
+
+    <delete id="DELETE_DataService" parameterClass="StrObjDict">
+      DELETE FROM 系统_服务定义
+      WHERE ID = #ID#
+    </delete>
+
+    <select id="LIST_DataService" parameterClass="StrObjDict" resultMap="DataService_Result">
+      SELECT * FROM 系统_服务定义
+    </select>
+
+  </statements>
+</sqlMap>

@@ -1,0 +1,8 @@
+E:\Application\trunk\mhome\HIP\ZLSoft.Pub\bin\Debug\ZLSoft.Pub.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.Pub\bin\Debug\ZLSoft.Pub.pdb
+E:\Application\trunk\mhome\HIP\ZLSoft.Pub\bin\Debug\IBatisNet.Common.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.Pub\bin\Debug\IBatisNet.DataAccess.2005.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.Pub\bin\Debug\IBatisNet.DataMapper.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.Pub\bin\Debug\Castle.DynamicProxy.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.Pub\obj\Debug\ZLSoft.Pub.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.Pub\obj\Debug\ZLSoft.Pub.pdb

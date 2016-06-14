@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="NursingMark" type="ZLSoft.Model.HNS.NursingMark, ZLSoft.Model" />
+    <typeAlias alias="PK_NursingMark" type="ZLSoft.Model.HNS.PK_NursingMark, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="NursingMark_Result" class="NursingMark">
+      <result property="ID" column="ID" />
+      <result property="Code" column="编码" />
+      <result property="Name" column="名称" />
+      <result property="Alias" column="别名" />
+      <result property="Remark" column="说明" />
+      <result property="IsInvalid" column="是否作废" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="ModifyTime" column="修改时间" />
+      <result property="InvalidTime" column="作废时间" />
+      <result property="InputCode" column="输入码" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_NursingMark" parameterClass="StrObjDict">
+      INSERT INTO HNS_护理评分(ID,编码,名称,别名,说明,是否作废,修改用户,修改时间,作废时间,输入码)
+      VALUES (#ID#,#Code#,#Name#,#Alias#,#Remark#,#IsInvalid#,#ModifyUser#,#ModifyTime#,#InvalidTime#,F_GetSrm(#Name#,'拼音码'))
+    </update>
+
+    <update id="UPDATE_NursingMark" parameterClass="StrObjDict" >
+      update HNS_护理评分
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="Code" >编码=#Code#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Alias" >别名=#Alias#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Remark" >说明=#Remark#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InvalidTime" >作废时间=#InvalidTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InputCode" >输入码=#InputCode#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_NursingMark" parameterClass="StrObjDict" >
+      delete from HNS_护理评分
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_NursingMark" parameterClass="PK_NursingMark" resultMap="NursingMark_Result" >
+      SELECT * FROM HNS_护理评分
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_NursingMark" parameterClass="StrObjDict" resultClass="NursingMark" resultMap="NursingMark_Result" >
+      select * from HNS_护理评分
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Code" >编码 like '%$Code$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Alias" >别名 like '%$Alias$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remark" >说明 like '%$Remark$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 = #IsInvalid#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InvalidTime" >作废时间 like '%$InvalidTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InputCode" >
+          (lower(名称) like lower('%$InputCode$%') OR lower(输入码) like lower('%$InputCode$%'))
+        </isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_NursingMark" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM HNS_护理评分
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Code" >编码 like '%$Code$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Alias" >别名 like '%$Alias$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remark" >说明 like '%$Remark$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like '%$IsInvalid$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >作废时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >作废时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InvalidTime" >作废时间 like '%$InvalidTime$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

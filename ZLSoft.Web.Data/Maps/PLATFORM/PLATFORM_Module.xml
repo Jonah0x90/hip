@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="Module" type="ZLSoft.Model.PLATFORM.Module, ZLSoft.Model" />
+    <typeAlias alias="PK_Module" type="ZLSoft.Model.PLATFORM.PK_Module, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="ModuleResult" class="Module">
+      <result property="ModuleCode" column="模块代码" />
+      <result property="Name" column="名称" />
+      <result property="Remark" column="备注" />
+      <result property="IsIndexCustom" column="是否自定义首页" />
+      <result property="IndexMenuID" column="首页菜单ID" />
+      <result property="IsCheckClient" column="是否检查客户端版本" />
+      <result property="TypeID" column="类别ID" />
+      <result property="SeqNo" column="排序序号" />
+      <result property="IsInvalid" column="是否作废" />
+      <result property="InputCode" column="输入码" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="LOAD_Module" parameterClass="PK_Module" resultMap="ModuleResult" resultClass="Module" >
+      select * from 系统_模块
+      where ID=#ID#
+    </select>
+
+
+    <select id="LIST_Module" parameterClass="StrObjDict" resultClass="Module" resultMap="ModuleResult" >
+      select * from 系统_模块
+
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" OR " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" OR " property="Name" >输入码 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" OR " property="Name" >备注 like '%$Name$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+    
+    
+    
+  </statements>
+</sqlMap>

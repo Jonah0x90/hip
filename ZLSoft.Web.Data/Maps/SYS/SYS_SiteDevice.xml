@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="SiteDevice" type="ZLSoft.Model.SYS.SiteDevice, ZLSoft.Model" />
+    <typeAlias alias="SiteVersionInfo" type="ZLSoft.Model.SYS.SiteVersionInfo, ZLSoft.Model" />
+    <typeAlias alias="PK_SiteDevice" type="ZLSoft.Model.SYS.PK_SiteDevice, ZLSoft.Model" />
+    <typeAlias alias="PK_SiteVersionInfo" type="ZLSoft.Model.SYS.PK_SiteVersionInfo, ZLSoft.Model" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="SiteDevice_Result" class="SiteDevice">
+      <result property="ID" column="ID" />
+      <result property="DeviceID" column="站点标识"/>
+      <result property="Remark" column="说明" />
+      <result property="DeptID" column="所属部门ID" />
+      <result property="RegTime" column="注册时间" />
+      <result property="DeviceInfo" column="设备型号" />
+      <result property="IsMobile" column="是否移动设备" />
+      <result property="Enable" column="是否启用" />
+    </resultMap>
+    <resultMap id="SiteVersionInfo_Result" class="SiteVersionInfo">
+      <result property="ModuleCode" column="模块代码" />
+      <result property="CurrentVersionCode" column="当前版本代码" />
+      <result property="UpdateVersionCode" column="目标版本代码" />
+      <result property="File" column="升级文件地址" />
+      <result property="Account" column="升级账号" />
+      <result property="Password" column="升级密码" />
+      <result property="UpdateMethod" column="升级方式" />
+      <result property="Enable" column="是否启用" />
+    </resultMap>
+  </resultMaps>
+  
+  
+  <statements>
+    <select id="LOAD_SiteDevice" parameterClass="PK_SiteDevice" resultMap="SiteDevice_Result">
+      SELECT * FROM 系统_站点设备
+      WHERE 站点标识=#DeviceID#
+    </select>
+
+    <select id="COUNT_SiteDevice" resultClass="StrObjDict">
+      SELECT COUNT(*) AS DeviceCount FROM 系统_站点设备
+    </select>
+
+
+    <update id="INSERT_SiteDevice" parameterClass="StrObjDict">
+      INSERT INTO 系统_站点设备(ID,站点标识,说明,所属部门ID,注册时间,设备型号,是否移动设备,是否启用)
+      VALUES(#ID#,#DeviceID#,#Remark#,#DeptID#,#RegTime#,#DeviceInfo#,#IsMobile#,#Enable#)
+    </update>
+
+    <update id="INSERT_SiteDevice_Module" parameterClass="StrObjDict">
+      INSERT INTO 系统_模块站点 VALUES(#DeviceID#,#ModuleCode#)
+    </update>
+
+    <select id="Load_SiteVersionInfo_AsVersion" parameterClass="StrObjDict" resultMap="SiteVersionInfo_Result">
+      SELECT * FROM 系统_模块版本
+      WHERE 是否启用=1
+      <dynamic prepend=" AND ">
+        <isPropertyAvailable prepend=" AND " property="ModuleCode" >模块代码=#ModuleCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="CurrentVersionCode" >目标版本代码 > #CurrentVersionCode#</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+    
+  </statements>
+</sqlMap>

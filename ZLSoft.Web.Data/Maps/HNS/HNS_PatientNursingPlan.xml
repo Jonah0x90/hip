@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="PatientNursingPlan" type="ZLSoft.Model.HNS.PatientNursingPlan, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="PatientNursingPlan_Result" class="PatientNursingPlan">
+      <result property="ID" column="ID" />
+      <result property="PlanStandardID" column="标准计划ID" />
+      <result property="DeptID" column="部门ID" />
+      <result property="ObjectID" column="对象ID" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="ModifyTime" column="修改时间" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_PatientNursingPlan" parameterClass="StrObjDict">
+      INSERT INTO HNS_病人护理计划(ID,标准计划ID,部门ID,对象ID,修改用户,修改时间)
+      VALUES (#ID#,#PlanStandardID#,#DeptID#,#ObjectID#,#ModifyUser#,#ModifyTime#)
+    </update>
+
+    <update id="UPDATE_PatientNursingPlan" parameterClass="StrObjDict" >
+      update HNS_病人护理计划
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="PlanStandardID" >标准计划ID=#PlanStandardID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="DeptID" >部门ID=#DeptID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ObjectID" >对象ID=#ObjectID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_PatientNursingPlan" parameterClass="StrObjDict" >
+      delete from HNS_病人护理计划
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_PatientNursingPlan" parameterClass="StrObjDict" resultMap="PatientNursingPlan_Result" >
+      SELECT * FROM HNS_病人护理计划
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_PatientNursingPlan" parameterClass="StrObjDict" resultClass="PatientNursingPlan" resultMap="PatientNursingPlan_Result" >
+      select * from HNS_病人护理计划
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PlanStandardID" >标准计划ID like '%$PlanStandardID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DeptID" >部门ID like '%$DeptID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ObjectID" >对象ID like '%$ObjectID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_PatientNursingPlan" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM HNS_病人护理计划
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PlanStandardID" >标准计划ID like '%$PlanStandardID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DeptID" >部门ID like '%$DeptID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ObjectID" >对象ID like '%$ObjectID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <!--  查找护理计划  -->
+    <select id="GetPlans" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT b.Id As "SchemeID",c.名称 As "Name",a.修改用户 As "CreatedUser",
+      To_Char(a.修改时间, 'yyyy-MM-dd hh24:mi:ss') As "CreatedTime",
+      (select count(1) from HNS_病人护理签名 where 源ID=b.id and 是否作废=0) As "SignedCount"
+      FROM HNS_病人护理计划 a,HNS_病人护理计划方案 b,hns_护理问题 c
+      where a.ID=b.病人计划ID and b.问题ID = c.ID and a.对象ID=#PatientID# and b.是否作废=0
+    </select>
+
+    <select id="GetSchemeDetails" parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT mx.代码 "Code",mx.内容 "TargetContent",mx.选项ID "TargetID",fa.类型 "QuestionType",
+      pg.ID "EvaluateID",pg.评估人 "Evaluater",To_Char(pg.评估时间, 'yyyy-MM-dd hh24:mi:ss') "EvaluateTime",pg.评估理由 "EvaluateContent",
+      pg.状态 "EvaluateStatus",pg.签名ID "EvaluateSignID",
+      qm.ID "SignID",qm.性质 "SignStatus",qm.签名人 "Signer",To_Char(qm.签名时间, 'yyyy-MM-dd hh24:mi:ss') "SignedTime"
+      FROM  hns_病人护理计划方案 fa
+      left join HNS_病人护理计划方案明细 mx on fa.id = mx.方案ID
+      left join (select * from (
+      select *
+      from hns_病人护理评估
+      where 计划方案ID =#SchemeID# order by 评估时间 desc)
+      where rownum =1) pg on fa.id = pg.计划方案ID
+      left join HNS_病人护理签名 qm on qm.源ID=fa.ID  AND qm.是否作废=0
+      where fa.id = #SchemeID# AND fa.是否作废=0
+    </select>
+
+    <select id="GetQuestionByPatient" parameterClass="StrObjDict" resultClass="StrObjDict">
+      select c.ID "QuestionID",c.名称 "QuestionName",c.类别 "QuestionType" from hns_病人护理计划 a
+      left join hns_病人护理计划方案 b on a.id=b.病人计划ID
+      inner join hns_护理问题 c on b.问题ID=c.ID
+      where a.对象ID = #PatientID#
+    </select>
+
+  </statements>
+</sqlMap>

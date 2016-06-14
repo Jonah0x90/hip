@@ -1,0 +1,434 @@
+.hide{
+    display: none;
+}
+
+button{
+    cursor: pointer;
+}
+
+.install-content{
+    background-color: rgb(248, 252, 251);
+    border: 1px solid #ccc;
+    width: 800px;
+    height: 900px;
+    margin: auto auto;
+}
+
+.install-content h5{
+    text-align: center;
+}
+
+.install-content .install-menu{
+    width: 600px;
+    height: 100%;
+    margin: 20px auto;
+}
+
+.install-content .install-menu table{
+    width: 100%;
+}
+
+.install-content .install-menu table tr{
+    height: 40px;
+}
+
+.install-content .install-menu table tr .td-third{
+    color: gray;
+    font-size: 13px;
+    padding-left: 10px;
+}
+
+.install-content .install-menu table tr td input{
+    width: 100%;
+}
+
+.install-content .install-menu .install-btn{
+    text-align: center;
+    margin-top: 30px;
+}
+
+.install-content .install-menu .install-btn button{
+    width: 102px;
+    height: 26px;
+}
+
+.install-content .install-menu .install-btn .build-data{
+    margin-right: 10px;
+}
+
+.install-content .install-menu .install-btn .first-to-next{
+    display: none;
+}
+
+.install-content .install-menu .install-progress{
+    width: 600px;
+    height: 400px;
+    border: 1px solid #cccccc;
+    margin-top: 30px;
+    overflow: scroll;
+}
+
+.install-content .install-menu .install-progress table img{
+    width: 20px;
+}
+
+.install-content .install-menu .install-progress table tr{
+    height: 28px;
+}
+
+.install-content .install-menu .install-progress table .install-error-text{
+    color: red;
+    font-size: 12px;
+}
+
+.install-content .install-second-menu{
+    width: 600px;
+    height: 100%;
+    margin: 20px auto;
+    display: none;
+}
+
+.install-content .install-second-menu table{
+    width: 100%;
+}
+
+.install-content .install-second-menu table tr{
+    height: 40px;
+}
+
+.install-content .install-second-menu table tr .td-third{
+    color: gray;
+    font-size: 13px;
+    padding-left: 10px;
+}
+
+.install-content .install-second-menu table tr td input{
+    width: 100%;
+}
+
+.install-content .install-second-menu .install-second-title{
+    font-size: 14px;
+    margin-left: 15px;
+    margin-bottom: 20px;
+}
+
+.install-content .install-second-menu textarea{
+    margin-left: 15px;
+    width: 583px;
+    height: 80px;
+    margin-bottom: 20px;
+    overflow: scroll;
+    resize: none;
+}
+
+.install-content .install-second-menu .install-btn{
+    text-align: center;
+    margin-top: 30px;
+}
+
+.install-content .install-second-menu .install-btn .edit-data-btn{
+    margin-right: 10px;
+    width: 120px;
+    height: 26px;
+}
+
+.install-content .install-second-menu .install-btn .second-to-next{
+    display: none;
+    width: 90px;
+    height: 26px;
+}
+
+.install-content .install-second-menu .install-progress{
+    width: 600px;
+    height: 400px;
+    border: 1px solid #cccccc;
+    margin-top: 30px;
+    overflow: scroll;
+}
+
+.install-content .install-second-menu .install-progress table img{
+    width: 20px;
+}
+
+.install-content .install-second-menu .install-progress table tr{
+    height: 28px;
+}
+
+.install-content .install-second-menu .install-progress table .install-error-text{
+    color: red;
+    font-size: 12px;
+}
+
+.install-content .install-third-menu{
+    width: 600px;
+    height: 100%;
+    margin: 20px auto;
+    display: none;
+}
+
+.install-content .install-third-menu .install-btn{
+    text-align: center;
+    margin-top: 80px;
+}
+
+.install-content .install-third-menu .install-btn .import-data-btn{
+    margin-right: 10px;
+    width: 120px;
+    height: 26px;
+}
+
+.install-content .install-third-menu .install-btn .finish-btn{
+    display: none;
+    width: 90px;
+    height: 26px;
+}
+
+.box{
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    left: 20%;
+    top: 20%;
+    background: url(../img/investjd.png);
+    margin-left: 235px;
+    margin-top: 30px;
+}
+
+#install-box-one,#install-box-two,#install-box-three{
+    display: none;
+}
+
+.circliful {
+    position: relative;
+}
+.circle-text, .circle-info, .circle-text-half, .circle-info-half {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    display: inline-block;
+}
+.circle-info, .circle-info-half {
+    color: #999;
+}
+.circliful .fa {
+    margin: -10px 3px 0 3px;
+    position: relative;
+    bottom: 4px;
+}
+
+
+.loader{
+    margin: 50px auto 10px;
+    width: 300px;
+    height: 25px;
+    border-radius: 14px;
+    border-bottom: 1px solid #fff;
+    border-top: 1px solid #999;
+    background: #ccc;
+    overflow: hidden;
+    position: relative;
+}
+
+.loader.gray{
+    background: #999;
+}
+
+.progress-bar{
+    height: inherit;
+    width: 0%;
+    border-radius: inherit;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-loading{
+    width: 100%;
+    text-align: center;
+}
+
+.progress-stripes{
+    width: inherit;
+    height: inherit;
+    font-size: 180px;
+    font-weight: bold;
+    margin-top: -50px;
+    letter-spacing: -14px;
+}
+
+.percentage{
+    position: absolute;
+    top: 4px;
+    right: 5px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+
+/***************************************/
+/* BELOW HERE IS SOLELY FOR AESTHETICS */
+/*_____________________________________*/
+
+/*** COLOR SCHEMES ***/
+
+/* RED */
+.red .progress-bar{
+    background: #e74c3c;
+}
+.red .progress-stripes{
+    color: #c0392b;
+}
+.red .percentage{
+    color: #eee;
+}
+
+/* BLUE */
+.blue .progress-bar{
+    background: #3498db;
+}
+.blue .progress-stripes{
+    color: #2980b9;
+}
+.blue .percentage{
+    color: #eee;
+}
+
+/* GREEN */
+.green .progress-bar{
+    background: #2ecc71;
+}
+.green .progress-stripes{
+    color: #27ae60;
+}
+.green .percentage{
+    color: #fff;
+}
+
+/* YELLOW */
+.yellow .progress-bar{
+    background: #f1c40f;
+}
+.yellow .progress-stripes{
+    color: #f39c12;
+}
+.yellow .percentage{
+    color: #fff;
+}
+
+/* PURPLE */
+.purple .progress-bar{
+    background: #9b59b6;
+}
+.purple .progress-stripes{
+    color: #8e44ad;
+}
+.purple .percentage{
+    color: #eee;
+}
+
+/* GRAY */
+.gray .progress-bar{
+    background: #ecf0f1;
+}
+.gray .progress-stripes{
+    color: #bdc3c7;
+}
+.gray .percentage{
+    color: #333;
+}
+
+/*** LOADED ***/
+
+span{
+    color: #888;
+    text-shadow: 0 1px 0 #fff;
+}
+
+span.loaded.red{
+    color: #c0392b;
+}
+
+span.loaded.blue{
+    color: #2980b9;
+}
+
+span.loaded.green{
+    color: #27ae60;
+}
+
+span.loaded.yellow{
+    color: #d35400;
+}
+
+span.loaded.purple{
+    color: #8e44ad;
+}
+
+span.loaded.gray{
+    color: #444;
+}
+
+/*** SKINS ***/
+.skins{
+    padding: 4px 0 8px;
+    cursor: default;
+    font-size: 14px;
+    color: #666;
+    background: #fff;
+    opacity: .5;
+    -moz-transition: opacity .25s linear;
+    -webkit-transition: opacity .25s linear;
+    transition: opacity .25s linear;
+}
+
+.skins:hover{
+    opacity: 1;
+}
+
+.skin{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-bottom: -7px;
+    border: 1px solid #fff;
+    display: inline-block;
+    *display: inline;
+    zoom: 1.0;
+}
+#red{
+    background: #c0392b;
+}
+#red:hover{
+    background: #e74c3c;
+}
+#blue{
+    background: #2980b9;
+}
+#blue:hover{
+    background: #3498db;
+}
+#green{
+    background: #27ae60;
+}
+#green:hover{
+    background: #2ecc71;
+}
+#yellow{
+    background: #f39c12;
+}
+#yellow:hover{
+    background: #f1c40f;
+}
+#purple{
+    background: #8e44ad;
+}
+#purple:hover{
+    background: #9b59b6;
+}
+#gray{
+    background: #7f8c8d;
+}
+#gray:hover {
+    background: #95a5a6;
+}

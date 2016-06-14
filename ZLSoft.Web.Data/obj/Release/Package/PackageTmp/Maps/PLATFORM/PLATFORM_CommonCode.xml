@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="CommonCode" type="ZLSoft.Model.PLATFORM.CommonCode, ZLSoft.Model" />
+    <typeAlias alias="PK_CommonCode" type="ZLSoft.Model.PLATFORM.PK_CommonCode, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="CommonCode_Result" class="CommonCode">
+      <result property="ID" column="ID" />
+      <result property="Name" column="名称"/>
+      <result property="CateID" column="类别ID"/>
+      <result property="IsInvalid" column="是否作废"/>
+      <result property="SystemLabel" column="系统标记"/>
+      <result property="InputCode" column="输入码"/>
+      <result property="Remarks" column="备注"/>
+      <result property="CodingRule" column="编码规则"/>
+      <result property="SuperID" column="上级ID"/>
+      <result property="IsExtSQL" column="是否SQL扩展"/>
+      <result property="ExtSQL" column="扩展SQL"/>
+
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="LOAD_CommonCode" parameterClass="PK_CommonCode" resultMap="CommonCode_Result" resultClass="CommonCode" >
+      select * from 系统_公共代码
+      where ID=#ID#
+    </select>
+
+    <select id="LIST_CommonCode" parameterClass="StrObjDict" resultClass="CommonCode" resultMap="CommonCode_Result" >
+      select * from 系统_公共代码
+
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" OR " property="InputCode" >名称 like '%$InputCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" OR " property="InputCode" >输入码 like '%$InputCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" OR " property="InputCode" >备注 like '%$InputCode$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <update id="INSERT_CommonCode" parameterClass="StrObjDict">
+      INSERT INTO "系统_公共代码" (ID,"名称","类别ID","是否作废","系统标记","输入码","备注","编码规则","上级ID")
+      VALUES ( #ID#,#Name#,#CateID#,#IsInvalid#,#SystemLabel#,#InputCode#,#Remarks#,#CodingRule#,#SuperID#)
+    </update>
+
+    <delete id="DELETE_CommonCode" parameterClass="StrObjDict" >
+      delete 系统_公共代码
+      where ID=#ID#
+    </delete>
+
+    <select id="LISTSOD_CommonCode" parameterClass="StrObjDict" resultClass="StrObjDict"  >
+      SELECT ID,
+      "名称" as "Name",
+      "类别ID" as "CateID",
+      "是否作废" as "IsInvalid",
+      "系统标记" as "SystemLabel",
+      "输入码" as "InputCode",
+      "备注" as "Remarks",
+      "编码规则" as "CodingRule",
+      "上级ID" as "SuperID",
+      "是否SQL扩展" as "IsExtSQL",
+      "扩展SQL" as "ExtSQL"
+      FROM "系统_公共代码"
+
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="CodeID" >代码ID=#CodeID#</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="LISTSOD_From" parameterClass="StrObjDict" resultClass="StrObjDict"  >
+      SELECT ID,
+      "名称" as "Name",
+      "类别ID" as "CateID",
+      "是否作废" as "IsInvalid",
+      "系统标记" as "SystemLabel",
+      "输入码" as "InputCode",
+      "备注" as "Remarks",
+      "编码规则" as "CodingRule",
+      "上级ID" as "SuperID",
+      "是否SQL扩展" as "IsExtSQL",
+      "扩展SQL" as "ExtSQL"
+      FROM "系统_公共代码"
+      WHERE 类别ID = '2'
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <update id="UPDATE_CommonCode" parameterClass="StrObjDict">
+      update 系统_公共代码
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="CateID" >类别ID=#CateID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SystemLabel" >系统标记=#SystemLabel#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InputCode" >输入码=#InputCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Remarks" >备注=#Remarks#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="CodingRule" >编码规则=#CodingRule#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SuperID" >上级ID=#SuperID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsExtSQL" >是否SQL扩展=#IsExtSQL#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ExtSQL" >扩展SQL=#ExtSQL#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <select id="COUNT_CommonCode" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM 系统_公共代码
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SuperID" >上级ID like '%$SuperID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsExtSQL" >是否SQL扩展 like '%$IsExtSQL$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ExtSQL" >扩展SQL like '%$ExtSQL$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="CateID" >类别ID like '%$CateID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like '%$IsInvalid$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SystemLabel" >系统标记 like '%$SystemLabel$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InputCode" >输入码 like '%$InputCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remarks" >备注 like '%$Remarks$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="CodingRule" >编码规则 like '%$CodingRule$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

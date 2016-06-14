@@ -1,0 +1,5 @@
+E:\Application\trunk\mhome\HIP\ZLSoft.Cache\bin\Release\ZLSoft.Cache.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.Cache\bin\Release\ZLSoft.Cache.pdb
+E:\Application\trunk\mhome\HIP\ZLSoft.Cache\obj\Release\ZLSoft.Cache.csprojResolveAssemblyReference.cache
+E:\Application\trunk\mhome\HIP\ZLSoft.Cache\obj\Release\ZLSoft.Cache.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.Cache\obj\Release\ZLSoft.Cache.pdb

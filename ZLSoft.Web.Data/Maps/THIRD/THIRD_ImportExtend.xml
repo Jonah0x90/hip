@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="ImportExtend" type="ZLSoft.Model.THIRD.ImportExtend, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="ImportExtend_Result" class="ImportExtend">
+      <result property="ObjectID" column="对象相关ID" />
+      <result property="ExtendKey" column="信息名" />
+      <result property="ExtendValue" column="信息值" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_ImportExtend" parameterClass="StrObjDict">
+      INSERT INTO PUB_病人补充信息(对象相关ID,信息名,信息值)
+      VALUES (#ObjectID#,#ExtendKey#,#ExtendValue#)
+    </update>
+
+    <update id="UPDATE_ImportExtend" parameterClass="StrObjDict" >
+      UPDATE PUB_病人补充信息
+      SET
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="ExtendValue" >信息值=#ExtendValue#</isPropertyAvailable>
+      </dynamic>
+      where 对象相关ID=#ObjectID# AND 信息名=#ExtendKey#
+    </update>
+  </statements>
+</sqlMap>

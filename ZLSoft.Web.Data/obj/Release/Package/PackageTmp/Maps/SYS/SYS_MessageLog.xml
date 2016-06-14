@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="MessageLog" type="ZLSoft.Model.SYS.MessageLog, ZLSoft.Model" />
+    <typeAlias alias="PK_MessageLog" type="ZLSoft.Model.SYS.PK_MessageLog, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="MessageLog_Result" class="MessageLog">
+      <result property="ID" column="ID" />
+      <result property="EventType" column="消息类型" />
+      <result property="ExtendType" column="扩展类别" />
+      <result property="SendModuleID" column="发送模块ID" />
+      <result property="GetModuleID" column="接收模块ID" />
+      <result property="CreateDate" column="创建时间" />
+      <result property="IsNeedToRespond" column="是否需要应答" />
+      <result property="IsRespond" column="是否应答" />
+      <result property="MsgContent" column="内容" />
+      <result property="Extend" column="扩展" />
+      <result property="EventName" column="事件名称" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_MessageLog" parameterClass="StrObjDict">
+      INSERT INTO 系统_消息记录(ID,消息类型,扩展类别,发送模块ID,接收模块ID,创建时间,是否需要应答,是否应答,内容,扩展,事件名称)
+      VALUES (#ID#,#EventType#,#ExtendType#,#SendModuleID#,#GetModuleID#,#CreateDate#,#IsNeedToRespond#,#IsRespond#,#MsgContent#,#Extend#,#EventName#)
+    </update>
+
+    <update id="UPDATE_MessageLog" parameterClass="StrObjDict" >
+      update 系统_消息记录
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="EventType" >消息类型=#EventType#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ExtendType" >扩展类别=#ExtendType#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SendModuleID" >发送模块ID=#SendModuleID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="GetModuleID" >接收模块ID=#GetModuleID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="CreateDate" >创建时间=#CreateDate#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsNeedToRespond" >是否需要应答=#IsNeedToRespond#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsRespond" >是否应答=#IsRespond#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="MsgContent" >内容=#MsgContent#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Extend" >扩展=#Extend#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="EventName" >事件名称=#EventName#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_MessageLog" parameterClass="StrObjDict" >
+      delete from 系统_消息记录
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_MessageLog" parameterClass="PK_MessageLog" >
+      SELECT * FROM 系统_消息记录
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_MessageLog" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      select ID,消息类型 AS "EventType",扩展类别 AS "ExtendType",发送模块ID AS "SendModuleID",
+      接收模块ID AS "GetModuleID",to_char(创建时间,'yyyy/MM/dd HH:mm:ss') AS "CreateDate",是否需要应答 AS "IsNeedToRespond",
+      是否应答 AS "IsRespond",内容 AS "MsgContent",扩展 AS "Extend",事件名称 AS "EventName"
+      from 系统_消息记录
+
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EventType" >消息类型 like '%$EventType$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ExtendType" >扩展类别 like '%$ExtendType$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SendModuleID" >发送模块ID like '%$SendModuleID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="GetModuleID" >接收模块ID like '%$GetModuleID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >创建时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >创建时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="CreateDate" >创建时间 like '%CreateDate%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsNeedToRespond" >是否需要应答 like '%$IsNeedToRespond$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsRespond" >是否应答 like '%$IsRespond$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MsgContent" >内容 like '%$MsgContent$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Extend" >扩展 like '%$Extend$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EventName" >事件名称 like '%$EventName$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_MessageLog" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM 系统_消息记录
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EventType" >消息类型 like '%$EventType$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ExtendType" >扩展类别 like '%$ExtendType$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SendModuleID" >发送模块ID like '%$SendModuleID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="GetModuleID" >接收模块ID like '%$GetModuleID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >创建时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >创建时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="CreateDate" >创建时间 like '%CreateDate%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsNeedToRespond" >是否需要应答 like '%$IsNeedToRespond$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsRespond" >是否应答 like '%$IsRespond$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MsgContent" >内容 like '%$MsgContent$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Extend" >扩展 like '%$Extend$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EventName" >事件名称 like '%EventName%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

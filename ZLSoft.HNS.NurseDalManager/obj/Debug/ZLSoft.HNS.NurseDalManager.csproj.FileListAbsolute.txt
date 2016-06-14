@@ -1,0 +1,17 @@
+E:\Application\trunk\mhome\HIP\ZLSoft.HNS.NurseDalManager\bin\Debug\ZLSoft.HNS.NurseDalManager.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.HNS.NurseDalManager\bin\Debug\ZLSoft.HNS.NurseDalManager.pdb
+E:\Application\trunk\mhome\HIP\ZLSoft.HNS.NurseDalManager\bin\Debug\IBatisNet.DataMapper.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.HNS.NurseDalManager\bin\Debug\ZLSoft.Cache.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.HNS.NurseDalManager\bin\Debug\ZLSoft.DalManager.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.HNS.NurseDalManager\bin\Debug\ZLSoft.Model.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.HNS.NurseDalManager\bin\Debug\ZLSoft.Pub.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.HNS.NurseDalManager\bin\Debug\IBatisNet.DataAccess.2005.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.HNS.NurseDalManager\bin\Debug\IBatisNet.Common.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.HNS.NurseDalManager\bin\Debug\Castle.DynamicProxy.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.HNS.NurseDalManager\bin\Debug\ZLSoft.Cache.pdb
+E:\Application\trunk\mhome\HIP\ZLSoft.HNS.NurseDalManager\bin\Debug\ZLSoft.DalManager.pdb
+E:\Application\trunk\mhome\HIP\ZLSoft.HNS.NurseDalManager\bin\Debug\ZLSoft.Model.pdb
+E:\Application\trunk\mhome\HIP\ZLSoft.HNS.NurseDalManager\bin\Debug\ZLSoft.Pub.pdb
+E:\Application\trunk\mhome\HIP\ZLSoft.HNS.NurseDalManager\obj\Debug\ZLSoft.HNS.NurseDalManager.csprojResolveAssemblyReference.cache
+E:\Application\trunk\mhome\HIP\ZLSoft.HNS.NurseDalManager\obj\Debug\ZLSoft.HNS.NurseDalManager.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.HNS.NurseDalManager\obj\Debug\ZLSoft.HNS.NurseDalManager.pdb

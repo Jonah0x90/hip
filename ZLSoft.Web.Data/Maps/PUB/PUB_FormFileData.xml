@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="FormFileData" type="ZLSoft.Model.PUB.FormFileData, ZLSoft.Model" />
+    <typeAlias alias="PK_FormFileData" type="ZLSoft.Model.PUB.PK_FormFileData, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="FormFileData_Result" class="FormFileData">
+      <result property="ID" column="ID" />
+      <result property="FormID" column="表单ID" />
+      <result property="DepartmentID" column="护理单元ID" />
+      <result property="PatientID" column="病人ID" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="ModifyTime" column="修改时间" />
+      <result property="Archive" column="归档人" />
+      <result property="ArchiveDate" column="归档时间" />
+      <result property="VersionCode" column="版本号" />
+      <result property="Pages" column="页号" />
+      <result property="Content" column="内容" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_FormFileData" parameterClass="StrObjDict">
+      INSERT INTO PUB_表单数据文件(ID,表单ID,护理单元ID,病人ID,修改用户,修改时间,归档人,归档时间,版本号,页号,内容)
+      VALUES (#ID#,#FormID#,#DepartmentID#,#PatientID#,#ModifyUser#,#ModifyTime#,#Archive#,#ArchiveDate#,#VersionCode#,#Pages#,#Content#)
+    </update>
+
+    <update id="UPDATE_FormFileData" parameterClass="StrObjDict" >
+      update PUB_表单数据文件
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="FormID" >表单ID=#FormID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="DepartmentID" >护理单元ID=#DepartmentID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PatientID" >病人ID=#PatientID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Archive" >归档人=#Archive#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ArchiveDate" >归档时间=#ArchiveDate#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="VersionCode" >版本号=#VersionCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Pages" >页号=#Pages#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Content" >内容=#Content#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_FormFileData" parameterClass="StrObjDict" >
+      delete from PUB_表单数据文件
+      where ID=#ID#
+    </delete>
+
+    <select id="Gets_FormFileData" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      select id,名称 as Mc,快捷码 as Kjm,类型 as Lx,子码 as Zm,修改用户 as Cjr,to_char(修改时间, 'yyyy-MM-dd hh24:mi:ss') AS Cjsj from PUB_表单 WHERE 表单对照 = #FormID#
+    </select>
+
+    <select id="LOAD_FormFileData" parameterClass="PK_FormFileData" resultMap="FormFileData_Result" >
+      SELECT * FROM PUB_表单数据文件
+      WHERE ID=#ID#
+    </select>
+
+    <select id="GetList_FormFileData" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      Select a.Id, b.id AS "FormID",c.报表关联ID AS "ReportFormID",b.名称 As "Name", a.修改用户 As "CreateUser", d.名称 As "CreateDepartment", To_Char(a.修改时间, 'yyyy-MM-dd hh24:mi:ss') As "CreateDate",
+      Substr(To_Char(c.发布时间, 'yyyyMMdd'), 3) As "Version", (SELECT to_char(wm_concat(ID)) FROM HNS_病人护理评分 WHERE 表单记录ID=a.ID) AS "ScoreRecord"
+      From PUB_表单数据文件 A, PUB_表单 B, PUB_表单版本文件 C, 系统_组织机构 D
+      Where a.表单id = b.Id And b.Id = c.表单id And a.版本号 = c.版本号 And a.护理单元id = d.Id And a.护理单元id = #DepartmentID# And
+      a.病人id = #PatientID# AND b.类型=#Type#
+      Order By a.修改时间 DESC
+    </select>
+
+    <select id="GetListTree_FormFileData" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      Select a.Id, b.id AS "FormID", b.名称 As "Name", a.修改用户 As "CreateUser", d.名称 As "CreateDepartment", To_Char(a.修改时间, 'yyyy-MM-dd hh24:mi:ss') As "CreateDate",
+      Substr(To_Char(c.发布时间, 'yyyyMMdd'), 3) As "Version", (SELECT to_char(wm_concat(ID)) FROM HNS_病人护理评分 WHERE 表单记录ID=a.ID) AS "ScoreRecord"
+      From PUB_表单数据文件 A, PUB_表单 B, PUB_表单版本文件 C, 系统_组织机构 D
+      Where a.表单id = b.Id And b.Id = c.表单id And a.版本号 = c.版本号 And a.护理单元id = d.Id And a.护理单元id = #DepartmentID# And
+      a.病人id = #PatientID#
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="Type" >b.类型=#Type#</isPropertyAvailable>
+      </dynamic>
+      Order By a.修改时间 DESC
+    </select>
+
+    <select id="Checked_FromFileData" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT * FROM PUB_表单版本文件
+      WHERE 表单ID=#ID#
+    </select>
+
+    <select id="GetVersion_FormFileData" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      Select max(版本号) From PUB_表单版本文件 Where 表单ID = #FormID# And 发布时间 Is Not Null
+    </select>
+
+    <select id="ResultAfterSave_FormFileData" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      Select #ID# AS "ID", a.Id AS "FormID", a.名称 AS "Name", a.修改用户 AS "ModifyUser", To_Char(a.修改时间, 'yyyy-MM-dd hh24:mi:ss') AS "ModifyDate",
+      适用科室 AS "DeptRange", b.名称 "CreateDept", Substr(To_Char(c.发布时间, 'yyyyMMdd'), 3) As "Version"
+      From PUB_表单 A, PUB_表单版本文件 C, 系统_组织机构 B
+      Where a.Id = c.表单id And a.Id = #FormID# And a.最新版本号 = c.版本号 And
+      b.Id = #DepartmentID#
+    </select>
+
+    <select id="GetEvaluate_FormFileData" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      Select a.版本号 AS "Version", b.Id AS "FormID", b.名称 AS "Name"
+      From PUB_表单数据文件 A, PUB_表单 B
+      Where a.表单id = b.Id And a.Id = #FormID#
+    </select>
+
+    <select id="GetMission_FormFileData" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      Select '' 版本号 AS "Version", b.Id AS "FormID", b.名称 AS "Name"
+      From PUB_表单 B Where b.Id = #FormID#;
+    </select>
+
+    <select id="GetEvaluateData_FormFileData" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      Select c.表单格式 AS "FormFormat",c.网页 AS "PageContent"
+      From PUB_表单 B, PUB_表单版本文件 C
+      Where b.Id = #ID# And b.Id = c.表单id And b.最新版本号 = c.版本号 And c.页号 = #Pages# And c.发布时间 Is Not Null
+    </select>
+
+    <select id="GetEvaluateData_FormFileDataA" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      Select c.表单格式A AS "FormFormat",c.网页A AS "PageContent"
+      From PUB_表单 B, PUB_表单版本文件 C
+      Where b.Id = #ID# And b.Id = c.表单id And b.最新版本号 = c.版本号 And c.页号 = #Pages# And c.发布时间 Is Not Null
+    </select>
+
+    <select id="GetEvaluateData_FormFileDataB" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      Select c.表单格式B AS "FormFormat",c.网页B AS "PageContent"
+      From PUB_表单 B, PUB_表单版本文件 C
+      Where b.Id = #ID# And b.Id = c.表单id And b.最新版本号 = c.版本号 And c.页号 = #Pages# And c.发布时间 Is Not Null
+    </select>
+
+    <select id="GetEvaluateData_FormFileDataC" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      Select c.表单格式C AS "FormFormat",c.网页C AS "PageContent"
+      From PUB_表单 B, PUB_表单版本文件 C
+      Where b.Id = #ID# And b.Id = c.表单id And b.最新版本号 = c.版本号 And c.页号 = #Pages# And c.发布时间 Is Not Null
+    </select>
+
+    <select id="GetData_FormFileData" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      Select 内容 AS "Content",页号 As "PageNo"
+      From PUB_表单数据文件
+      Where ID = #ID#
+    </select>
+
+
+    <select id="GetSysElement_FormFileData" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      Select A.ID AS "PatientID",B.ExtraInfo
+      From pub_病人基本信息 A
+      Join (
+      Select 对象相关ID,LISTAGG(信息名||':'||信息值,',') WITHIN GROUP (ORDER BY 对象相关ID) ExtraInfo
+      From pub_病人补充信息 WHERE 信息值 IS NOT NULL
+      Group by 对象相关ID
+      ) B on B.对象相关ID=A.ID
+      WHERE A.ID = #PatientID#
+    </select>
+
+
+
+
+    <select id="LIST_FormFileData" parameterClass="StrObjDict" resultClass="FormFileData" resultMap="FormFileData_Result" >
+      select * from HNS_病人护理表单
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormID" >表单ID like '%$FormID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DepartmentID" >护理单元ID like '%$DepartmentID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PatientID" >病人ID like '%$PatientID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Archive" >归档人 like '%$Archive$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >归档时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >归档时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ArchiveDate" >归档时间 like '%$ArchiveDate$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >版本号 like '%$VersionCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Pages" >页号 like '%$Pages$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Content" >内容 like '%$Content$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_FormFileData" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM HNS_病人护理表单
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormID" >表单ID like '%$FormID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DepartmentID" >护理单元ID like '%$DepartmentID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PatientID" >病人ID like '%$PatientID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Archive" >归档人 like '%$Archive$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >归档时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >归档时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ArchiveDate" >归档时间 like '%$ArchiveDate$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >版本号 like '%$VersionCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Pages" >页号 like '%$Pages$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Content" >内容 like '%$Content$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

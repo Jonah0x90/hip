@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="WorkItem" type="ZLSoft.Model.PUB.WorkItem, ZLSoft.Model" />
+    <typeAlias alias="PK_WorkItem" type="ZLSoft.Model.PUB.PK_WorkItem, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+<resultMap id="WorkItem_Result" class="WorkItem">
+    <result property="ID" column="ID" />
+    <result property="RelatID" column="相关ID" />
+    <result property="Code" column="编码" />
+    <result property="Name" column="名称" />
+    <result property="Unit" column="单位" />
+    <result property="Remark" column="说明" />
+    <result property="IsBaseThird" column="是否对照" />
+    <result property="IsInvalid" column="是否作废" />
+    <result property="InvalidTime" column="作废时间" />
+</resultMap>
+  </resultMaps>
+  <statements>
+<update id="INSERT_WorkItem" parameterClass="StrObjDict">
+INSERT INTO PUB_护理项目(ID,相关ID,编码,名称,单位,说明,是否对照,是否作废,作废时间) 
+ VALUES (#ID#,#RelatID#,#Code#,#Name#,#Unit#,#Remark#,#IsBaseThird#,#IsInvalid#,#InvalidTime#)</update>
+
+<update id="UPDATE_WorkItem" parameterClass="StrObjDict" >
+update PUB_护理项目 
+ set 
+ <dynamic prepend=" "> 
+   <isPropertyAvailable prepend=" , " property="RelatID" >相关ID=#RelatID#</isPropertyAvailable>
+   <isPropertyAvailable prepend=" , " property="Code" >编码=#Code#</isPropertyAvailable>
+   <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+   <isPropertyAvailable prepend=" , " property="Unit" >单位=#Unit#</isPropertyAvailable>
+   <isPropertyAvailable prepend=" , " property="Remark" >说明=#Remark#</isPropertyAvailable>
+   <isPropertyAvailable prepend=" , " property="IsBaseThird" >是否对照=#IsBaseThird#</isPropertyAvailable>
+   <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+   <isPropertyAvailable prepend=" , " property="InvalidTime" >作废时间=#InvalidTime#</isPropertyAvailable>
+ </dynamic>
+   where ID=#ID# 
+</update>
+
+    <delete id="DELETE_WorkItem" parameterClass="StrObjDict" >
+      delete from PUB_护理项目
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_WorkItem" parameterClass="PK_WorkItem" resultMap="WorkItem_Result" >
+      SELECT * FROM PUB_护理项目
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_WorkItem" parameterClass="StrObjDict" resultClass="WorkItem" resultMap="WorkItem_Result" >      select * from PUB_护理项目
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RelatID" >相关ID = #RelatID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Code" >编码 like '%$Code$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Unit" >单位 = #Unit#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsBaseThird" >是否对照 = #IsBaseThird#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like #IsInvalid#</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+    <insert id="IMPORT_INSERT_WorkItem">
+      INSERT INTO PUB_护理项目(SEQ_PUB_护理项目_ID.NEXTVAL,#RelatID#,#Code#,#Name#,#Unit#,#Remark#,DEFAULT,1)
+
+    </insert>
+
+    <update id="IMPORT_UPDATE_WorkItem">
+      UPDATE PUB_护理项目
+      SET
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Unit" >单位=#Unit#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Remark" >说明=#Remark#</isPropertyAvailable>
+      </dynamic>
+      WHERE 相关ID=#RelatID#
+    </update>
+
+  </statements>
+</sqlMap>

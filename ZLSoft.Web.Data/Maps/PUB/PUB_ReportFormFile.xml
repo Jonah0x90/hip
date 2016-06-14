@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="ReportFormFile" type="ZLSoft.Model.PUB.ReportFormFile, ZLSoft.Model" />
+    <typeAlias alias="PK_ReportFormFile" type="ZLSoft.Model.PUB.PK_ReportFormFile, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="ReportFormFile_Result" class="ReportFormFile">
+      <result property="ID" column="ID" />
+      <result property="Name" column="名称" />
+      <result property="Remark" column="说明" />
+      <!--<result property="Content" column="报表内容" />
+      <result property="Parameter" column="报表参数" />-->
+      <result property="TypeID" column="分类ID" />
+      <result property="UpdateUser" column="修改人" />
+      <result property="ModifyTime" column="修改时间" />
+      <result property="SeqNo" column="排序序号" />
+      <result property="InputCode" column="输入码" />
+      <result property="IsInvalid" column="是否作废" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_ReportFormFile" parameterClass="StrObjDict">
+      INSERT INTO PUB_报表文件(ID,名称,说明,报表内容,报表参数,分类ID,修改人,修改时间,排序序号,输入码,是否作废)
+      VALUES (#ID#,#Name#,#Remark#,#Content#,#Parameter#,#TypeID#,#UpdateUser#,#ModifyTime#,#SeqNo#,#InputCode#,#IsInvalid#)
+    </update>
+
+    <update id="UPDATE_ReportFormFile" parameterClass="StrObjDict" >
+      update PUB_报表文件
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Remark" >说明=#Remark#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Content" >报表内容=#Content#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Parameter" >报表参数=#Parameter#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="TypeID" >分类ID=#TypeID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="UpdateUser" >修改人=#UpdateUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SeqNo" >排序序号=#SeqNo#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InputCode" >输入码=#InputCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_ReportFormFile" parameterClass="StrObjDict" >
+      delete from PUB_报表文件
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_ReportFormFile" parameterClass="PK_ReportFormFile" resultMap="ReportFormFile_Result" >
+      SELECT * FROM PUB_报表文件
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="Info_ReportFormFile" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT ID,名称 as "Name", 报表内容 as "Content",分类ID as "TypeID",是否作废 as "IsInvalid",排序序号 as "SeqNo",输入码 as "InputCode",报表参数 as "Parameter" FROM PUB_报表文件
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="LIST_ReportFormFile" parameterClass="StrObjDict" resultClass="ReportFormFile" resultMap="ReportFormFile_Result" >
+      select * from PUB_报表文件
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remark" >说明 like '%$Remark$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Content" >报表内容 like '%$Content$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Parameter" >报表参数 like '%$Parameter$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="TypeID" >分类ID like '%$TypeID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="UpdateUser" >修改人 like '%$UpdateUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SeqNo" >排序序号 like '%$SeqNo$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InputCode" >输入码 like '%$InputCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like '%$IsInvalid$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_ReportFormFile" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM PUB_报表文件
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remark" >说明 like '%$Remark$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Content" >报表内容 like '%$Content$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Parameter" >报表参数 like '%$Parameter$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="TypeID" >分类ID like '%$TypeID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="UpdateUser" >修改人 like '%$UpdateUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SeqNo" >排序序号 like '%$SeqNo$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InputCode" >输入码 like '%$InputCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like '%$IsInvalid$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

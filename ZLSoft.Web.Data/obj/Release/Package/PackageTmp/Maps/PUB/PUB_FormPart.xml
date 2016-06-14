@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="ElementPart" type="ZLSoft.Model.PUB.ElementPart, ZLSoft.Model" />
+    <typeAlias alias="PK_ElementPart" type="ZLSoft.Model.PUB.PK_ElementPart, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="ElementPart_Result" class="ElementPart">
+      <result property="ID" column="ID" />
+      <result property="Name" column="名称" />
+      <result property="FastCode" column="快捷码" />
+      <result property="Content" column="内容" />
+      <result property="UpdateUser" column="修改人" />
+      <result property="ModifyTime" column="修改时间" />
+      <result property="LastUseForm" column="上次应用表单" />
+      <result property="TypeID" column="分类ID" />
+      <result property="Resolution" column="分辨率" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_ElementPart" parameterClass="StrObjDict">
+      INSERT INTO HNS_护理要素(ID,名称,快捷码,内容,修改人,修改时间,上次应用表单,分类ID,分辨率)
+      VALUES (#ID#,#Name#,#FastCode#,#Content#,#UpdateUser#,#ModifyTime#,#LastUseForm#,#TypeID#,#Resolution#)
+    </update>
+
+    <update id="UPDATE_ElementPart" parameterClass="StrObjDict" >
+      update HNS_护理要素
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FastCode" >快捷码=#FastCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Content" >内容=#Content#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="UpdateUser" >修改人=#UpdateUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="LastUseForm" >上次应用表单=#LastUseForm#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="TypeID" >分类ID=#TypeID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Resolution" >分辨率=#Resolution#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_ElementPart" parameterClass="StrObjDict" >
+      delete from HNS_护理要素
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_ElementPart" parameterClass="PK_ElementPart" resultMap="ElementPart_Result" >
+      SELECT * FROM HNS_护理要素
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_ElementPart" parameterClass="StrObjDict" resultClass="ElementPart" resultMap="ElementPart_Result" >
+      select * from HNS_护理要素
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FastCode" >快捷码 like '%$FastCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Content" >内容 like '%$Content$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="UpdateUser" >修改人 like '%$UpdateUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="LastUseForm" >上次应用表单 like '%$LastUseForm$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="TypeID" >分类ID like '%$TypeID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Resolution" >分辨率 like '%$Resolution$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_ElementPart" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM HNS_护理要素
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FastCode" >快捷码 like '%$FastCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Content" >内容 like '%$Content$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="UpdateUser" >修改人 like '%$UpdateUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="LastUseForm" >上次应用表单 like '%$LastUseForm$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="TypeID" >分类ID like '%$TypeID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Resolution" >分辨率 like '%$Resolution$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="Get_ElementPartInfo" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT 内容 as "Content" FROM HNS_护理要素 WHERE ID = #ID#
+    </select>
+   
+
+  </statements>
+</sqlMap>

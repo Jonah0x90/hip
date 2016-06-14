@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<!--消息记录-->
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+        <typeAlias alias="MessageLog" type="ZLSoft.Model.SYS.MessageLog, ZLSoft.Model" />
+        <typeAlias alias="PK_MessageLog" type="ZLSoft.Model.SYS.PK_MessageLog, ZLSoft.Model" />
+    </alias>
+
+    <resultMaps>
+    <resultMap id="MessageLogResult" class="MessageLog">
+      <result property="ID" column="ID" />
+      <result property="MessageType" column="消息类型" />
+      <result property="ExpansionType" column="扩展类别" />
+      <result property="SendModularID" column="发送模块ID" />
+      <result property="ReceiveModularID" column="接收模块ID" />
+      <result property="Content" column="内容" />
+      <result property="CreateTime" column="创建时间" />
+      <result property="NeedAnswer" column="是否需要应答" />
+      <result property="IsAnswer" column="是否应答" />
+      <result property="Expansion" column="扩展" />
+    </resultMap>
+  </resultMaps>
+  
+    <statements>
+        <select id="LOAD_MessageLog" parameterClass="PK_MessageLog" resultMap="MessageLogResult" resultClass="MessageLog" >
+            select * from 系统_消息记录
+            where ID=#ID#
+        </select>
+    </statements>
+</sqlMap>

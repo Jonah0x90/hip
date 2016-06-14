@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="RoleMember" type="ZLSoft.Model.PUB.RoleMember, ZLSoft.Model" />
+    <typeAlias alias="PK_RoleMember" type="ZLSoft.Model.PUB.PK_RoleMember, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="RoleMember_Result" class="RoleMember">
+      <result property="RoleID" column="角色ID" />
+      <result property="UserID" column="用户ID" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="ModifyTime" column="修改日期" />
+      <result property="SeqNo" column="排序序号" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_RoleMember" parameterClass="StrObjDict">
+      INSERT INTO 系统_角色成员(角色ID,用户ID)
+      VALUES (#RoleID#,#UserID#)
+    </update>
+
+    <update id="UPDATE_RoleMember" parameterClass="StrObjDict" >
+      update 系统_角色成员
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="UserID" >用户ID=#UserID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改日期=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SeqNo" >排序序号=#SeqNo#</isPropertyAvailable>
+      </dynamic>
+      where 角色ID=#RoleID#
+    </update>
+
+    <delete id="DELETE_RoleMember" parameterClass="StrObjDict" >
+      delete from 系统_角色成员
+      where 角色ID=#RoleID# AND 用户ID=#UserID#
+    </delete>
+
+
+
+    <select id="LOAD_RoleMember" parameterClass="PK_RoleMember" resultMap="RoleMember_Result" >
+      SELECT * FROM 系统_角色成员
+      WHERE 角色ID=#RoleID#
+    </select>
+
+
+    <select id="LISTSOD_RoleMember" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT c.ID,
+      c.用户名 AS "UserName",
+      d.姓名 AS "Name",
+      d.性别 AS "Sex",
+      d.出生日期 AS "BirthDay",
+      e.所属部门 AS "Org",
+      F.角色ID AS "RoleID"
+      FROM 系统_用户信息 c,
+      人事_职工信息 d,
+      系统_角色成员 f,
+      (  SELECT a.人员相关ID,
+      LISTAGG (a.部门相关ID || '-' || b.名称, ',')
+      WITHIN GROUP (ORDER BY a.部门相关ID)
+      AS 所属部门
+      FROM 系统_组织机构_部门人员关联 a,
+      系统_组织机构 b
+      WHERE a.部门相关ID = b.相关ID
+      GROUP BY a.人员相关ID) e
+      WHERE     c.职工相关ID = d.相关ID
+      AND F.用户ID = C.ID
+      AND d.相关ID = e.人员相关ID
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="角色ID" >角色ID=#RoleID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="UserID" >用户ID like '%$UserID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改日期 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改日期 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改日期 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SeqNo" >排序序号 like '%$SeqNo$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="LISTOTHERSOD_RoleMember" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT c.ID,
+      c.用户名 AS "UserName",
+      d.输入码 AS "PYcode",
+      d.姓名 AS "Name",
+      e.所属部门 AS "Org"
+      FROM 系统_用户信息 c,
+      人事_职工信息 d,
+      系统_角色成员 f,
+      (  SELECT a.人员相关ID, LISTAGG (a.部门相关ID || '-' || b.名称, ',')
+      WITHIN GROUP (ORDER BY a.部门相关ID) AS 所属部门
+      FROM 系统_组织机构_部门人员关联 a, 系统_组织机构 b
+      WHERE a.部门相关ID = b.相关ID GROUP BY a.人员相关ID) e
+      WHERE     c.职工相关ID = d.相关ID
+      AND F.用户ID != C.ID
+      AND d.相关ID = e.人员相关ID
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="角色ID" >角色ID=#RoleID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="UserID" >用户ID like '%$UserID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改日期 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改日期 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改日期 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SeqNo" >排序序号 like '%$SeqNo$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="BaseEmployeeInfo" type="ZLSoft.Model.HR.BaseEmployeeInfo, ZLSoft.Model" />
+    <typeAlias alias="PK_BaseEmployeeInfo" type="ZLSoft.Model.HR.PK_BaseEmployeeInfo, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="BaseEmployeeInfo_Result" class="BaseEmployeeInfo">
+      <result property="UserID" column="用户ID" />
+      <result property="IDCard" column="身份证" />
+      <result property="Sex" column="性别" />
+      <result property="Nation" column="民族" />
+      <result property="Birday" column="出生日期" />
+      <result property="PlaceOfOrigin" column="籍贯" />
+      <result property="TakeWorkDate" column="参加工作时间" />
+      <result property="ToHospitalDate" column="到院时间" />
+      <result property="EmployeeNature" column="职工性质" />
+      <result property="JobCategory" column="岗位类别" />
+      <result property="EmployeeCategory" column="职工类别" />
+      <result property="EmployeeCategory2" column="职工类别2" />
+      <result property="PersonDepartID" column="人事科室ID" />
+      <result property="BusinessUnitID" column="业务单元ID" />
+      <result property="BusinessOrgID" column="业务组织ID" />
+      <result property="TempOrgID" column="临时组织ID" />
+      <result property="OtherOrgID" column="其他组织ID" />
+      <result property="Staffing" column="人员编制" />
+      <result property="Remarks" column="备注" />
+      <result property="HomeAddress" column="家庭地址" />
+      <result property="HomePostCode" column="家庭邮编" />
+      <result property="HomePhone" column="家庭电话" />
+      <result property="Phone" column="手机号" />
+      <result property="WorkPhone" column="工作电话" />
+      <result property="MailAddress" column="电子邮箱" />
+      <result property="EnglishLevel" column="英语等级" />
+      <result property="PCLevel" column="计算机等级" />
+      <result property="RetiredDate" column="退休时间" />
+      <result property="RestartEndDate" column="返聘到期时间" />
+      <result property="PreLeaveDate" column="预定离院日期" />
+      <result property="IsCancellation" column="是否注销" />
+      <result property="CancellationDate" column="注销日期" />
+      <result property="CancelReason" column="注销原因" />
+      <result property="PYDate" column="拼音码" />
+      <result property="PoliticalStatus" column="政治面貌" />
+      <result property="JoinGroupDate" column="入党团时间" />
+      <result property="GroupJob" column="党团内职务" />
+      <result property="GroupJobDate" column="党内任职时间" />
+      <result property="Education" column="学历" />
+      <result property="GraduationDate" column="毕业时间" />
+      <result property="GraduationSchool" column="毕业学校" />
+      <result property="Professional" column="所学专业" />
+      <result property="EducationCategory" column="教育类别" />
+      <result property="LengthOfSchooling" column="学制" />
+      <result property="Degree" column="学位" />
+      <result property="DegreeDate" column="学位时间" />
+      <result property="BaseEducation" column="基础学历" />
+      <result property="AccountOfNature" column="户口性质" />
+      <result property="AccountLocation" column="户口所在地" />
+      <result property="MaritalStatus" column="婚姻状况" />
+      <result property="LengthOfService" column="工龄" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="ModifyDate" column="修改日期" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_BaseEmployeeInfo" parameterClass="StrObjDict">
+      INSERT INTO 人事_职工基本档案(用户ID,身份证,性别,民族,出生日期,籍贯,参加工作时间,到院时间,职工性质,岗位类别,职工类别,职工类别2,人事科室ID,业务单元ID,业务组织ID,临时组织ID,其他组织ID,人员编制,备注,家庭地址,家庭邮编,家庭电话,手机号,工作电话,电子邮箱,英语等级,计算机等级,退休时间,返聘到期时间,预定离院日期,是否注销,注销日期,注销原因,拼音码,政治面貌,入党团时间,党团内职务,党内任职时间,学历,毕业时间,毕业学校,所学专业,教育类别,学制,学位,学位时间,基础学历,户口性质,户口所在地,婚姻状况,工龄,修改用户,修改日期)
+      VALUES (#UserID#,#IDCard#,#Sex#,#Nation#,#Birday#,#PlaceOfOrigin#,#TakeWorkDate#,#ToHospitalDate#,#EmployeeNature#,#JobCategory#,#EmployeeCategory#,#EmployeeCategory2#,#PersonDepartID#,#BusinessUnitID#,#BusinessOrgID#,#TempOrgID#,#OtherOrgID#,#Staffing#,#Remarks#,#HomeAddress#,#HomePostCode#,#HomePhone#,#Phone#,#WorkPhone#,#MailAddress#,#EnglishLevel#,#PCLevel#,#RetiredDate#,#RestartEndDate#,#PreLeaveDate#,#IsCancellation#,#CancellationDate#,#CancelReason#,#PYDate#,#PoliticalStatus#,#JoinGroupDate#,#GroupJob#,#GroupJobDate#,#Education#,#GraduationDate#,#GraduationSchool#,#Professional#,#EducationCategory#,#LengthOfSchooling#,#Degree#,#DegreeDate#,#BaseEducation#,#AccountOfNature#,#AccountLocation#,#MaritalStatus#,#LengthOfService#,#ModifyUser#,#ModifyDate#)
+    </update>
+
+    <update id="UPDATE_BaseEmployeeInfo" parameterClass="StrObjDict" >
+      update 人事_职工基本档案
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="UserID" >用户ID=#UserID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IDCard" >身份证=#IDCard#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Sex" >性别=#Sex#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Nation" >民族=#Nation#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Birday" >出生日期=#Birday#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PlaceOfOrigin" >籍贯=#PlaceOfOrigin#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="TakeWorkDate" >参加工作时间=#TakeWorkDate#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ToHospitalDate" >到院时间=#ToHospitalDate#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="EmployeeNature" >职工性质=#EmployeeNature#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="JobCategory" >岗位类别=#JobCategory#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="EmployeeCategory" >职工类别=#EmployeeCategory#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="EmployeeCategory2" >职工类别2=#EmployeeCategory2#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PersonDepartID" >人事科室ID=#PersonDepartID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="BusinessUnitID" >业务单元ID=#BusinessUnitID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="BusinessOrgID" >业务组织ID=#BusinessOrgID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="TempOrgID" >临时组织ID=#TempOrgID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="OtherOrgID" >其他组织ID=#OtherOrgID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Staffing" >人员编制=#Staffing#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Remarks" >备注=#Remarks#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="HomeAddress" >家庭地址=#HomeAddress#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="HomePostCode" >家庭邮编=#HomePostCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="HomePhone" >家庭电话=#HomePhone#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Phone" >手机号=#Phone#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="WorkPhone" >工作电话=#WorkPhone#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="MailAddress" >电子邮箱=#MailAddress#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="EnglishLevel" >英语等级=#EnglishLevel#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PCLevel" >计算机等级=#PCLevel#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="RetiredDate" >退休时间=#RetiredDate#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="RestartEndDate" >返聘到期时间=#RestartEndDate#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PreLeaveDate" >预定离院日期=#PreLeaveDate#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsCancellation" >是否注销=#IsCancellation#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="CancellationDate" >注销日期=#CancellationDate#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="CancelReason" >注销原因=#CancelReason#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PYDate" >拼音码=#PYDate#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PoliticalStatus" >政治面貌=#PoliticalStatus#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="JoinGroupDate" >入党团时间=#JoinGroupDate#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="GroupJob" >党团内职务=#GroupJob#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="GroupJobDate" >党内任职时间=#GroupJobDate#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Education" >学历=#Education#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="GraduationDate" >毕业时间=#GraduationDate#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="GraduationSchool" >毕业学校=#GraduationSchool#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Professional" >所学专业=#Professional#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="EducationCategory" >教育类别=#EducationCategory#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="LengthOfSchooling" >学制=#LengthOfSchooling#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Degree" >学位=#Degree#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="DegreeDate" >学位时间=#DegreeDate#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="BaseEducation" >基础学历=#BaseEducation#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="AccountOfNature" >户口性质=#AccountOfNature#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="AccountLocation" >户口所在地=#AccountLocation#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="MaritalStatus" >婚姻状况=#MaritalStatus#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="LengthOfService" >工龄=#LengthOfService#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyDate" >修改日期=#ModifyDate#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_BaseEmployeeInfo" parameterClass="StrObjDict" >
+      delete from 人事_职工基本档案
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_BaseEmployeeInfo" parameterClass="PK_BaseEmployeeInfo" resultMap="BaseEmployeeInfo_Result" >
+      SELECT * FROM 人事_职工基本档案
+      WHERE ID=#ID#
+    </select>
+    
+   
+
+
+    <select id="LIST_BaseEmployeeInfo" parameterClass="StrObjDict" resultClass="BaseEmployeeInfo" resultMap="BaseEmployeeInfo_Result" >
+      select * from 人事_职工基本档案
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="UserID" >用户ID like '%$UserID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IDCard" >身份证 like '%$IDCard$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Sex" >性别 like '%$Sex$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Nation" >民族 like '%$Nation$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >出生日期 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >出生日期 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Birday" >出生日期 like '%$Birday$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PlaceOfOrigin" >籍贯 like '%$PlaceOfOrigin$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >参加工作时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >参加工作时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="TakeWorkDate" >参加工作时间 like '%$TakeWorkDate$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >到院时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >到院时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ToHospitalDate" >到院时间 like '%$ToHospitalDate$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EmployeeNature" >职工性质 like '%$EmployeeNature$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="JobCategory" >岗位类别 like '%$JobCategory$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EmployeeCategory" >职工类别 like '%$EmployeeCategory$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EmployeeCategory2" >职工类别2 like '%$EmployeeCategory2$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PersonDepartID" >人事科室ID like '%$PersonDepartID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="BusinessUnitID" >业务单元ID like '%$BusinessUnitID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="BusinessOrgID" >业务组织ID like '%$BusinessOrgID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="TempOrgID" >临时组织ID like '%$TempOrgID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="OtherOrgID" >其他组织ID like '%$OtherOrgID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Staffing" >人员编制 like '%$Staffing$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remarks" >备注 like '%$Remarks$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="HomeAddress" >家庭地址 like '%$HomeAddress$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="HomePostCode" >家庭邮编 like '%$HomePostCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="HomePhone" >家庭电话 like '%$HomePhone$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Phone" >手机号 like '%$Phone$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="WorkPhone" >工作电话 like '%$WorkPhone$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MailAddress" >电子邮箱 like '%$MailAddress$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EnglishLevel" >英语等级 like '%$EnglishLevel$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PCLevel" >计算机等级 like '%$PCLevel$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >退休时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >退休时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RetiredDate" >退休时间 like '%$RetiredDate$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >返聘到期时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >返聘到期时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RestartEndDate" >返聘到期时间 like '%$RestartEndDate$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >预定离院日期 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >预定离院日期 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PreLeaveDate" >预定离院日期 like '%$PreLeaveDate$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsCancellation" >是否注销 like '%$IsCancellation$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >注销日期 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >注销日期 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="CancellationDate" >注销日期 like '%$CancellationDate$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="CancelReason" >注销原因 like '%$CancelReason$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PYDate" >拼音码 like '%$PYDate$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PoliticalStatus" >政治面貌 like '%$PoliticalStatus$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >入党团时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >入党团时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="JoinGroupDate" >入党团时间 like '%$JoinGroupDate$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="GroupJob" >党团内职务 like '%$GroupJob$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >党内任职时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >党内任职时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="GroupJobDate" >党内任职时间 like '%$GroupJobDate$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Education" >学历 like '%$Education$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >毕业时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >毕业时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="GraduationDate" >毕业时间 like '%$GraduationDate$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="GraduationSchool" >毕业学校 like '%$GraduationSchool$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Professional" >所学专业 like '%$Professional$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EducationCategory" >教育类别 like '%$EducationCategory$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="LengthOfSchooling" >学制 like '%$LengthOfSchooling$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Degree" >学位 like '%$Degree$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >学位时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >学位时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DegreeDate" >学位时间 like '%$DegreeDate$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="BaseEducation" >基础学历 like '%$BaseEducation$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="AccountOfNature" >户口性质 like '%$AccountOfNature$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="AccountLocation" >户口所在地 like '%$AccountLocation$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MaritalStatus" >婚姻状况 like '%$MaritalStatus$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="LengthOfService" >工龄 like '%$LengthOfService$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改日期 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改日期 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyDate" >修改日期 like '%$ModifyDate$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

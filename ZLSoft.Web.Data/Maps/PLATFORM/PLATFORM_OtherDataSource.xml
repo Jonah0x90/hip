@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="OtherDataSource" type="ZLSoft.Model.SYS.OtherDataSource, ZLSoft.Model" />
+    <typeAlias alias="PK_OtherDataSource" type="ZLSoft.Model.SYS.PK_OtherDataSource, ZLSoft.Model" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="OtherDataSourceResult" class="OtherDataSource">
+      <result property="ID" column="ID" />
+      <result property="Name" column="数据源名称" />
+      <result property="Provider" column="数据源提供者" />
+      <result property="Address" column="地址" />
+      <result property="UserName" column="用户名" />
+      <result property="Password" column="密码" />
+      <result property="DataBase" column="数据库" />
+      <result property="ConnectionString" column="连接参数" />
+      <result property="AppSetting" column="应用程序配置文件" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="LOAD_OtherDataSource" parameterClass="PK_OtherDataSource" resultMap="OtherDataSourceResult" resultClass="OtherDataSource" >
+      select * from 系统_三方数据源
+      where ID=#ID#
+    </select>
+  </statements>
+</sqlMap>

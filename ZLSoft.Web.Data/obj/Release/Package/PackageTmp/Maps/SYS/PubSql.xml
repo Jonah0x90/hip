@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <parameterMaps>
+    <parameterMap id="proc_oracle_outputdata_param" class="StrObjDict">
+      <parameter  property="AS_TABLE" column="AS_TABLE" direction="Input" type="string" dbType="VarChar" />
+      <parameter  property="AS_WHERE" column="AS_WHERE" direction="Input" type="string" dbType="VarChar" />
+      <parameter  property="AS_COLS" column="AS_COLS" direction="Output" type="string" dbType="VarChar" />
+      <parameter  property="AS_DBTYPE" column="AS_DBTYPE" direction="Input" type="string" dbType="VarChar" />
+      <parameter  property="CUR_OUT" column="CUR_OUT" direction="Output"   dbType="Cursor"  typeHandler="IBatisNet.DataMapper.Customize.StoreProcedureOutputCursorTypeHandlerCallback,IBatisNet.DataMapper" />
+    </parameterMap>
+
+    <parameterMap id="proc_mssql_outputdata_param" class="StrObjDict">
+      <parameter  property="AS_TABLE" column="AS_TABLE" direction="Input" type="string" dbType="VarChar" />
+      <parameter  property="AS_WHERE" column="AS_WHERE" direction="Input" type="string" dbType="VarChar" />
+      <parameter  property="AS_COLS" column="AS_COLS" direction="Output" type="string" dbType="VarChar" />
+      <parameter  property="AS_DBTYPE" column="AS_DBTYPE" direction="Input" type="string" dbType="VarChar" />
+
+    </parameterMap>
+  </parameterMaps>
+
+  <statements>
+    <statement id="ExecuteScalar" parameterClass="string"   remapResults="true" resultClass="System.Object" >
+      <![CDATA[$sql$]]>
+    </statement>
+    <statement id="ExecuteForQuery" parameterClass="string"   remapResults="true" resultClass="StrObjDict" >
+      <![CDATA[$sql$]]>
+    </statement>
+    <statement id="ExecuteNoneQuery" parameterClass="string"   remapResults="true" >
+      <![CDATA[$sql$]]>
+    </statement>
+    <statement id="BatchExecuteNoneQuery"  parameterClass="ArrayList"   remapResults="true" >
+      begin
+      <iterate conjunction=" " open="" close=""  >
+        <![CDATA[$[].sql$]]>
+      </iterate>
+      end;
+    </statement>
+
+    <statement id="BatchExtendExecuteNoneQuery"  parameterClass="ArrayList"   remapResults="true" >
+      DECLARE
+      v_temp NUMBER(18);
+      v_name VARCHAR2(100);
+      BEGIN
+      <iterate conjunction=" " open="" close=""  >
+        SELECT COUNT(*) into v_temp FROM PUB_病人补充信息 WHERE 对象相关ID=#[].ObjectID# AND 信息名=#[].ExtendName#;
+        IF v_temp = 0
+        THEN
+        INSERT INTO PUB_病人补充信息(对象相关ID,信息名,信息值) VALUES(#[].ObjectID#,#[].ExtendName#,#[].ExtendValue#);
+        else
+        UPDATE PUB_病人补充信息 SET 信息值=#[].ExtendValue# WHERE 对象相关ID=#[].ObjectID# AND 信息名=#[].ExtendName#;
+        END IF;
+      </iterate>
+      end;
+    </statement>
+
+    <statement id="BatchExtendExecuteNoneQuery2"  parameterClass="ArrayList"   remapResults="true" >
+      DECLARE
+      v_temp VARCHAR2(100);
+      begin
+      <iterate conjunction=" " open="" close=""  >
+        UPDATE PUB_病人补充信息 SET 信息值=#[].ExtendValue# WHERE 对象相关ID=#[].ObjectID# AND 信息名=#[].ExtendName# RETURNING 对象相关ID INTO v_temp;
+        if v_temp is null
+        then
+        INSERT INTO PUB_病人补充信息(对象相关ID,信息名,信息值) VALUES(#[].ObjectID#,#[].ExtendName#,#[].ExtendValue#);
+        end if;
+        v_temp := null;
+      </iterate>
+      end;
+    </statement>
+
+    <statement id="PubSql_GetSrm" parameterClass="string"   remapResults="true" resultClass="StrObjDict" >
+      select F_GetSrm(#Chnr#,#Code#) AS "InputCode" from dual
+    </statement>
+
+    <statement id="PubSql_GetSrm_Mssql" parameterClass="string"   remapResults="true" resultClass="StrObjDict" >
+      select dbo.F_GetSrm(#Chnr#,#Chnr#) AS SRM
+    </statement>
+
+    <update id="Sys_Exec_Sql" parameterClass="StrObjDict"> $SQL$</update>
+    <insert id="Sys_Exec_InsertSql" parameterClass="StrObjDict"> $SQL$</insert>
+    <delete id="Sys_Exec_DelSql" parameterClass="StrObjDict"> $SQL$</delete>
+    <statement id="EXECSQL" parameterClass="string" remapResults="true"><![CDATA[$SQL$]]></statement>
+
+    <select id="PubSql_GetMeta" parameterClass="StrObjDict" remapResults="true" resultClass="StrObjDict">SELECT * FROM ($SQL$) WHERE 1=2</select>
+
+    <procedure id="proc_oracle_outputdata" parameterMap="proc_oracle_outputdata_param"  resultClass="System.Data.DataTable">
+      pkg_pub.prc_outputdata
+    </procedure>
+
+
+
+    <procedure id="proc_mssql_outputdata" parameterMap="proc_mssql_outputdata_param"  resultClass="System.Data.DataTable">
+      prc_outputdata
+    </procedure>
+
+    <procedure id="proc_mssql_getxtcs"   resultClass="System.Data.DataTable">
+      getxtcs
+    </procedure>
+
+
+
+  </statements>
+</sqlMap>

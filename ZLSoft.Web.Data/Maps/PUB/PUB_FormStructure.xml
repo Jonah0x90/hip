@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="FormStructure" type="ZLSoft.Model.PUB.FormStructure, ZLSoft.Model" />
+    <typeAlias alias="PK_FormStructure" type="ZLSoft.Model.PUB.PK_FormStructure, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="FormStructure_Result" class="FormStructure">
+      <result property="ID" column="ID" />
+      <result property="FormID" column="表单ID" />
+      <result property="VersionCode" column="版本号" />
+      <result property="ElementName" column="元素名称" />
+      <result property="ElementAttribute" column="元素属性" />
+      <result property="Implication" column="业务含义" />
+      <result property="FormOfExpression" column="表现形式" />
+      <result property="FormStyleCss" column="表单样式" />
+      <result property="SuperID" column="上级ID" />
+      <result property="NO" column="排序序号" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_FormStructure" parameterClass="StrObjDict">
+      INSERT INTO PUB_表单结构(ID,表单ID,版本号,元素名称,元素属性,业务含义,表现形式,表单样式,上级ID,排序序号)
+      VALUES (#ID#,#FormID#,#VersionCode#,#ElementName#,#ElementAttribute#,#Implication#,#FormOfExpression#,#FormStyleCss#,#SuperID#,#NO#)
+    </update>
+
+    <update id="UPDATE_FormStructure" parameterClass="StrObjDict" >
+      update PUB_表单结构
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="FormID" >表单ID=#FormID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="VersionCode" >版本号=#VersionCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ElementName" >元素名称=#ElementName#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ElementAttribute" >元素属性=#ElementAttribute#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Implication" >业务含义=#Implication#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FormOfExpression" >表现形式=#FormOfExpression#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FormStyleCss" >表单样式=#FormStyleCss#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SuperID" >上级ID=#SuperID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SuperID" >排序项号=#NO#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_FormStructure" parameterClass="StrObjDict" >
+      delete from PUB_表单结构
+      where 表单ID=#ID#
+    </delete>
+    
+    <update id ="Del_FormStructure" parameterClass="StrObjDict">
+      delete from PUB_表单结构
+      where 表单ID=#ID#
+      <dynamic prepend="AND">
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >版本号=#VersionCode#</isPropertyAvailable>
+      </dynamic>
+    </update>
+
+
+
+    <select id="LOAD_FormStructure" parameterClass="PK_FormStructure" resultMap="FormStructure_Result" >
+      SELECT * FROM PUB_表单结构
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_FormStructure" parameterClass="StrObjDict" resultClass="FormStructure" resultMap="FormStructure_Result" >
+      select * from PUB_表单结构
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormID" >表单ID like '%$FormID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >版本号 like '%$VersionCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ElementName" >元素名称 like '%$ElementName$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ElementAttribute" >元素属性 like '%$ElementAttribute$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Implication" >业务含义 like '%$Implication$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormOfExpression" >表现形式 like '%$FormOfExpression$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormStyleCss" >表单样式 like '%$FormStyleCss$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SuperID" >上级ID like '%$SuperID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="NO" >排序序号 like '%$NO$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_FormStructure" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM PUB_表单结构
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormID" >表单ID like '%$FormID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >版本号 like '%$VersionCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ElementName" >元素名称 like '%$ElementName$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ElementAttribute" >元素属性 like '%$ElementAttribute$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Implication" >业务含义 like '%$Implication$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormOfExpression" >表现形式 like '%$FormOfExpression$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormStyleCss" >表单样式 like '%$FormStyleCss$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SuperID" >上级ID like '%$SuperID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="NO" >排序序号 like '%$NO$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+
+    <!-- 第三方护理项目 -->
+    <select id="三方护理项目">
+      SELECT 项目序号 AS ID,项目序号 AS BM,项目名称 AS MC,项目单位 AS DW,说明 AS SM
+      FROM 护理记录项目
+    </select>
+    
+    <!-- 第三方组织机构 -->
+    <select id="三方组织机构">
+      INSERT INTO 系统_菜单(ID,编码,名称,模块代码,说明,上级ID,层级,是否末级,功能ID,图标,参数值,打开方式,是否启用权限,是否作废,作废时间,输入码,修改用户,修改时间,排序序号,移动使用,是否关联功能)
+      VALUES (#ID#,#Code#,#Name#,#ModuleCode#,#Remark#,#SuperID#,#Grade#,#IsLast#,#FunID#,#PicUrl#,#ParamValue#,#OpenType#,#IsCtlAuth#,#IsInvalid#,#InvalidTime#,#InputCode#,#ModifyUser#,#ModifyTime#,#SeqNo#,#IsMobileSupport#,#IsRelatFun#)
+    </select>
+    
+    
+    <select id="THIRD_PATIENTLIST" parameterClass="StrObjDict">
+      INSERT INTO 系统_菜单(ID,编码,名称,模块代码,说明,上级ID,层级,是否末级,功能ID,图标,参数值,打开方式,是否启用权限,是否作废,作废时间,输入码,修改用户,修改时间,排序序号,移动使用,是否关联功能)
+      VALUES (#ID#,#Code#,#Name#,#ModuleCode#,#Remark#,#SuperID#,#Grade#,#IsLast#,#FunID#,#PicUrl#,#ParamValue#,#OpenType#,#IsCtlAuth#,#IsInvalid#,#InvalidTime#,#InputCode#,#ModifyUser#,#ModifyTime#,#SeqNo#,#IsMobileSupport#,#IsRelatFun#)
+    </select>
+
+  </statements>
+</sqlMap>

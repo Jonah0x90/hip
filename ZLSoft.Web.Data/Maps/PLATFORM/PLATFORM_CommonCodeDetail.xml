@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="CommonCodeDetail" type="ZLSoft.Model.PLATFORM.CommonCodeDetail, ZLSoft.Model" />
+    <typeAlias alias="PK_CommonCodeDetail" type="ZLSoft.Model.PLATFORM.PK_CommonCodeDetail, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="CommonCodeDetail_Result" class="CommonCodeDetail">
+      <result property="ValueRange" column="数据值域" />
+      <result property="DataField" column="数据字段" />
+      <result property="ID" column="ID" />
+      <result property="CodeID" column="代码ID" />
+      <result property="Name" column="明细名称" />
+      <result property="SuperID" column="上级ID" />
+      <result property="Level" column="级别" />
+      <result property="IsFinal" column="是否末级" />
+      <result property="SeqNo" column="排序序号" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="ModifyTime" column="修改日期" />
+      <result property="IsInvalid" column="是否作废" />
+      <result property="InvalidTime" column="作废日期" />
+      <result property="InputCode" column="输入码" />
+      <result property="Remarks" column="备注" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_CommonCodeDetail" parameterClass="StrObjDict">
+      INSERT INTO 系统_公共代码明细(数据值域,数据字段,ID,代码ID,明细名称,上级ID,级别,是否末级,排序序号,修改用户,修改日期,是否作废,作废日期,输入码,备注)
+      VALUES (#ValueRange#,#DataField#,#ID#,#CodeID#,#Name#,#SuperID#,#Level#,#IsFinal#,#SeqNo#,#ModifyUser#,#ModifyTime#,#IsInvalid#,#InvalidTime#,#InputCode#,#Remarks#)
+    </update>
+
+    <update id="UPDATE_CommonCodeDetail" parameterClass="StrObjDict" >
+      update 系统_公共代码明细
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="ValueRange" >数据值域=#ValueRange#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="DataField" >数据字段=#DataField#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="CodeID" >代码ID=#CodeID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Name" >明细名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SuperID" >上级ID=#SuperID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Level" >级别=#Level#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsFinal" >是否末级=#IsFinal#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SeqNo" >排序序号=#SeqNo#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改日期=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InvalidTime" >作废日期=#InvalidTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InputCode" >输入码=#InputCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Remarks" >备注=#Remarks#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_CommonCodeDetail" parameterClass="StrObjDict" >
+      delete from 系统_公共代码明细
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_CommonCodeDetail" parameterClass="PK_CommonCodeDetail" resultMap="CommonCodeDetail_Result" >
+      SELECT * FROM 系统_公共代码明细
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_CommonCodeDetail" parameterClass="StrObjDict" resultClass="CommonCodeDetail" resultMap="CommonCodeDetail_Result" >
+      select * from 系统_公共代码明细
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ValueRange" >数据值域 like '%$ValueRange$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DataField" >数据字段 like '%$DataField$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="CodeID" >代码ID like '%$CodeID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >明细名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SuperID" >上级ID like '%$SuperID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Level" >级别 like '%$Level$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsFinal" >是否末级 like '%$IsFinal$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SeqNo" >排序序号 like '%$SeqNo$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改日期 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改日期 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改日期 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like '%$IsInvalid$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >作废日期 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >作废日期 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InvalidTime" >作废日期 like '%$InvalidTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InputCode" >输入码 like '%$InputCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remarks" >备注 like '%$Remarks$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_CommonCodeDetail" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM 系统_公共代码明细
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ValueRange" >数据值域 like '%$ValueRange$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DataField" >数据字段 like '%$DataField$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="CodeID" >代码ID like '%$CodeID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >明细名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SuperID" >上级ID like '%$SuperID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Level" >级别 like '%$Level$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsFinal" >是否末级 like '%$IsFinal$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SeqNo" >排序序号 like '%$SeqNo$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改日期 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改日期 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改日期 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like '%$IsInvalid$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >作废日期 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >作废日期 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InvalidTime" >作废日期 like '%$InvalidTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InputCode" >输入码 like '%$InputCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remarks" >备注 like '%$Remarks$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="LISTSOD_CommonCodeDetail" parameterClass="StrObjDict" resultClass="StrObjDict"  >
+      SELECT ID,
+      "代码ID" as "CodeID",
+      "明细名称" as "Name",
+      "上级ID" as "SuperID",
+      "级别" as "Level",
+      "数据值域" as "ValueRange",
+      "数据字段" as "DataField",
+      "是否末级" as "IsFinal",
+      "排序序号" as "SeqNo",
+      "修改用户" as "ModifyUser",
+      "修改日期" as "ModifyTime",
+      "是否作废" as "IsInvalid",
+      "作废日期" as "InvalidTime",
+      "输入码" as "InputCode",
+      "备注" as "Remarks"
+      FROM "系统_公共代码明细"
+
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="CodeID" >代码ID=#CodeID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InputCode" >输入码 like '%$InputCode$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="LISTSOD_FromRelation" parameterClass="StrObjDict" resultClass="StrObjDict"  >
+      SELECT ID,
+      "代码ID" as "CodeID",
+      "明细名称" as "Name",
+      "上级ID" as "SuperID",
+      "级别" as "Level",
+      "是否末级" as "IsUltimate",
+      "排序序号" as "SeqNo",
+      "修改用户" as "ModifyUser",
+      "修改日期" as "ModifyTime",
+      "是否作废" as "IsInvalid",
+      "作废日期" as "InvalidTime",
+      "输入码" as "InputCode",
+      "备注" as "Remarks"
+      FROM "系统_公共代码明细"
+
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="CodeID" >代码ID=#CodeID#</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

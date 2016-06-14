@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="TreeDefinition" type="ZLSoft.Model.SYS.TreeDefinition, ZLSoft.Model" />
+    <typeAlias alias="PK_TreeDefinition" type="ZLSoft.Model.SYS.PK_TreeDefinition, ZLSoft.Model" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="TreeDefinitionResult" class="TreeDefinition">
+      <result property="ID" column="ID" />
+      <result property="Name" column="名称" />
+      <result property="OrcScript" column="脚本_ORC" />
+      <result property="MssqlScript" column="脚本_MSSQL" />
+      <result property="MysqlScript" column="脚本_MYSQL" />
+      <result property="IsNullify" column="是否作废" />
+      <result property="IsPublicTree" column="是否公共树" />
+      <result property="Explain" column="说明" />
+      <result property="IsMultilayer" column="是否多级" />
+      <result property="RootName" column="根节点名称" />
+      <result property="RootFormat" column="根节点格式" />
+      <result property="InputCodes" column="输入码" />
+      <result property="Modifier" column="修改用户" />
+      <result property="ModifiDate" column="修改日期" />
+      <result property="SortNumber" column="排序序号" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="LOAD_TreeDefinition" parameterClass="PK_TreeDefinition" resultMap="TreeDefinitionResult" resultClass="TreeDefinition" >
+      select * from 系统_树定义
+      where 名称=#Name#
+    </select>
+
+    
+  </statements>
+</sqlMap>

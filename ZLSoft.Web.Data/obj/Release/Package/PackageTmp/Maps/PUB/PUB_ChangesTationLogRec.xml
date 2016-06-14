@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="ChangesTationLogRec" type="ZLSoft.Model.PUB.ChangesTationLogRec, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="ChangesTationLogRec_Result" class="ChangesTationLogRec">
+      <result property="ID" column="ID" />
+      <result property="LesionID" column="病区ID" />
+      <result property="Title" column="标题" />
+      <result property="Content" column="内容" />
+      <result property="RecordTime" column="记录时间" />
+      <result property="Obj" column="预留字段" />
+      <result property="PatientID" column="病人ID" />
+      <result property="RecordPerson" column="记录人" />
+      <result property="IsInvalid" column="是否作废" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_ChangesTationLogRec" parameterClass="StrObjDict">
+      INSERT INTO PUB_交班记录(ID,病区ID,标题,内容,记录时间,预留字段,病人ID,记录人,是否作废)
+      VALUES (#ID#,#LesionID#,#Title#,#Content#,to_date(#RecordTime#,'yyyy/mm/dd hh24:mi:ss'),#Obj#,#PatientID#,#RecordPerson#,#IsInvalid#)
+    </update>
+
+    <update id="UPDATE_ChangesTationLogRec" parameterClass="StrObjDict" >
+      update PUB_交班记录
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="LesionID" >病区ID=#LesionID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Title" >标题=#Title#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Content" >内容=#Content#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="RecordTime" >记录时间=to_date(#RecordTime#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Obj" >预留字段=#Obj#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PatientID" >病人ID=#PatientID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="RecordPerson" >记录人=#RecordPerson#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_ChangesTationLogRec" parameterClass="StrObjDict" >
+      delete from PUB_交班记录
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_ChangesTationLogRec" parameterClass="StrObjDict" resultMap="ChangesTationLogRec_Result" >
+      SELECT * FROM PUB_交班记录
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_ChangesTationLogRec" parameterClass="StrObjDict" resultClass="StrObjDict">
+      select ID,
+      病区ID AS "LesionID",
+      标题 AS "Title",
+      内容 AS "Content",
+      to_char(记录时间,'yyyy/mm/dd hh24:mi:ss') AS "RecordTime",
+      预留字段 AS "Obj",
+      病人ID AS "PatientID",
+      记录人 AS "RecordPerson",
+      是否作废 AS "IsInvalid"
+      from PUB_交班记录
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="LesionID" >病区ID = #LesionID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Title" >标题 like '%$Title$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Content" >内容 like '%$Content$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RecordTime" >记录时间 like '%$RecordTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Obj" >预留字段 like '%$Obj$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PatientID" >病人ID like '%$PatientID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RecordPerson" >记录人 like '%$RecordPerson$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like '%$IsInvalid$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_ChangesTationLogRec" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM PUB_交班记录
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="LesionID" >病区ID like '%$LesionID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Title" >标题 like '%$Title$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Content" >内容 like '%$Content$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >记录时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >记录时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RecordTime" >记录时间 like '%$RecordTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Obj" >预留字段 like '%$Obj$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PatientID" >病人ID like '%$PatientID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RecordPerson" >记录人 like '%$RecordPerson$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like '%$IsInvalid$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

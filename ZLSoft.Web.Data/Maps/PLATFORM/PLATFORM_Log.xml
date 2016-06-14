@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--日志管理-->
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="Log" type="ZLSoft.Model.PLATFORM.Log, ZLSoft.Model" />
+    <typeAlias alias="PK_Log" type="ZLSoft.Model.PLATFORM.PK_Log, ZLSoft.Model" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="Log_Result" class="Log">
+      <result property="ID" column="ID" />
+      <result property="ModuleName" column="日志模块" />
+      <result property="Function" column="日志功能" />
+      <result property="Content" column="内容" />
+      <result property="ModifyTime" column="修改时间" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="Level" column="日志级别" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="LOAD_Log" parameterClass="PK_Log" resultMap="Log_Result" >
+      SELECT * FROM 系统_日志管理
+      <dynamic prepend=" WHERE ">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="COUNT_Log" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM 系统_日志管理
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Function" >日志功能 like '%$Function$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModuleName" >日志模块 like '%$ModuleName$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Level" >日志级别 like '%$Level$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Content" >内容 like '%$Content$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <update id="INSERT_Log" parameterClass="StrObjDict" >
+      insert into "系统_日志管理"  (ID,"修改时间","修改用户","内容","日志功能","日志级别","日志模块")
+      values ("SEQ_系统_日志管理_ID".Nextval,#ModifyTime#,#ModifyUser#,#Content#,#Function#,#Level#,#ModuleName#)
+    </update>
+
+    <select id="LIST_Log" parameterClass="StrObjDict" resultClass="Log" resultMap="Log_Result" >
+      select * from 系统_日志管理
+
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Function" >日志功能 like '%$Function$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModuleName" >日志模块 like '%$ModuleName$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Level" >日志级别 like '%$Level$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Content" >内容 like '%$Content$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>    
+   
+  </statements>
+</sqlMap>

@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>安装向导</title>
+    <link rel="stylesheet" href="../Resources/css/index.css">
+
+    <script src="../Resources/jquery/jquery.min.js"></script>
+    <script src="../Resources/jquery/jquery.circliful.js"></script>
+    <script src="../Resources/jquery/index.js"></script>
+</head>
+<body>
+    <div class="install-content">
+        <h5>安装向导</h5>
+
+        <div class="install-menu">
+            <h6>第一步：修改数据库连链接</h6>
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="width: 25%">数据库名称：</td>
+                        <td style="width: 35%"><input class="input-data" id="dataSource-name" type="text" value="YYZY"></td>
+                        <td class="td-third dataSource-name-text" style="width: 40%">请填写数据库名称</td>
+                    </tr>
+                    <tr>
+                        <td>用户名：</td>
+                        <td><input class="input-data" id="data-username" type="text" value="zlhis"></td>
+                        <td class="td-third data-username-text">请填写数据库用户名</td>
+                    </tr>
+                    <tr>
+                        <td>用户密码：</td>
+                        <td><input class="input-data" id="data-password" type="password" value="his"></td>
+                        <td class="td-third data-password-text">请填写数据库用户密码</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="install-btn"><button class="build-data">导入基础数据</button><button class="first-to-next">下一步</button></div>
+            <div class="stat-div">
+                <div id="stat-one" data-dimension="250" data-text="0%" data-info="正在导入..."
+                     data-width="30" data-fontsize="38" data-percent="0" data-fgcolor="#61a9dc"
+                     data-bgcolor="#eee" style="margin: 30px auto;"></div>
+            </div>
+
+
+            <!--<div class="box" id="install-box-one" style="background-position: -4752px 0px;"></div>-->
+            <!--
+            <div class="loader">
+                <div class="progress-bar"><div class="progress-stripes"></div><div class="percentage">0%</div></div>
+            </div>
+            <div class="progress-loading">Loading...</div>
+
+            <div class="install-progress">
+                <table>
+                    <thead>
+                        <tr>
+                            <td style="width: 50%;">安装目录</td>
+                            <td style="width: 10%;">成功</td>
+                            <td style="width: 10%;">失败</td>
+                            <td style="width: 30%;">安装信息</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>./data/ndsda</td>
+                            <td><img src="img/yes.png"></td>
+                            <td></td>
+                            <td class="install-error-text"></td>
+                        </tr>
+                        <tr>
+                            <td>./data/ndsda</td>
+                            <td><img src="img/yes.png"></td>
+                            <td></td>
+                            <td class="install-error-text"></td>
+                        </tr>
+                        <tr>
+                            <td>./data/ndsda</td>
+                            <td></td>
+                            <td><img src="img/wrong.png"></td>
+                            <td class="install-error-text">数据库出错</td>
+                        </tr>
+                        <tr>
+                            <td>./data/ndsda</td>
+                            <td><img src="img/yes.png"></td>
+                            <td></td>
+                            <td class="install-error-text"></td>
+                        </tr>
+                        <tr>
+                            <td>./data/ndsda</td>
+                            <td><img src="img/yes.png"></td>
+                            <td></td>
+                            <td class="install-error-text"></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            -->
+        </div>
+
+        <div class="install-second-menu">
+            <h6>第二步：修改第三方数据源</h6>
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="width: 25%">用户名：</td>
+                        <td style="width: 35%"><input class="input-data" type="text" id="dataSource-username" value="ZLHIS"></td>
+                        <td class="td-third dataSource-username-error" style="width: 40%">请填写用户名</td>
+                    </tr>
+                    <tr>
+                        <td>口令：</td>
+                        <td><input class="input-data" type="password" id="dataSource-password" value="his"></td>
+                        <td class="td-third dataSource-password-error">请填写口令</td>
+                    </tr>
+                    <tr>
+                        <td>SID：</td>
+                        <td><input class="input-data" type="text" id="dataSource-sid" value="ydtest"></td>
+                        <td class="td-third dataSource-sid-error">请填写SID</td>
+                    </tr>
+                    <tr>
+                        <td>主机名：</td>
+                        <td><input class="input-data" type="text" id="dataSource-hostName" value="192.168.0.89"></td>
+                        <td class="td-third dataSource-hostName-error">请填写主机名</td>
+                    </tr>
+                    <tr>
+                        <td>端口：</td>
+                        <td><input class="input-data" type="text" id="dataSource-port" value="1521"></td>
+                        <td class="td-third dataSource-port-error">请填写端口</td>
+                    </tr>
+                    <tr>
+                        <td>驱动版本：</td>
+                        <td><input class="input-data" type="text" id="dataSource-version" value="oracle12.1"></td>
+                        <td class="td-third dataSource-version-error">请填写驱动版本</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="install-btn"><button class="edit-data-btn">确认修改并提交</button><button class="second-to-next">下一步</button></div>
+            <!--<div id="stat-two" data-dimension="250" data-text="35%" data-info="提交中..."-->
+            <!--data-width="30" data-fontsize="38" data-percent="35" data-fgcolor="#61a9dc"-->
+            <!--data-bgcolor="#eee" style="margin: 30px auto;"></div>-->
+
+        </div>
+
+        <div class="install-third-menu">
+            <h6>第三步：导入第三方数据</h6>
+            <div class="install-btn"><button class="import-data-btn">确认修改并提交</button><!--<button class="finish-btn">完成</button>--></div>
+            <div class="stat-div-third">
+                <div id="stat-three" data-dimension="250" data-text="0%" data-info="提交中..."
+                     data-width="30" data-fontsize="38" data-percent="0" data-fgcolor="#61a9dc"
+                     data-bgcolor="#eee" style="margin: 30px auto;"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

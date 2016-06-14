@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="DataSource" type="ZLSoft.Model.PLATFORM.DataSource, ZLSoft.Model" />
+    <typeAlias alias="PK_DataSource" type="ZLSoft.Model.PLATFORM.PK_DataSource, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="DataSource_Result" class="DataSource">
+      <result property="ID" column="ID" />
+      <result property="DataSourceName" column="数据源名称" />
+      <result property="Provider" column="数据源提供者" />
+      <result property="Url" column="地址" />
+      <result property="UserName" column="用户名" />
+      <result property="Password" column="密码" />
+      <result property="Database" column="数据库" />
+      <result property="ConnectParams" column="连接参数" />
+      <result property="ConfigFile" column="应用数据源配置文件" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_DataSource" parameterClass="StrObjDict">
+      INSERT INTO 系统_三方数据源(ID,数据源名称,数据源提供者,地址,用户名,密码,数据库,连接参数,应用数据源配置文件)
+      VALUES (#ID#,#DataSourceName#,#Provider#,#Url#,#UserName#,#Password#,#Database#,#ConnectParams#,#ConfigFile#)
+    </update>
+
+    <update id="UPDATE_DataSource" parameterClass="StrObjDict" >
+      update 系统_三方数据源
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="DataSourceName" >数据源名称=#DataSourceName#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Provider" >数据源提供者=#Provider#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Url" >地址=#Url#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="UserName" >用户名=#UserName#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Password" >密码=#Password#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Database" >数据库=#Database#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ConnectParams" >连接参数=#ConnectParams#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ConfigFile" >应用数据源配置文件=#ConfigFile#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_DataSource" parameterClass="StrObjDict" >
+      delete from 系统_三方数据源
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_DataSource" parameterClass="PK_DataSource" resultMap="DataSource_Result" >
+      SELECT * FROM 系统_三方数据源
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_DataSource" parameterClass="StrObjDict" resultMap="DataSource_Result" >
+      select * from 系统_三方数据源
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DataSourceName" >数据源名称 LIKE '%$DataSourceName$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Provider" >数据源提供者 like '%$Provider$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Url" >地址 like '%$Url$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="UserName" >用户名 like '%$UserName$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Password" >密码 like '%$Password$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Database" >数据库 like '%$Database$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ConnectParams" >连接参数 like '%$ConnectParams$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ConfigFile" >应用数据源配置文件 like '%$ConfigFile$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="NAMEVALUE_DataSource" parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT 数据源名称 AS "Name",ID AS "Value" FROM 系统_三方数据源
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DataSourceName" >数据源名称 LIKE '%$DataSourceName$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Provider" >数据源提供者 like '%$Provider$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Url" >地址 like '%$Url$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="UserName" >用户名 like '%$UserName$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Password" >密码 like '%$Password$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Database" >数据库 like '%$Database$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ConnectParams" >连接参数 like '%$ConnectParams$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ConfigFile" >应用数据源配置文件 like '%$ConfigFile$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="Get_DataSource" parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT ID,数据源名称 AS "Name" FROM 系统_三方数据源
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--键值对 如下拉框-->
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+  </alias>
+
+  <statements>
+    <select id="LOAD_KeyValue" parameterClass="StrObjDict" resultClass="StrObjDict">
+      select ID as "Value" , 明细名称 as "Key" from  系统_公共代码明细 
+      where 代码ID = #ID#
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="QuestionRelation" type="ZLSoft.Model.HNS.QuestionRelation, ZLSoft.Model" />
+
+  </alias>
+  <resultMaps>
+    <resultMap id="QuestionRelation_Result" class="QuestionRelation">
+      <result property="QuestionID" column="问题ID" />
+      <result property="FunID" column="方法ID" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_QuestionRelation" parameterClass="StrObjDict">
+      INSERT INTO HNS_护理问题_方法关联(问题ID,方法ID)
+      VALUES (#QuestionID#,#FunID#)
+    </update>
+
+    <update id="UPDATE_QuestionRelation" parameterClass="StrObjDict" >
+      update HNS_护理问题_方法关联
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="QuestionID" >问题ID=#QuestionID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FunID" >方法ID=#FunID#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <update id="DELETE_QuestionRelation" parameterClass="StrObjDict" >
+      delete from HNS_护理问题_方法关联
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="FunID" >方法ID=#FunID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="QuestionID" >问题ID=#QuestionID#</isPropertyAvailable>
+      </dynamic>
+    </update>
+
+
+
+    <select id="LIST_QuestionRelation"  parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT q.ID QID,q.名称 QNAME,f.ID FID,f.名称 FName,f.代码 Code  FROM HNS_护理问题_方法关联 fq
+      join HNS_护理问题 q on fq.问题ID=q.ID
+      join HNS_护理问题方法 f on fq.方法ID=f.ID
+      where fq.问题ID=#ID#
+    </select>
+
+
+    <select id="COUNT_QuestionRelation" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM HNS_护理问题_方法关联
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="QuestionID" >问题ID = #QuestionID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FunID" >方法ID = #FunID#</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+  </statements>
+</sqlMap>

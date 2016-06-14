@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C28D909B-2639-4788-AB8E-9B566C24F193}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZLSoft.Public</RootNamespace>
+    <AssemblyName>ZLSoft.Public</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BulletinController.cs" />
+    <Compile Include="ChangesTationLogController.cs" />
+    <Compile Include="CustomerController.cs" />
+    <Compile Include="ElementTypesController.cs" />
+    <Compile Include="FormController.cs" />
+    <Compile Include="OrganizationsController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="KeyValueController.cs" />
+    <Compile Include="ReportFormController.cs" />
+    <Compile Include="RoleMemberController.cs" />
+    <Compile Include="RoleController.cs" />
+    <Compile Include="ShujuqxController.cs" />
+    <Compile Include="SysCommonController.cs" />
+    <Compile Include="TreeController.cs" />
+    <Compile Include="TreeDefinitionController.cs" />
+    <Compile Include="TreeMenuController.cs" />
+    <Compile Include="PubUserController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZLSoft.AppContext\ZLSoft.AppContext.csproj">
+      <Project>{48021c5a-1ddb-49e2-9825-86160af2e736}</Project>
+      <Name>ZLSoft.AppContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLSoft.DalManager\ZLSoft.DalManager.csproj">
+      <Project>{fbf63088-7c2c-4c33-93f6-3761b9ef11d2}</Project>
+      <Name>ZLSoft.DalManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLSoft.DataFilterChainManager\ZLSoft.DataFilterChainManager.csproj">
+      <Project>{10a55557-c00e-418e-a9cf-b34d5a6421d8}</Project>
+      <Name>ZLSoft.DataFilterChainManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLSoft.Model\ZLSoft.Model.csproj">
+      <Project>{7c4edde6-bae5-4b6b-8578-38298dae0a02}</Project>
+      <Name>ZLSoft.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLSoft.Pub\ZLSoft.Pub.csproj">
+      <Project>{ffcb3b7f-f2dc-411f-bb12-950121bd98e7}</Project>
+      <Name>ZLSoft.Pub</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

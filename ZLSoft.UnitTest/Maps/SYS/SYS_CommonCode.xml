@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="CommonCode" type="ZLSoft.Model.SYS.CommonCode, ZLSoft.Model" />
+    <typeAlias alias="PK_CommonCode" type="ZLSoft.Model.SYS.PK_CommonCode, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="CommonCodeResult" class="CommonCode">
+      <result property="ID" column="ID" />
+      <result property="Name" column="名称"/>
+      <result property="CateID" column="类别ID"/>
+      <result property="IsIsNullify" column="是否作废"/>
+      <result property="SystemLabel" column="系统标记"/>
+      <result property="InputCodes" column="输入码"/>
+      <result property="Remarks" column="备注"/>
+      <result property="CodingRule" column="编码规则"/>
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <select id="LOAD_CommonCode" parameterClass="PK_CommonCode" resultMap="CommonCodeResult" resultClass="CommonCode" >
+      select * from 系统_公共代码
+      where ID=#CommonCodeID#
+    </select>
+
+    <update id="INSERT_CommonCode" parameterClass="PK_CommonCode" resultMap="CommonCodeResult" resultClass="CommonCode" >
+      INSERT INTO "系统_公共代码明细" (ID,"代码ID", "明细名称","上级ID", "级别","是否末级", "排序序号","修改用户","修改日期","是否作废","作废日期","输入码","备注")
+      VALUES ( )
+    </update>
+
+    <update id="INSERT_CommonCodeDetail" parameterClass="PK_CommonCode" resultMap="CommonCodeResult" resultClass="CommonCode" >
+      INSERT INTO "系统_公共代码" (ID,"名称","类别ID","是否作废","系统标记","输入码","备注","编码规则")
+      VALUES ( #ID#,#名称#,#类别ID#,#是否作废#,#系统标记#,#输入码#,#备注#,#编码规则#,)
+    </update>
+
+    <update id="UPDATE_CommonCode" parameterClass="StrObjDict" >
+      update 系统_公共代码
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Explain" >说明=#Explain#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ValueExplain" >值说明=#ValueExplain#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="DefaultValue" >默认值=#DefaultValue#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InputCode" >输入码=#InputCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改日期=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="TypeID" >模块ID=#TypeID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsExtSQL" >是否SQL扩展=#IsExtSQL#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ExtSQL" >扩展SQL=#ExtSQL#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    
+  </statements>
+</sqlMap>

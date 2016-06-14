@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{651706E3-22A7-4C5B-A95D-780F62B359D6}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZLSoft.Web.NursePlatform</RootNamespace>
+    <AssemblyName>ZLSoft.Web.NursePlatform</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Oracle.DataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Oracle.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="Maps\HNS\HNS_NursingEvaluat.xml" />
+    <Content Include="Maps\HNS\HNS_NursingSign.xml" />
+    <Content Include="Maps\HNS\HNS_PatientCareMark.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\HNS\HNS_PatientMarkDetails.xml" />
+    <Content Include="Maps\HNS\HNS_PatientNursingPlan.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\HNS\HNS_PatientScheme.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\HNS\HNS_PatientSchemeDetails.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PLATFORM\PLATFORM_TreeDefinition.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\HNS\HNS_NursingPatient.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\HNS\HNS_NursingPatientExtra.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_Bulletin.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_ChangesTationLog.xml" />
+    <Content Include="Maps\PUB\PUB_ChangesTationLogRec.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_Form.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\HNS\HNS_NursingMark.xml" />
+    <Content Include="Maps\HNS\HNS_NursingQuestion.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\HNS\HNS_NursingMarkRefer.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\HNS\HNS_NursingMarkTarget.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\HNS\HNS_NursingPlan.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\HNS\HNS_NursingPlanDetails.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\HNS\HNS_NursingPlanTarget.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\HNS\HNS_QuestionRelation.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\HR\HR_BaseEmployeeInfo.xml" />
+    <Content Include="Maps\PLATFORM\PLATFORM_BPMLog.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PLATFORM\PLATFORM_BPM.xml" />
+    <Content Include="Maps\PLATFORM\PLATFORM_CommonCode.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PLATFORM\PLATFORM_CommonCodeDetail.xml" />
+    <Content Include="Maps\PLATFORM\PLATFORM_DataSource.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PLATFORM\PLATFORM_Function.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PLATFORM\PLATFORM_FunctionOption.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PLATFORM\PLATFORM_Log.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PLATFORM\PLATFORM_MessageLog.xml" />
+    <Content Include="Maps\PLATFORM\PLATFORM_Module.xml" />
+    <Content Include="Maps\PLATFORM\PLATFORM_OtherDataSource.xml" />
+    <Content Include="Maps\PLATFORM\PLATFORM_OtherService.xml" />
+    <Content Include="Maps\PLATFORM\PLATFORM_Parameters.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\Hl\HL_HLDY.xml" />
+    <Content Include="Maps\HR\HR_Employee.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_FormData.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_FormElement.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_FormElementGroup.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_FormFileData.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_FormPart.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_FormPartGroup.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_FormStructure.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_ReportFormFile.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_ReportFormSources.xml" />
+    <Content Include="Maps\PUB\PUB_ReportFormType.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_WorkItem.xml" />
+    <Content Include="Maps\PUB\PUB_Annex.xml" />
+    <Content Include="Maps\PUB\PUB_CnLibrary.xml" />
+    <Content Include="Maps\PUB\PUB_Compound.xml" />
+    <Content Include="Maps\PUB\PUB_Customer.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_KeyValue.xml" />
+    <Content Include="Maps\PLATFORM\PLATFORM_Menu.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_Organization.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_RoleMember.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_UserInfo.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\SYS\PubSql.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PUB\PUB_Role.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PLATFORM\PLATFORM_MenuOption.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\SYS\SYS_Backlog.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\SYS\SYS_BacklogDetails.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\SYS\SYS_MessageLog.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\SYS\SYS_SiteDevice.xml" />
+    <Content Include="Maps\PLATFORM\PLATFORM_ColumnMap.xml" />
+    <Content Include="Maps\THIRD\THIRD_Import.xml" />
+    <Content Include="Maps\THIRD\THIRD_ImportExtend.xml" />
+    <Content Include="Maps\THIRD\THIRD_ImportObject.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\PLATFORM\PLATFORM_ExternalService.xml" />
+    <Content Include="Maps\Xt\PubSql.xml" />
+    <Content Include="Maps\Xt\XT_GGDM.xml" />
+    <Content Include="Maps\Xt\XT_GGDMMX.xml" />
+    <Content Include="Maps\Xt\XT_KS.xml" />
+    <Content Include="Maps\Xt\XT_MENU.xml" />
+    <Content Include="Maps\Xt\XT_SJQX_DX.xml" />
+    <Content Include="Maps\Xt\XT_SJQX_DY.xml" />
+    <Content Include="Maps\Xt\XT_SJQX_DY_XX.xml" />
+    <Content Include="Maps\Xt\XT_SJQX_QX.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\Xt\XT_TREE.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\Xt\XT_YHXX.xml" />
+    <Content Include="Maps\Xt\XT_YQ.xml" />
+    <Content Include="Maps\Xt\副本 PubSql.xml" />
+    <Content Include="Maps\Xt\XT_THIRD_CON.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Maps\Xt\XT_XTCS.xml" />
+    <Content Include="Resources\css\index.css" />
+    <Content Include="Resources\DBConfig\Tables.sql" />
+    <Content Include="Resources\DBConfig\Insert.sql" />
+    <Content Include="Resources\DBConfig\服务定义_交班报告.sql" />
+    <Content Include="Resources\img\investjd.png" />
+    <Content Include="Resources\img\wrong.png" />
+    <Content Include="Resources\img\yes.png" />
+    <Content Include="Resources\jquery\index.js" />
+    <Content Include="Resources\jquery\jquery.circliful.js" />
+    <Content Include="Resources\jquery\jquery.min.js" />
+    <Content Include="Install\Index.html" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dbconfig\dao.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="dbconfig\providers.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="dbconfig\SqlMap.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZLSoft.Admin\ZLSoft.Platform.csproj">
+      <Project>{a2cb7074-dc4f-4320-91d5-04e38486568f}</Project>
+      <Name>ZLSoft.Platform</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLSoft.AppContext\ZLSoft.AppContext.csproj">
+      <Project>{48021C5A-1DDB-49E2-9825-86160AF2E736}</Project>
+      <Name>ZLSoft.AppContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLSoft.HNS.Nurse\ZLSoft.HNS.Nurse.csproj">
+      <Project>{69eb8830-5676-4707-8e1a-ee144df49d33}</Project>
+      <Name>ZLSoft.HNS.Nurse</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLSoft.HrMng\ZLSoft.HrMng.csproj">
+      <Project>{8d787244-bf70-4515-bf57-4d840926e3f8}</Project>
+      <Name>ZLSoft.HrMng</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLSoft.Public\ZLSoft.Public.csproj">
+      <Project>{c28d909b-2639-4788-ab8e-9b566c24f193}</Project>
+      <Name>ZLSoft.Public</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLSoft.Sys\ZLSoft.Sys.csproj">
+      <Project>{19EBD3D1-967A-4094-AB92-F143071FE27F}</Project>
+      <Name>ZLSoft.Sys</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLSoft.Third\ZLSoft.Third.csproj">
+      <Project>{06cf58dd-43e0-42cc-a2c9-61af0818de3f}</Project>
+      <Name>ZLSoft.Third</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlMap_Interface.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="dbconfig\SqlMap_Interface.config" />
+    <None Include="Properties\PublishProfiles\0.53.pubxml" />
+    <None Include="Properties\PublishProfiles\0.55.pubxml" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
+    <None Include="Properties\PublishProfiles\NurseManager.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>41510</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

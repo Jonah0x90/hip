@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="DataServiceColumnMap" type="ZLSoft.Model.PLATFORM.DataServiceColumnMap, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="DataServiceColumnMap_Result" class="DataServiceColumnMap">
+      <result property="ServiceID" column="服务ID" />
+      <result property="LocalColumn" column="字段" />
+      <result property="ThirdColumn" column="三方字段" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_DataServiceColumnMap" parameterClass="StrObjDict">
+      INSERT INTO 系统_三方服务字段对照(服务ID,字段,三方字段)
+      VALUES (#ServiceID#,#LocalColumn#,#ThirdColumn#)
+    </update>
+
+    <update id="UPDATE_DataServiceColumnMap" parameterClass="StrObjDict" >
+      UPDATE 系统_三方服务字段对照
+      SET
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="LocalColumn" >字段=#LocalColumn#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ThirdColumn" >三方字段=#ThirdColumn#</isPropertyAvailable>
+      </dynamic>
+      where 服务ID=#ServiceID#
+    </update>
+
+    <delete id="DELETE_DataServiceColumnMap" parameterClass="StrObjDict" >
+      DELETE FROM 系统_三方服务字段对照
+      WHERE 服务ID=#ServiceID#
+    </delete>
+
+
+
+
+    <select id="LOAD_DataServiceColumnMap" parameterClass="StrObjDict" resultMap="DataServiceColumnMap_Result" >
+      SELECT * FROM 系统_三方服务字段对照
+      WHERE 服务ID=#ServiceID#
+    </select>
+
+
+    <select id="LIST_DataServiceColumnMap" parameterClass="StrObjDict" resultMap="DataServiceColumnMap_Result" >
+      SELECT * FROM 系统_三方服务字段对照
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ServiceID" >服务ID = #ServiceID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="LocalColumn" >字段 = #LocalColumn#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ThirdColumn" >三方字段 = #ThirdColumn#</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

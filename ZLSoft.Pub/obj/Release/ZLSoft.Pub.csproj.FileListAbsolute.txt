@@ -1,0 +1,9 @@
+E:\Application\trunk\mhome\HIP\ZLSoft.Pub\bin\Release\ZLSoft.Pub.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.Pub\bin\Release\ZLSoft.Pub.pdb
+E:\Application\trunk\mhome\HIP\ZLSoft.Pub\bin\Release\IBatisNet.Common.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.Pub\bin\Release\IBatisNet.DataAccess.2005.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.Pub\bin\Release\IBatisNet.DataMapper.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.Pub\bin\Release\Castle.DynamicProxy.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.Pub\obj\Release\ZLSoft.Pub.csprojResolveAssemblyReference.cache
+E:\Application\trunk\mhome\HIP\ZLSoft.Pub\obj\Release\ZLSoft.Pub.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.Pub\obj\Release\ZLSoft.Pub.pdb

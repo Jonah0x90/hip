@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="NursingEvaluat" type="ZLSoft.Model.HNS.NursingEvaluat, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="NursingEvaluat_Result" class="NursingEvaluat">
+      <result property="ID" column="ID" />
+      <result property="SchemeID" column="计划方案ID" />
+      <result property="EvaluatFun" column="评估方法" />
+      <result property="Evaluator" column="评估人" />
+      <result property="EvaluatTime" column="评估时间" />
+      <result property="SignID" column="签名ID" />
+      <result property="EvaluatReason" column="评估理由" />
+      <result property="Status" column="状态" />
+      <result property="IsInvalid" column="是否作废" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_NursingEvaluat" parameterClass="StrObjDict">
+      INSERT INTO HNS_病人护理评估(ID,计划方案ID,评估方法,评估人,评估时间,签名ID,评估理由,状态,是否作废)
+      VALUES (#ID#,#SchemeID#,#EvaluatFun#,#Evaluator#,#EvaluatTime#,#SignID#,#EvaluatReason#,#Status#,#IsInvalid#)
+    </update>
+
+    <update id="UPDATE_NursingEvaluat" parameterClass="StrObjDict" >
+      update HNS_病人护理评估
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="SchemeID" >计划方案ID=#SchemeID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="EvaluatFun" >评估方法=#EvaluatFun#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Evaluator" >评估人=#Evaluator#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="EvaluatTime" >评估时间=#EvaluatTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SignID" >签名ID=#SignID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="EvaluatReason" >评估理由=#EvaluatReason#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Status" >状态=#Status#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_NursingEvaluat" parameterClass="StrObjDict" >
+      delete from HNS_病人护理评估
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_NursingEvaluat" parameterClass="StrObjDict" resultMap="NursingEvaluat_Result" >
+      SELECT * FROM HNS_病人护理评估
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_NursingEvaluat" parameterClass="StrObjDict" resultClass="StrObjDict" resultMap="NursingEvaluat_Result" >
+      select * from HNS_病人护理评估
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SchemeID" >计划方案ID = #SchemeID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EvaluatFun" >评估方法 like '%$EvaluatFun$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Evaluator" >评估人 like '%$Evaluator$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >评估时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >评估时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EvaluatTime" >评估时间 like '%$EvaluatTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SignID" >签名ID like '%$SignID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EvaluatReason" >评估理由 like '%$EvaluatReason$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Status" >状态 like '%$Status$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_NursingEvaluat" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM HNS_病人护理评估
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SchemeID" >计划方案ID like '%$SchemeID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EvaluatFun" >评估方法 like '%$EvaluatFun$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Evaluator" >评估人 like '%$Evaluator$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >评估时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >评估时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EvaluatTime" >评估时间 like '%$EvaluatTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SignID" >签名ID like '%$SignID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EvaluatReason" >评估理由 like '%$EvaluatReason$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Status" >状态 like '%$Status$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

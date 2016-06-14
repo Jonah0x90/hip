@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+    <statements>
+        <select id="LIST2_HL_HLDY" parameterClass="StrObjDict" resultClass="StrObjDict" >
+            select KSID,KSDM,KSMC,KSSX,SRM1,SRM2,SRM3,KSBZ,HSZID,HSZMC,ZFPB,ZFR,ZFRQ,XGR,XGRQ,PXXH,SJID,KSFL1,KSFL2 from HL_HLDY
+            <dynamic prepend=" WHERE ">
+                <isPropertyAvailable prepend=" AND " property="KSID" >KSID=#KSID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="KSDM" >KSDM=#KSDM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="KSMC" >KSMC=#KSMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="KSSX" >KSSX=#KSSX#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM1" >SRM1=#SRM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM2" >SRM2=#SRM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM3" >SRM3=#SRM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="KSBZ" >KSBZ=#KSBZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="HSZID" >HSZID=#HSZID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="HSZMC" >HSZMC=#HSZMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ZFPB" >ZFPB=#ZFPB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ZFR" >ZFR=#ZFR#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ZFRQ_START" >ZFRQ>=${ibatis_key_todate}#ZFRQ_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ZFRQ_END" >ZFRQ&lt;=${ibatis_key_todate}#ZFRQ_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGR" >XGR=#XGR#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_START" >XGRQ>=${ibatis_key_todate}#XGRQ_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_END" >XGRQ&lt;=${ibatis_key_todate}#XGRQ_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PXXH" >PXXH=#PXXH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SJID" >SJID=#SJID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="KSFL1" >KSFL1=#KSFL1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="KSFL2" >KSFL2=#KSFL2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+            <dynamic prepend=" ORDER BY ">
+                <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+        </select>
+
+    </statements>
+</sqlMap>

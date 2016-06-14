@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+        <typeAlias alias="XT_THIRD_CON" type="ZLSoft.Model.System.XT_THIRD_CON, ZLSoft.Model" />
+        <typeAlias alias="PK_XT_THIRD_CON" type="ZLSoft.Model.System.PK_XT_THIRD_CON, ZLSoft.Model" />
+    </alias>
+    <statements>
+        <insert id="INSERT_XT_THIRD_CON" parameterClass="StrObjDict" >
+            insert into XT_THIRD_CON(CONN_ID,CONN_NAME,PROVIDER_NAME,SERVER_NAME,USERNAME,PASSWORD,"DATABASE",PARAM,MAPSFILE)
+            values(
+            #CONN_ID#,#CONN_NAME#,#PROVIDER_NAME#,#SERVER_NAME#,#USERNAME#,#PASSWORD#,DATABASE,#PARAM#,#MAPSFILE#)
+        </insert>
+        <update id="UPDATE_XT_THIRD_CON" parameterClass="StrObjDict" >
+            update XT_THIRD_CON
+            set
+            <dynamic prepend=" ">
+                <isPropertyAvailable prepend=" , " property="CONN_NAME" >CONN_NAME=#CONN_NAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="PROVIDER_NAME" >PROVIDER_NAME=#PROVIDER_NAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SERVER_NAME" >SERVER_NAME=#SERVER_NAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="USERNAME" >USERNAME=#USERNAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="PASSWORD" >PASSWORD=#PASSWORD#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="DATABASE" >"DATABASE"=DATABASE</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="PARAM" >PARAM=#PARAM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="MAPSFILE" >MAPSFILE=#MAPSFILE#</isPropertyAvailable>
+            </dynamic>
+            where CONN_ID=#CONN_ID#
+        </update>
+        <delete id="DELETE_XT_THIRD_CON" parameterClass="StrObjDict" >
+            delete XT_THIRD_CON
+            where CONN_ID=#CONN_ID#
+        </delete>
+        <select id="LOAD_XT_THIRD_CON" parameterClass="PK_XT_THIRD_CON" resultClass="XT_THIRD_CON" >
+            select CONN_ID,CONN_NAME,PROVIDER_NAME,SERVER_NAME,USERNAME,PASSWORD,"DATABASE",PARAM,MAPSFILE from XT_THIRD_CON
+            where CONN_ID=#CONN_ID#
+        </select>
+        <select id="LIST_XT_THIRD_CON" parameterClass="StrObjDict" resultClass="XT_THIRD_CON" >
+            select CONN_ID,CONN_NAME,PROVIDER_NAME,SERVER_NAME,USERNAME,PASSWORD,"DATABASE",PARAM,MAPSFILE from XT_THIRD_CON
+            <dynamic prepend=" WHERE ">
+                <isPropertyAvailable prepend=" AND " property="CONN_ID" >CONN_ID=#CONN_ID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CONN_NAME" >CONN_NAME=#CONN_NAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PROVIDER_NAME" >PROVIDER_NAME=#PROVIDER_NAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SERVER_NAME" >SERVER_NAME=#SERVER_NAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="USERNAME" >USERNAME=#USERNAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PASSWORD" >PASSWORD=#PASSWORD#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DATABASE" >"DATABASE"=DATABASE</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PARAM" >PARAM=#PARAM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MAPSFILE" >MAPSFILE=#MAPSFILE#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+            <dynamic prepend=" ORDER BY ">
+                <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+        </select>
+        <select id="LIST2_XT_THIRD_CON" parameterClass="StrObjDict" resultClass="StrObjDict" >
+            select CONN_ID,CONN_NAME,PROVIDER_NAME,SERVER_NAME,USERNAME,PASSWORD,"DATABASE",PARAM,MAPSFILE from XT_THIRD_CON
+            <dynamic prepend=" WHERE ">
+                <isPropertyAvailable prepend=" AND " property="CONN_ID" >CONN_ID=#CONN_ID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CONN_NAME" >CONN_NAME=#CONN_NAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PROVIDER_NAME" >PROVIDER_NAME=#PROVIDER_NAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SERVER_NAME" >SERVER_NAME=#SERVER_NAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="USERNAME" >USERNAME=#USERNAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PASSWORD" >PASSWORD=#PASSWORD#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="DATABASE" >"DATABASE"=DATABASE</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PARAM" >PARAM=#PARAM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="MAPSFILE" >MAPSFILE=#MAPSFILE#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+            <dynamic prepend=" ORDER BY ">
+                <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+        </select>
+    </statements>
+</sqlMap>

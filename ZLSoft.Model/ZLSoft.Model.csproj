@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7C4EDDE6-BAE5-4B6B-8578-38298DAE0A02}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZLSoft.Model</RootNamespace>
+    <AssemblyName>ZLSoft.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="HNS\Element.cs" />
+    <Compile Include="HNS\NursingEvaluat.cs" />
+    <Compile Include="HNS\NursingPatient.cs" />
+    <Compile Include="HNS\NursingPatientExtra.cs" />
+    <Compile Include="HNS\NursingSign.cs" />
+    <Compile Include="PUB\Bulletin.cs" />
+    <Compile Include="PUB\ChangesTationLog.cs" />
+    <Compile Include="PUB\ChangesTationLogRec.cs" />
+    <Compile Include="PUB\FormFileData.cs" />
+    <Compile Include="HNS\PatientCareMark.cs" />
+    <Compile Include="HNS\PatientMarkDetails.cs" />
+    <Compile Include="HNS\PatientScheme.cs" />
+    <Compile Include="HNS\PatientSchemeDetails.cs" />
+    <Compile Include="HNS\PK_NursingPatient.cs" />
+    <Compile Include="HNS\PK_NursingPatientExtra.cs" />
+    <Compile Include="PUB\PK_Bulletin.cs" />
+    <Compile Include="PUB\PK_FormFileData.cs" />
+    <Compile Include="HNS\PK_PatientCareMark.cs" />
+    <Compile Include="PUB\ElementPart.cs" />
+    <Compile Include="PUB\ElementPartGroup.cs" />
+    <Compile Include="PUB\ElementType.cs" />
+    <Compile Include="PUB\ElementTypeGroup.cs" />
+    <Compile Include="HNS\HealthEducation.cs" />
+    <Compile Include="HNS\NursingQuestion.cs" />
+    <Compile Include="PUB\Form.cs" />
+    <Compile Include="PUB\FormData.cs" />
+    <Compile Include="PUB\FormFile.cs" />
+    <Compile Include="PUB\FormStructure.cs" />
+    <Compile Include="HNS\NursingMark.cs" />
+    <Compile Include="HNS\NursingMarkRefer.cs" />
+    <Compile Include="HNS\NursingMarkTarget.cs" />
+    <Compile Include="HNS\NursingPlan.cs" />
+    <Compile Include="HNS\NursingPlanDetails.cs" />
+    <Compile Include="HNS\NursingPlanTarget.cs" />
+    <Compile Include="HNS\PatientNursingPlan.cs" />
+    <Compile Include="PUB\PK_ElementPart.cs" />
+    <Compile Include="PUB\PK_ElementPartGroup.cs" />
+    <Compile Include="PUB\PK_ElementType.cs" />
+    <Compile Include="PUB\PK_ElementTypeGroup.cs" />
+    <Compile Include="HNS\PK_NurseQuestion.cs" />
+    <Compile Include="PUB\PK_Form.cs" />
+    <Compile Include="PUB\PK_FormData.cs" />
+    <Compile Include="PUB\PK_FormFile.cs" />
+    <Compile Include="PUB\PK_FormStructure.cs" />
+    <Compile Include="PUB\PK_FormVersion.cs" />
+    <Compile Include="HNS\PK_NursingMark.cs" />
+    <Compile Include="HNS\PK_NursingMarkRefer.cs" />
+    <Compile Include="HNS\PK_NursingMarkTarget.cs" />
+    <Compile Include="HNS\PK_NursingPlan.cs" />
+    <Compile Include="HNS\PK_NursingPlanDetails.cs" />
+    <Compile Include="HNS\PK_NursingPlanTarget.cs" />
+    <Compile Include="HNS\QuestionRelation.cs" />
+    <Compile Include="HR\BaseEmployeeInfo.cs" />
+    <Compile Include="HR\Employee.cs" />
+    <Compile Include="HR\PK_BaseEmployeeInfo.cs" />
+    <Compile Include="HR\PK_Employee.cs" />
+    <Compile Include="PLATFORM\BPMLog.cs" />
+    <Compile Include="PLATFORM\DataSource.cs" />
+    <Compile Include="PLATFORM\FunctionOption.cs" />
+    <Compile Include="PLATFORM\Module.cs" />
+    <Compile Include="PLATFORM\PK_BPM.cs" />
+    <Compile Include="PLATFORM\PK_BPMLog.cs" />
+    <Compile Include="PLATFORM\PK_DataSource.cs" />
+    <Compile Include="PLATFORM\BPM.cs" />
+    <Compile Include="PLATFORM\PK_FunctionOption.cs" />
+    <Compile Include="PLATFORM\PK_Module.cs" />
+    <Compile Include="PUB\OrganizationRelation.cs" />
+    <Compile Include="PUB\PK_OrganizationRelation.cs" />
+    <Compile Include="PUB\PK_ReportFormFile.cs" />
+    <Compile Include="PUB\PK_ReportFormSources.cs" />
+    <Compile Include="PUB\PK_ReportFormType.cs" />
+    <Compile Include="PUB\PK_RoleMember.cs" />
+    <Compile Include="PUB\PK_Role.cs" />
+    <Compile Include="PUB\PK_RolePower.cs" />
+    <Compile Include="PUB\PK_WorkItem.cs" />
+    <Compile Include="PUB\ReportFormFile.cs" />
+    <Compile Include="PUB\ReportFormSources.cs" />
+    <Compile Include="PUB\ReportFormType.cs" />
+    <Compile Include="PUB\RolePower.cs" />
+    <Compile Include="PUB\WorkItem.cs" />
+    <Compile Include="PUB\RoleMember.cs" />
+    <Compile Include="SYS\Backlog.cs" />
+    <Compile Include="SYS\BacklogDetails.cs" />
+    <Compile Include="SYS\Install.cs" />
+    <Compile Include="SYS\PK_TreeDefinition.cs" />
+    <Compile Include="SYS\TreeDefinition.cs" />
+    <Compile Include="THIRD\ImportExtend.cs" />
+    <Compile Include="THIRD\PK_ImportObject.cs" />
+    <Compile Include="PUB\Area.cs" />
+    <Compile Include="PUB\Organization.cs" />
+    <Compile Include="PUB\Customer.cs" />
+    <Compile Include="PUB\CustomerState.cs" />
+    <Compile Include="PUB\PK_Customer.cs" />
+    <Compile Include="PUB\PK_Organization.cs" />
+    <Compile Include="PUB\ReferModel.cs" />
+    <Compile Include="System\PK_XT_GGDM.cs" />
+    <Compile Include="System\PK_XT_GGDMMX.cs" />
+    <Compile Include="System\PK_XT_KS.cs" />
+    <Compile Include="System\PK_XT_MENU.cs" />
+    <Compile Include="System\PK_XT_SJQX_DX.cs" />
+    <Compile Include="System\PK_XT_SJQX_DY.cs" />
+    <Compile Include="System\PK_XT_SJQX_DY_XX.cs" />
+    <Compile Include="System\PK_XT_SJQX_QX.cs" />
+    <Compile Include="System\PK_XT_THIRD_CON.cs" />
+    <Compile Include="System\PK_XT_TREE.cs" />
+    <Compile Include="System\PK_XT_XTCS.cs" />
+    <Compile Include="System\PK_XT_XTCSZ.cs" />
+    <Compile Include="System\PK_XT_YHXX.cs" />
+    <Compile Include="System\PK_XT_YQ.cs" />
+    <Compile Include="System\XT_GGDM.cs" />
+    <Compile Include="System\XT_GGDMMX.cs" />
+    <Compile Include="System\XT_KS.cs" />
+    <Compile Include="System\XT_MENU.cs" />
+    <Compile Include="System\XT_SJQX_DX.cs" />
+    <Compile Include="System\XT_SJQX_DY.cs" />
+    <Compile Include="System\XT_SJQX_DY_XX.cs" />
+    <Compile Include="System\XT_SJQX_QX.cs" />
+    <Compile Include="System\XT_THIRD_CON.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\XT_TREE.cs" />
+    <Compile Include="System\XT_XTCS.cs" />
+    <Compile Include="System\XT_XTCSZ.cs" />
+    <Compile Include="System\XT_YHXX.cs" />
+    <Compile Include="System\XT_YQ.cs" />
+    <Compile Include="SYS\Annex.cs" />
+    <Compile Include="SYS\CNLibrary.cs" />
+    <Compile Include="PLATFORM\CommonCode.cs" />
+    <Compile Include="PLATFORM\CommonCodeDetail.cs" />
+    <Compile Include="SYS\Compound.cs" />
+    <Compile Include="PLATFORM\Function.cs" />
+    <Compile Include="SYS\FunctionOption.cs" />
+    <Compile Include="PLATFORM\Log.cs" />
+    <Compile Include="PLATFORM\Menu.cs" />
+    <Compile Include="PLATFORM\MenuOption.cs" />
+    <Compile Include="SYS\MessageLog.cs" />
+    <Compile Include="SYS\OtherDataSource.cs" />
+    <Compile Include="PLATFORM\PK_Log.cs" />
+    <Compile Include="SYS\PK_Annex.cs" />
+    <Compile Include="SYS\PK_CNLibrary.cs" />
+    <Compile Include="PLATFORM\PK_CommonCode.cs" />
+    <Compile Include="PLATFORM\PK_CommonCodeDetail.cs" />
+    <Compile Include="SYS\PK_Compound.cs" />
+    <Compile Include="PLATFORM\PK_Function.cs" />
+    <Compile Include="PLATFORM\PK_MenuOption.cs" />
+    <Compile Include="PLATFORM\PK_Menu.cs" />
+    <Compile Include="SYS\PK_MessageLog.cs" />
+    <Compile Include="SYS\PK_OtherDataSource.cs" />
+    <Compile Include="PLATFORM\PK_SysParameters.cs" />
+    <Compile Include="SYS\PK_SiteDevice.cs" />
+    <Compile Include="SYS\PK_SiteVersionInfo.cs" />
+    <Compile Include="PUB\PK_PubUser.cs" />
+    <Compile Include="PUB\Role.cs" />
+    <Compile Include="SYS\SiteDevice.cs" />
+    <Compile Include="SYS\SiteVersionInfo.cs" />
+    <Compile Include="PLATFORM\SysParameters.cs" />
+    <Compile Include="PLATFORM\PK_DataService.cs" />
+    <Compile Include="PLATFORM\DataServiceColumnMap.cs" />
+    <Compile Include="THIRD\ImportObject.cs" />
+    <Compile Include="PLATFORM\DataService.cs" />
+    <Compile Include="PUB\PubUser.cs" />
+    <Compile Include="SYS\UserInfo.cs" />
+    <Compile Include="Tree\Tree.cs" />
+    <Compile Include="Tree\Tree_old.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZLSoft.Pub\ZLSoft.Pub.csproj">
+      <Project>{FFCB3B7F-F2DC-411F-BB12-950121BD98E7}</Project>
+      <Name>ZLSoft.Pub</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

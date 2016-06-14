@@ -1,0 +1,4 @@
+E:\Application\trunk\mhome\HIP\ZLSoft.Cache\bin\Debug\ZLSoft.Cache.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.Cache\bin\Debug\ZLSoft.Cache.pdb
+E:\Application\trunk\mhome\HIP\ZLSoft.Cache\obj\Debug\ZLSoft.Cache.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.Cache\obj\Debug\ZLSoft.Cache.pdb

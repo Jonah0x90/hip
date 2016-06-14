@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="Form" type="ZLSoft.Model.PUB.Form, ZLSoft.Model" />
+    <typeAlias alias="PK_Form" type="ZLSoft.Model.PUB.PK_Form, ZLSoft.Model" />
+    <typeAlias alias="FormFile" type="ZLSoft.Model.PUB.FormFile, ZLSoft.Model" />
+    <typeAlias alias="PK_FormFile" type="ZLSoft.Model.PUB.PK_FormFile, ZLSoft.Model" />
+  </alias>
+  
+  <resultMaps>
+    <resultMap id="Form_Result" class="Form">
+      <result property="ID" column="ID" />
+      <result property="Name" column="名称" />
+      <result property="FastCode" column="快捷码" />
+      <result property="FormType" column="类型" />
+      <result property="MarkCode" column="子码" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="ModifyTime" column="修改时间" />
+      <result property="DeptRange" column="适用科室" />
+      <result property="FormAgainst" column="表单对照" />
+      <result property="NewVersionCode" column="最新版本号" />
+      <result property="DesignVersion" column="设计器版本" />
+      <result property="Resolution" column="分辨率" />
+      <result property="InvalidTime" column="作废时间" />
+      <result property="IsInvalid" column="是否作废" />
+    </resultMap>
+  
+     <resultMap id="FormFile_Result" class="FormFile">
+      <result property="ID" column="ID" />
+      <result property="FormID" column="表单ID" />
+      <result property="PageNumber" column="总页数" />
+      <result property="PageNo" column="页号" />
+      <result property="PageContent" column="网页" />
+      <result property="Docment" column="配套文档" />
+      <result property="VersionCode" column="版本号" />
+      <result property="FormStruct" column="表单格式" />
+      <result property="FormStructA" column="表单格式A" />
+      <result property="FormStructB" column="表单格式B" />
+      <result property="FormStructC" column="表单格式C" />
+      <result property="MobileStyle" column="移动端样式" />
+      <result property="DesktopStyle" column="桌面端样式" />
+      <result property="PageContentA" column="网页A" />
+      <result property="PageContentB" column="网页B" />
+      <result property="PageContentC" column="网页C" />
+      <result property="UpdateUser" column="修改人" />
+      <result property="UpdateRemark" column="修改说明" />
+      <result property="Issuer" column="发布人" />
+      <result property="IssueDateTime" column="发布时间" />
+      <result property="IssueRemark" column="发布说明" />
+      <result property="RelatedReportID" column="报表关联ID" />  
+     </resultMap>
+  </resultMaps>
+  
+  <statements>
+    <update id="INSERT_Form" parameterClass="StrObjDict">
+      INSERT INTO PUB_表单(ID,名称,快捷码,类型,子码,修改用户,修改时间,适用科室,表单对照,最新版本号,设计器版本,分辨率,作废时间,是否作废)
+      VALUES (#ID#,#Name#,#FastCode#,#FormType#,#MarkCode#,#ModifyUser#,#ModifyTime#,#DeptRange#,#FormAgainst#,#VersionCode#,#DesignVersion#,#Resolution#,#InvalidTime#,#IsInvalid#)
+    </update>
+    
+    <update id="INSERT_FormFile" parameterClass="StrObjDict">
+      INSERT INTO PUB_表单版本文件(ID,表单ID,总页数,页号,网页,配套文档,版本号,表单格式,表单格式A,表单格式B,表单格式C,网页A,网页B,网页C,修改人,修改说明,发布人,发布时间,发布说明,报表关联ID)
+      VALUES (#ID#,#FormID#,#PageNumber#,#PageNo#,#PageContent#,#Docment#,#VersionCode#,#FormStruct#,#FormStructA#,#FormStructB#,#FormStructC#,#PageContentA#,#PageContentB#,#PageContentC#,#UpdateUser#,#UpdateRemark#,#Issuer#,#IssueDateTime#,#IssueRemark#,#RelatedReportID#)
+    </update>
+    
+    <update id="UPDATE_Form" parameterClass="StrObjDict" >
+      update PUB_表单
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FastCode" >快捷码=#FastCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FormType" >类型=#FormType#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="MarkCode" >子码=#MarkCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="DeptRange" >适用科室=#DeptRange#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FormAgainst" >表单对照=#FormAgainst#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="VersionCode" >最新版本号=#VersionCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="DesignVersion" >设计器版本=#DesignVersion#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Resolution" >分辨率=#Resolution#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InvalidTime" >作废时间=#InvalidTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+    
+    <update id="UPDATE_FormFile" parameterClass="StrObjDict" >
+      update PUB_表单版本文件
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="PageNumber" >总页数=#PageNumber#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PageNo" >页号=#PageNo#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PageContent" >网页=#PageContent#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Docment" >配套文档=#Docment#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="VersionCode" >版本号=#VersionCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FormStruct" >表单格式=#FormStruct#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FormStructA" >表单格式A=#FormStructA#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FormStructB" >表单格式B=#FormStructB#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FormStructC" >表单格式C=#FormStructC#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="MobileStyle" >移动端样式=#MobileStyle#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="DesktopStyle" >桌面端样式=#DesktopStyle#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PageContentA" >网页A=#PageContentA#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PageContentB" >网页B=#PageContentB#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PageContentC" >网页C=#PageContentC#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="UpdateUser" >修改人=#UpdateUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="UpdateRemark" >修改说明=#UpdateRemark#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Issuer" >发布人=#Issuer#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IssueDateTime" >发布时间=#IssueDateTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IssueRemark" >发布说明=#IssueRemark#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="RelatedReportID" >报表关联ID=#RelatedReportID#</isPropertyAvailable>
+      </dynamic>
+      where 表单ID=#FormID#
+      <dynamic prepend="AND">
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >版本号=#VersionCode#</isPropertyAvailable>
+      </dynamic>
+    </update>
+    
+    <update id="UPDATE_FormVersion" parameterClass="StrObjDict" >
+      update PUB_表单版本文件
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="VersionCode" >版本号=#VersionCode#</isPropertyAvailable>
+      </dynamic>
+      where 表单ID=#FormID#
+      <dynamic prepend="AND">
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >版本号=#VersionCode#</isPropertyAvailable>
+      </dynamic>
+    </update>
+
+    <delete id="DELETE_Form" parameterClass="StrObjDict" >
+      delete from PUB_表单
+      where ID=#ID#
+    </delete>
+    
+    <delete id="DELETE_FormFile" parameterClass="StrObjDict" >
+      delete from PUB_表单版本文件
+      where 表单ID=#ID#
+    </delete>
+   
+    <delete id="DELETEVer_FormFile" parameterClass="StrObjDict" >
+      delete from PUB_表单版本文件
+      where 表单ID=#ID# And 版本号 =#VersionCode#
+    </delete>
+
+    <delete id="CatchDel_FormFile" parameterClass="StrObjDict" >
+      delete from PUB_表单版本文件
+      where ID=#ID#
+    </delete> 
+
+    <select id="CheckName_Form" parameterClass="StrObjDict" resultClass="StrObjDict">
+      Select 名称 as "Name" From PUB_表单 WHERE 名称 = #Name#
+    </select>
+
+    <select id="GetFormDept_Form" parameterClass="StrObjDict" resultClass="StrObjDict">
+      Select 适用科室 as "Dept" From PUB_表单 WHERE ID = #ID#
+    </select>
+    
+    <select id="LOAD_Form" parameterClass="PK_Form" resultMap="Form_Result" >
+      SELECT * FROM PUB_表单
+      WHERE ID=#ID#
+    </select>
+    
+    <select id="LOAD_FormFile" parameterClass="PK_FormFile" resultMap="FormFile_Result" >
+      SELECT * FROM PUB_表单版本文件
+      WHERE ID=#ID#
+    </select>
+   
+    <select id="List_GetForm" parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT distinct b.id,b.名称 AS MC,b.快捷码 AS KJM,b.类型 AS LX,b.子码 AS ZM,b.修改用户 AS CJR,
+      to_char(b.修改时间,'yyyy-MM-dd hh24:mi:ss') AS CJSJ,b.最新版本号 AS ZHBBH, b.适用科室 AS SYKS,
+      decode(b.适用科室,Null,0,1) AS ISBDKS, b.表单对照 AS BDDZ,b.分辨率 As FBL, b.是否作废 As STATE
+      FROM PUB_表单版本文件 A,PUB_表单 b WHERE (类型 = #FormType# OR #FormType# IS NULL) AND ( 快捷码 LIKE lower('%$FastCode$%') OR 快捷码 LIKE upper('%$FastCode$%')
+      OR #FastCode# IS NULL) and a.表单ID=b.ID
+       <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >b.是否作废=#IsInvalid#</isPropertyAvailable>
+      </dynamic>
+      ORDER BY CJSJ Desc
+    </select>
+
+
+    <select id="List_Client_GetForm" parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT distinct A.id,A.名称 AS MC,A.快捷码 AS KJM,A.类型 AS LX,A.子码 AS ZM,A.修改用户 AS CJR,
+      to_char(A.修改时间,'yyyy-MM-dd hh24:mi:ss') AS CJSJ,A.最新版本号 AS ZHBBH,
+      A.适用科室 AS SYKS,
+      decode(A.适用科室,Null,0,1) AS ISBDKS,
+      (Select Max(版本号) From PUB_表单版本文件 Where 表单ID=A.id And 发布时间 Is Not Null) AS ZXBB,
+      A.表单对照 AS BDDZ,A.分辨率 As FBL,
+      A.是否作废 As STATE
+      FROM PUB_表单 A,PUB_表单版本文件 B
+      WHERE (类型 = #FormType# OR #FormType# IS NULL) AND ( 快捷码 LIKE #FastCode# OR #FastCode# IS NULL)
+      AND A.id = B.表单ID And B.发布时间 Is Not Null
+      AND instr(适用科室, #DeptRange#) > 0
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >是否作废=#IsInvalid#</isPropertyAvailable>
+      </dynamic>
+      ORDER BY 快捷码
+    </select>
+
+    <select id="ListInfo_GetForm" parameterClass="StrObjDict" resultClass="StrObjDict">
+      <!--Select 版本号 AS Bbh, 发布人 AS Fbr, To_Char(发布时间, 'yyyy-MM-dd hh24:mi:ss') AS Fbsj, 发布说明 AS Fbsm
+      From PUB_表单版本
+      Where 表单id = #FormID#
+      Order By 版本号-->
+      Select distinct b.版本号 AS Bbh, b.发布人 AS Fbr, To_Char(b.发布时间, 'yyyy-MM-dd hh24:mi:ss') AS Fbsj, b.发布说明 AS Fbsm,
+      b.报表关联ID As "RelatedReportID",
+      b.移动端样式 As "MobileStyleID",
+      (Select 明细名称 from 系统_公共代码明细 where ID = b.移动端样式) as "MobileStyleName",
+      b.桌面端样式 As "DesktopStyleID",
+      (Select 明细名称 from 系统_公共代码明细 where ID = b.桌面端样式) as "DesktopStyleName"
+      From PUB_表单版本文件 B
+      Where b.表单ID = #FormID# 
+      Order By b.版本号
+    </select>
+    
+    <select id="Styleinfo_Form" parameterClass="StrObjDict" resultClass="StrObjDict">
+      Select 移动端样式 as "MS",桌面端样式 as "DS" From PUB_表单版本文件  Where 表单id = #FormID# And 页号 = 1
+      <dynamic prepend="AND">
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >版本号=#VersionCode#</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="ClientStyleinfo_Form" parameterClass="StrObjDict" resultClass="StrObjDict">
+      Select A.移动端样式 as "MS",A.桌面端样式 as "DS" From PUB_表单版本文件 A,PUB_表单 B  Where A.表单id = #FormID# And A.页号 = 1
+      And A.表单id = B.ID And A.版本号 = B.最新版本号
+    </select>
+    
+    <select id="Result_GetForm" parameterClass="StrObjDict" resultClass="StrObjDict">
+      Select 表单格式 as "Format", 网页 as "PageContent" From PUB_表单版本文件  Where 表单id = #FormID# And 页号 = 1
+      <dynamic prepend="AND">
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >版本号=#VersionCode#</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="ResultA_GetForm" parameterClass="StrObjDict" resultClass="StrObjDict">
+      Select 表单格式A as "Format", 网页A As "PageContent" From PUB_表单版本文件  Where 表单id = #FormID# And 页号 = 1
+      <dynamic prepend="AND">
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >版本号=#VersionCode#</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="ResultB_GetForm" parameterClass="StrObjDict" resultClass="StrObjDict">
+      Select 表单格式B as "Format", 网页B As "PageContent" From PUB_表单版本文件  Where 表单id = #FormID# And 页号 = 1
+      <dynamic prepend="AND">
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >版本号=#VersionCode#</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="ResultC_GetForm" parameterClass="StrObjDict" resultClass="StrObjDict">
+      Select 表单格式C as "Format", 网页C As "PageContent" From PUB_表单版本文件  Where 表单id = #FormID# And 页号 = 1
+      <dynamic prepend="AND">
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >版本号=#VersionCode#</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <update id="ToPublishA_GetForm" parameterClass="StrObjDict">
+      Update PUB_表单版本文件 Set 发布人 = #Issuer#, 发布时间 = Sysdate, 发布说明 = #IssueRemark# Where 表单id = #FormID# And 版本号 = #VersionCode#
+    </update>
+
+    <update id="ToPublishB_GetForm" parameterClass="StrObjDict">
+      Update PUB_表单 Set 最新版本号=#VersionCode# Where ID=#FormID#
+    </update>
+
+    <select id="CheckedPublish_GetForm" parameterClass="StrObjDict" resultClass="StrObjDict">
+      Select ID From PUB_表单数据文件  Where 表单id = #FormID# And 版本号 = #VersionCode#
+    </select>
+
+    <select id="ResultPublish_GetForm" parameterClass="StrObjDict" resultClass="StrObjDict">
+      Select 表单id AS id, 版本号 AS Bbh, 发布人 AS Fbr, To_Char(发布时间, 'yyyy-MM-dd hh24:mi:ss') AS Fbsj
+      From PUB_表单版本文件
+      Where 表单id = #FormID# Order By 版本号
+    </select>
+
+    <select id="GetMaxVerCode_Form" parameterClass="StrObjDict" resultClass="StrObjDict">
+      <!--Select 最新版本号 As "VersionCode"
+      From PUB_表单
+      Where id = #FormID#-->
+
+      Select max( 版本号) as "VersionCode" From PUB_表单版本文件  Where 表单ID = #FormID# 
+    </select>
+
+    <select id="GetFormTypes_Form" parameterClass="StrObjDict" resultClass="StrObjDict">
+      Select 类型 "Type" From PUB_表单 Where ID = #FormID#
+    </select>
+    
+    <update id="SetVerCode_Form" parameterClass="StrObjDict">
+      Update PUB_表单 Set 最新版本号=#VersionCode# Where ID=#FormID#
+    </update>
+
+    <update id="SetStateA_Form" parameterClass="StrObjDict">
+      Update PUB_表单 Set 作废时间=#InvalidTime#,是否作废=#IsInvalid# Where ID=#ID#
+    </update>
+
+    <update id="SetStateB_Form" parameterClass="StrObjDict">
+      Update PUB_表单 Set 作废时间=Null,是否作废=Null Where ID=#ID#
+    </update>
+    
+    <select id="ResultDeptList_Form" parameterClass="StrObjDict" resultClass="StrObjDict">
+      select id,相关ID as Fid,名称 as MC,上级相关ID as Pid,编码 as Bm,简码 as Jm from 系统_组织机构 where 是否作废 ='0'  and ((lower(名称) like lower('%$Code$%') or lower(简码) like lower('%$Code$%')))
+      <dynamic prepend="AND">
+        <isPropertyAvailable prepend=" AND " property="TypeID" >部门性质=#TypeID#</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <update id="SaveDeptList_Form" parameterClass="StrObjDict">
+      Update PUB_表单 Set 适用科室 =#DeptRange# Where ID =#ID#
+    </update>
+    
+    <update id="SetMobileStyle_Form" parameterClass="StrObjDict">
+      Update PUB_表单版本文件 Set 移动端样式 =#MobileStyle# Where 表单ID =#ID# AND 版本号 = #VersionCode#
+    </update>
+    
+    <update id="SetDesktopStyle_Form" parameterClass="StrObjDict">
+      Update PUB_表单版本文件 Set 桌面端样式 =#DesktopStyle# Where 表单ID =#ID# AND 版本号 = #VersionCode#
+    </update>
+    
+    <select id="ResultEvaluatestyle_Form" parameterClass="StrObjDict" resultClass="StrObjDict">
+      select id,名称 as Mc,快捷码 as Kjm,类型 as Lx,子码 as Zm,修改用户 as Cjr,to_char(修改时间, 'yyyy-MM-dd hh24:mi:ss') AS Cjsj from PUB_表单 where 是否作废 ='0'
+      <!--AND --><!--instr(适用科室, #DeptRange#) > 0-->
+      <dynamic prepend="AND">
+        <isPropertyAvailable prepend=" AND " property="Type" >类型=#Type#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ID" >表单对照=#FormID#</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="ResultEvaluatestyleID_Form" parameterClass="StrObjDict" resultClass="StrObjDict">
+      select id,名称 as Mc,快捷码 as Kjm,类型 as Lx,子码 as Zm,修改用户 as Cjr,to_char(修改时间, 'yyyy-MM-dd hh24:mi:ss') AS Cjsj,表单对照 As BDDZ from PUB_表单 where 是否作废 ='0'
+      <!--AND instr(适用科室, #DeptRange#) > 0-->
+      <dynamic prepend="AND">
+        <isPropertyAvailable prepend=" AND " property="Type" >类型=#Type#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="GetStyleCss_Form" parameterClass="StrObjDict" resultClass="StrObjDict">
+      select ID as "ID",明细名称 as "Name",上级ID as "SuperID",级别 as "Level" ,
+      是否末级 as "IsLast",输入码 as "InputCode",备注 as "ReMark"
+      from 系统_公共代码明细 where 代码ID = (Select ID From 系统_公共代码 Where 类别ID = #TypeID#)
+      AND 是否作废 = '0'
+    </select>
+
+    <update id="SaveFormMap_Form" parameterClass="StrObjDict">
+      Update PUB_表单 Set 表单对照 =#FormAgainst# Where ID =#ID#
+    </update>
+    
+
+    <select id="LIST_Form" parameterClass="StrObjDict" resultClass="Form" resultMap="Form_Result" >
+      select * from PUB_表单
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FastCode" >快捷码 like '%$FastCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormType" >类型 like '%$FormType$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkCode" >子码 like '%$MarkCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DeptRange" >适用科室 like '%$DeptRange$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormAgainst" >表单对照 like '%$FormAgainst$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="NewVersionCode" >最新版本号 like '%$NewVersionCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DesignVersion" >设计器版本 like '%$DesignVersion$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Resolution" >分辨率 like '%$Resolution$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >作废时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >作废时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InvalidTime" >作废时间 like '%$InvalidTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like '%$IsInvalid$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+    
+     <select id="LIST_FormFile" parameterClass="StrObjDict" resultClass="FormFile" resultMap="FormFile_Result" >
+      select * from PUB_表单版本文件
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormID" >表单ID like '%$FormID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PageNumber" >总页数 like '%$PageNumber$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PageNo" >页号 like '%$PageNo$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PageContent" >网页 like '%$PageContent$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Docment" >配套文档 like '%$Docment$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >版本号 like '%$VersionCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormStruct" >表单格式 like '%$FormStruct$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormStructA" >表单格式A like '%$FormStructA$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormStructB" >表单格式B like '%$FormStructB$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormStructC" >表单格式C like '%$FormStructC$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MobileStyle" >移动端样式 like '%$MobileStyle$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DeskTopStyle" >桌面端样式 like '%$DeskTopStyle$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+    
+
+    <select id="COUNT_Form" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM PUB_表单
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FastCode" >快捷码 like '%$FastCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormType" >类型 like '%$FormType$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkCode" >子码 like '%$MarkCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DeptRange" >适用科室 like '%$DeptRange$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormAgainst" >表单对照 like '%$FormAgainst$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="NewVersionCode" >最新版本号 like '%$NewVersionCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DesignVersion" >设计器版本 like '%$DesignVersion$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Resolution" >分辨率 like '%$Resolution$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >作废时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >作废时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InvalidTime" >作废时间 like '%$InvalidTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like '%$IsInvalid$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+    
+    <select id="COUNT_FormFile" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM PUB_表单版本文件
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormID" >表单ID like '%$FormID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PageNumber" >总页数 like '%$PageNumber$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PageNo" >页号 like '%$PageNo$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PageContent" >网页 like '%$PageContent$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Docment" >配套文档 like '%$Docment$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="VersionCode" >版本号 like '%$VersionCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormStruct" >表单格式 like '%$FormStruct$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormStructA" >表单格式A like '%$FormStructA$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormStructB" >表单格式B like '%$FormStructB$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FormStructC" >表单格式C like '%$FormStructC$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MobileStyle" >移动端样式 like '%$MobileStyle$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DeskTopStyle" >桌面端样式 like '%$DeskTopStyle$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+   
+  </statements>
+</sqlMap>

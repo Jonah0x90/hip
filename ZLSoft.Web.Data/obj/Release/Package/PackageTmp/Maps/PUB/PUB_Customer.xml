@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--日志管理-->
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="Customer" type="ZLSoft.Model.PUB.Customer, ZLSoft.Model" />
+    <typeAlias alias="PK_Customer" type="ZLSoft.Model.PUB.PK_Customer, ZLSoft.Model" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="Customer_Result" class="Customer">
+      <result property="ID" column="ID" />
+      <result property="RelatID" column="相关ID" />
+      <result property="IndexID" column="主页ID" />
+      <result property="CustomerNo" column="住院号" />
+      <result property="Name" column="姓名" />
+      <result property="Sex" column="性别" />
+      <result property="BirthDay" column="出生日期" />
+      <result property="RegDate" column="入院日期" />
+      <result property="OutDate" column="出院日期" />
+      <result property="WardID" column="当前病区相关ID" />
+      <result property="DeptID" column="当前科室相关ID" />
+      <result property="ClientManager" column="责任护士" />
+      <result property="CardNo" column="床号" />
+      <result property="State" column="状态" />
+      <result property="IsVip" column="是否危重" />
+      <result property="Grade" column="护理等级" />
+      <result property="IsBaseThird" column="是否对照"/>
+      <result property="ModifyUser" column="修改用户"/>
+      <result property="ModifyTime" column="修改时间"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+
+    <select id="SELECT_IndexID" parameterClass="PK_Customer" resultClass="int">
+      SELECT MAX(主页ID)
+      FROM PUB_病人基本信息
+      WHERE ID=#ID#
+    </select>
+
+    <UPDATE id="INSERT_Customer" parameterClass="Customer">
+      INSERT INTO PUB_病人基本信息
+      VALUES(#ID#,#RelatID#,#IndexID#,#CustomerNo#,#Name#,#Sex#,#BirthDay#,#RegDate#,#OutDate#,#WardID#,#DeptID#,#ClientManager#,#CardNo#,#State#,#IsVip#,#Grade#,#IsBaseThird#,#ModifyUser#,#ModifyTime#)
+    </UPDATE>
+
+    <UPDATE id="INSERT_Customer_State" parameterClass="StrObjDict">
+      INSERT INTO PUB_病人状态
+      VALUES(#ID#,#RelatID#,#State#,#StartTime#,#EndTime#,#ModifyUser#,#IsBaseThird#,#ImportTime#,#IndexID#,#WardID#,#DeptID#,#CardNo#,#ClientManager#)
+    </UPDATE>
+    
+    
+    <select id="LIST_Customer" parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT a.ID,a.姓名 AS "Name",a.性别 AS "Sex",a.住院号 AS "CustomerNo",a.床号 AS "CardNo",to_char(a.入院日期,'yyyy-mm-dd hh24:mi:ss') AS "RegDate",to_char(a.出院日期,'yyyy-mm-dd hh24:mi:ss') AS "OutDate",a.责任护士 AS "ClientManager",b.名称 AS "Ward"
+      FROM PUB_病人基本信息 a
+      INNER JOIN 系统_组织机构 b ON a.当前病区相关ID = b.相关ID
+      INNER JOIN 系统_组织机构 c ON a.当前科室相关ID = c.相关ID
+      LEFT JOIN (SELECT * FROM PUB_病人补充信息 WHERE 信息名='西医入院诊断') d ON a.相关ID = d.对象相关ID
+      <!-- a.出院日期 IS NULL -->
+      <dynamic prepend=" WHERE ">
+        <isPropertyAvailable prepend=" AND " property="ClientManager" >a.责任护士=#ClientManager#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="OrgID" >a.当前病区相关ID=#OrgID#</isPropertyAvailable>
+        <!--<isPropertyAvailable prepend=" AND " property="DetailName" >b.ID=#DetailValue#</isPropertyAvailable>-->
+        <isPropertyAvailable prepend=" AND " property="InputCode" >F_GetSrm(a.姓名,'拼音码')LIKE #InputCode#</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="LIST2_Customer" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT a.ID,a.姓名 AS "Name",a.性别 AS "Sex",a.住院号 AS "CustomerNo",a.床号 AS "CardNo",a.入院日期 AS "RegDate",a.出院日期 AS "OutDate",a.责任护士 AS "ClientManager",b.名称 AS "Ward" 
+      FROM PUB_病人基本信息 a
+      INNER JOIN 系统_组织机构 b ON a.当前病区相关ID = b.相关ID
+      INNER JOIN 系统_组织机构 c ON a.当前科室相关ID = c.相关ID
+      LEFT JOIN (SELECT * FROM PUB_病人补充信息 WHERE 信息名='西医入院诊断') d ON a.相关ID = d.病人相关ID
+      WHERE a.出院日期 IS NULL
+      AND (a.当前病区相关ID &lt;> #OrgID# and  Exists
+      (SELECT 1 FROM PUB_病人状态 e WHERE e.相关id = a.相关ID AND e.主页ID = a.主页ID AND e.结束时间 >= SYSDATE - 7 AND e.病区ID=#OrgID#))
+      <dynamic prepend=" AND ">
+        <isPropertyAvailable prepend=" AND " property="InputCode" >F_GetSrm(a.姓名,'拼音码')LIKE #InputCode#</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+    <select id="LOAD_Customer" parameterClass="PK_Customer" resultMap="Customer_Result">
+      SELECT * FROM PUB_病人基本信息
+      <dynamic prepend=" WHERE ">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IN" >出院日期 IS NULL</isPropertyAvailable>
+        <!--提取在院病人-->
+        <isPropertyAvailable prepend=" AND " property="OUT" >出院日期 IS NOT NULL</isPropertyAvailable>
+        <!--提取出院病人-->
+        <!--提取在院病人-->
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+   
+  </statements>
+</sqlMap>

@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="Organization" type="ZLSoft.Model.PUB.Organization, ZLSoft.Model" />
+    <typeAlias alias="OrganizationRelation" type="ZLSoft.Model.PUB.OrganizationRelation, ZLSoft.Model" />
+    <typeAlias alias="PK_Organization" type="ZLSoft.Model.PUB.PK_Organization, ZLSoft.Model" />
+    <typeAlias alias="PK_OrganizationRelation" type="ZLSoft.Model.PUB.PK_OrganizationRelation, ZLSoft.Model" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="Organization_Result" class="Organization">
+      <result property="ID" column="ID" />
+      <result property="RelatID" column="相关ID" />
+      <result property="Name" column="名称" />
+      <result property="SimpleName" column="简称" />
+      <result property="Remark" column="说明" />
+      <result property="SuperRelatID" column="上级相关ID" />
+      <result property="AreaID" column="院区ID" />
+      <result property="DepartType" column="部门性质" />
+      <result property="DepartGrade" column="部门级别" />
+      <result property="IsFinal" column="是否末级" />
+      <result property="IsInvalid" column="是否作废" />
+      <result property="InvalidTime" column="作废时间" />
+      <result property="InputCode" column="输入码" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="ModifyTime" column="修改时间" /> 
+      <result property="SeqNo" column="排序序号" />
+      <result property="Address" column="地址" />
+      <result property="IsBaseThird" column="是否对照" />
+      <result property="Code" column="编码" />
+      <result property="SimpleCode" column="简码" />
+    </resultMap>
+    <resultMap id="OrganizationRelation_Result" class="OrganizationRelation">
+      <result property="LesionID" column="病区相关ID" />
+      <result property="DepartmentID" column="科室相关ID" />
+      <result property="IsBaseThird" column="是否对照" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <select id="LOAD_Organization" parameterClass="PK_Organization" resultMap="Organization_Result" >
+      SELECT * FROM 系统_组织机构
+      WHERE ID=#ID#
+    </select>
+
+    <select id="LIST_RelationList" parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT
+      a.ID AS "ID",a.相关ID AS "RelatID",a.名称 AS "Name",a.简称 AS "SimpleName",
+      a.上级相关ID AS "SuperRelatID",a.院区ID AS "AreaID",a.部门性质 AS "DepartType",a.部门级别 AS "DepartGrade",
+      a.是否末级 AS "IsFinal",a.是否作废 AS "IsInvalid",b.病区相关ID AS "LesionID",b.科室相关ID AS "DepartmentID"
+      FROM 系统_组织机构 a,系统_组织机构_病区科室关联 b
+      WHERE a.ID = b.病区相关ID OR a.ID = b.科室相关ID
+      ORDER BY ID
+    </select>
+
+    <select id="Get_YQList" parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT ID,名称 AS "Name" FROM 系统_院区
+    </select>
+
+    <select id="Checked_Organization" parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT Count(名称) As "Name" FROM 系统_组织机构 Where 名称 = #Name#
+    </select>
+
+
+    <select id="LIST_Organization" parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT *
+      FROM 系统_组织机构
+
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RelatID" >相关ID=#RelatID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SimpleName" >简称=#SimpleName#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remark" >说明=#Remark#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SuperRelatID" >上级相关ID=#SuperRelatID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="AreaID" >院区ID=#AreaID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DepartType" >部门性质=#DepartType#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DepartGrade" >部门级别=#DepartGrade#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsFinal" >是否末级=#IsFinal#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InvalidTime" >作废时间=#InvalidTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InputCode" >输入码=#InputCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SeqNo" >排序序号=#SeqNo#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsBaseThird" >是否对照=#IsBaseThird#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="LIST_SIMPLE_Organization" parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT ID AS ID,名称 AS "Name"
+      FROM 系统_组织机构
+
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RelatID" >相关ID=#RelatID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SimpleName" >简称=#SimpleName#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remark" >说明=#Remark#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SuperRelatID" >上级相关ID=#SuperRelatID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="AreaID" >院区ID=#AreaID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DepartType" >部门性质=#DepartType#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DepartGrade" >部门级别=#DepartGrade#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsFinal" >是否末级=#IsFinal#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InvalidTime" >作废时间=#InvalidTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InputCode" >输入码=#InputCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SeqNo" >排序序号=#SeqNo#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsBaseThird" >是否对照=#IsBaseThird#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+    <select id="LIST_Organization_ByUser" parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT a.ID AS ID,a.名称 AS "Name",a.部门性质 AS "DepartType"
+      FROM 系统_组织机构 a,系统_组织机构_部门人员关联 b,系统_用户信息 c,人事_职工信息 d
+      WHERE
+      a.相关ID = b.部门相关ID AND b.人员相关ID = d.相关ID AND c.职工相关ID = d.相关ID
+      <dynamic prepend=" AND ">
+        <isPropertyAvailable prepend=" AND " property="UserID" >c.ID=#UserID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DepartType" >a.部门性质=#DepartType#</isPropertyAvailable>
+      </dynamic>
+
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+    <update id="INSERT_Organization" parameterClass="StrObjDict">
+      INSERT INTO 系统_组织机构(ID,相关ID,名称,简称,说明,上级相关ID,院区ID,部门性质,部门级别,是否末级,是否作废,作废时间,输入码,修改用户,修改时间,排序序号,地址,是否对照,编码,简码)
+      VALUES (#ID#,#RelatID#,#Name#,#SimpleName#,#Remark#,#SuperRelatID#,#AreaID#,#DepartType#,#DepartGrade#,#IsFinal#,#IsInvalid#,#InvalidTime#,#InputCode#,#ModifyUser#,#ModifyTime#,#SeqNo#,#Address#,#IsBaseThird#,#Code#,#SimpleCode#)
+    </update>
+
+    <update id="INSERT_OrganizationRelation" parameterClass="StrObjDict">
+      INSERT INTO 系统_组织机构_病区科室关联(病区相关ID,科室相关ID,是否对照)
+      VALUES (#LesionID#,#DepartmentID#,#IsBaseThird#)
+    </update>
+
+    <update id="UPDATE_Organization" parameterClass="StrObjDict" >
+      UPDATE 系统_组织机构
+      SET
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SimpleName" >简称=#SimpleName#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Remark" >说明=#Remark#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SuperRelatID" >上级相关ID=#SuperRelatID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="AreaID" >院区ID=#AreaID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="DepartType" >部门性质=#DepartType#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="DepartGrade" >部门级别=#DepartGrade#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsFinal" >是否末级=#IsFinal#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InvalidTime" >作废时间=#InvalidTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InputCode" >输入码=#InputCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SeqNo" >排序序号=#SeqNo#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Address" >地址=#Address#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Code" >编码=#Code#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SimpleCode" >简码=#SimpleCode#</isPropertyAvailable>
+      </dynamic>
+      WHERE ID=#ID#
+    </update>
+
+    <delete id="DELETE_Organization" parameterClass="StrObjDict" >
+      delete from 系统_组织机构
+      where ID=#ID#
+    </delete>
+    
+    
+  </statements>
+</sqlMap>

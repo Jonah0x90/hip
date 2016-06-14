@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="MenuOption" type="ZLSoft.Model.PLATFORM.MenuOption, ZLSoft.Model" />
+    <typeAlias alias="PK_MenuOption" type="ZLSoft.Model.PLATFORM.PK_MenuOption, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="MenuOption_Result" class="MenuOption">
+      <result property="FuncOptID" column="功能操作ID" />
+      <result property="ID" column="ID" />
+      <result property="MenuID" column="菜单ID" />
+      <result property="SeqNo" column="排序序号" />
+      <result property="IsCtlAuth" column="是否控制权限" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="ModifyTime" column="修改时间" />
+      <result property="OptionCode" column="操作代码" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_MenuOption" parameterClass="StrObjDict">
+      INSERT INTO 系统_菜单操作(功能操作ID,ID,菜单ID,排序序号,是否控制权限,修改用户,修改时间,操作代码)
+      VALUES (#FuncOptID#,#ID#,#MenuID#,#SeqNo#,#IsCtlAuth#,#ModifyUser#,#ModifyTime#,#OptionCode#)
+    </update>
+
+    <update id="UPDATE_MenuOption" parameterClass="StrObjDict" >
+      update 系统_菜单操作
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="FuncOptID" >功能操作ID=#FuncOptID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="MenuID" >菜单ID=#MenuID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SeqNo" >排序序号=#SeqNo#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsCtlAuth" >是否控制权限=#IsCtlAuth#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="OptionCode" >操作代码=#OptionCode#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_MenuOption" parameterClass="StrObjDict" >
+      delete from 系统_菜单操作
+      where ID=#ID#
+    </delete>
+
+    <delete id="DELETE_MenuOptionMenuID" parameterClass="StrObjDict" >
+      delete from 系统_菜单操作
+      where 菜单ID=#MenuID#
+    </delete>
+
+
+
+    <select id="LOAD_MenuOption" parameterClass="PK_MenuOption" resultMap="MenuOption_Result" >
+      SELECT * FROM 系统_菜单操作
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_MenuOption" parameterClass="StrObjDict" resultClass="MenuOption" resultMap="MenuOption_Result" >
+      select * from 系统_菜单操作
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="FuncOptID" >功能操作ID like '%$FuncOptID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MenuID" >菜单ID like '%$MenuID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SeqNo" >排序序号 like '%$SeqNo$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsCtlAuth" >是否控制权限 like '%$IsCtlAuth$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改时间 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="OptionCode" >操作代码 like '%$OptionCode$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

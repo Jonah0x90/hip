@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="BPM" type="ZLSoft.Model.PLATFORM.BPM, ZLSoft.Model" />
+    <typeAlias alias="PK_BPM" type="ZLSoft.Model.PLATFORM.PK_BPM, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="BPM_Result" class="BPM">
+      <result property="ID" column="ID" />
+      <result property="Name" column="名称" />
+      <result property="SuperID" column="上级ID" />
+      <result property="ServiceID" column="服务ID" />
+      <result property="IsAutomatic" column="是否自动执行" />
+      <result property="IsSystem" column="是否内置" />
+      <result property="PlanContent" column="计划内容" />
+      <result property="LastTime" column="上次执行时间" />
+      <result property="IsInvalid" column="是否作废" />
+      <result property="InvalidTime" column="作废时间" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_BPM" parameterClass="StrObjDict">
+      INSERT INTO 系统_BPM(ID,名称,上级ID,服务ID,是否自动执行,是否内置,计划内容,上次执行时间)
+      VALUES (#ID#,#Name#,#SuperID#,#ServiceID#,#IsAutomatic#,#IsSystem#,#PlanContent#)
+    </update>
+
+    <update id="UPDATE_BPM" parameterClass="StrObjDict" >
+      UPDATE 系统_BPM
+      SET
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SuperID" >上级ID=#SuperID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ServiceID" >服务ID=#ServiceID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsAutomatic" >是否自动执行=#IsAutomatic#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PlanContent" >计划内容=#PlanContent#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="LastTime" >上次执行时间=#LastTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InvalidTime" >作废时间=#InvalidTime#</isPropertyAvailable>
+      </dynamic>
+      WHERE ID=#ID#
+    </update>
+
+    <delete id="DELETE_BPM" parameterClass="StrObjDict" >
+      DELETE FROM 系统_BPM
+      WHERE ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_BPM" parameterClass="PK_BPM" resultMap="BPM_Result" >
+      SELECT * FROM 系统_BPM
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_BPM" parameterClass="StrObjDict" resultMap="BPM_Result" >
+      select * from 系统_BPM
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SuperID" >上级ID = #SuperID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ServiceID" >服务ID = #ServiceID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsAutomatic" >是否自动执行 = #IsAutomatic#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsSystem" >是否内置 = #IsSystem#</isPropertyAvailable>
+        <!--<isPropertyAvailable prepend=" AND " property="StartDate" >上次执行时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >上次执行时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="LastTime" >上次执行时间 like '%$LastTime$%'</isPropertyAvailable>-->
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 = #IsInvalid#</isPropertyAvailable>
+        <!--<isPropertyAvailable prepend=" AND " property="StartDate" >作废时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >作废时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InvalidTime" >作废时间 like '%$InvalidTime$%'</isPropertyAvailable>-->
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+    
+    <select id="LISTSOD_BPM" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT 
+      ID,
+      名称 AS "Name",
+      上级ID AS "SuperID",
+      服务ID AS "ServiceID",
+      是否自动执行 AS "IsAutomatic",
+      是否内置 AS "IsSystem",
+      是否作废 AS "IsInvalid"
+      FROM 系统_BPM
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SuperID" >上级ID = #SuperID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ServiceID" >服务ID = #ServiceID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsAutomatic" >是否自动执行 = #IsAutomatic#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsSystem" >是否内置 = #IsSystem#</isPropertyAvailable>
+        <!--<isPropertyAvailable prepend=" AND " property="StartDate" >上次执行时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >上次执行时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="LastTime" >上次执行时间 like '%$LastTime$%'</isPropertyAvailable>-->
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 = #IsInvalid#</isPropertyAvailable>
+        <!--<isPropertyAvailable prepend=" AND " property="StartDate" >作废时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >作废时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InvalidTime" >作废时间 like '%$InvalidTime$%'</isPropertyAvailable>-->
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+  </statements>
+</sqlMap>

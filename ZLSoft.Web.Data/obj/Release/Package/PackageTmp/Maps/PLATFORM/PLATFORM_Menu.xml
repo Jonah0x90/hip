@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="Menu" type="ZLSoft.Model.PLATFORM.Menu, ZLSoft.Model" />
+    <typeAlias alias="PK_Menu" type="ZLSoft.Model.PLATFORM.PK_Menu, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="Menu_Result" class="Menu">
+      <result property="ID" column="ID" />
+      <result property="Code" column="编码"/>
+      <result property="Name" column="名称"/>
+      <result property="ModuleCode" column="模块代码"/>
+      <result property="Remark" column="说明"/>
+      <result property="SuperID" column="上级ID"/>
+      <result property="Grade" column="层级"/>
+      <result property="IsLast" column="是否末级"/>
+      <result property="FunID" column="功能ID"/>
+      <result property="PicUrl" column="图标"/>
+      <result property="ParamValue" column="参数值"/>
+      <result property="OpenType" column="打开方式"/>
+      <result property="IsCtlAuth" column="是否启用权限"/>
+      <result property="IsMobileSupport" column="移动使用"/>
+      <result property="IsRelatFun" column="是否关联功能"/>
+      <result property="IsInvalid" column="是否作废" />
+      <result property="InvalidTime" column="作废时间" />
+      <result property="InputCode" column="输入码" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="ModifyTime" column="修改时间" />
+      <result property="SeqNo" column="排序序号" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+
+    <update id="INSERT_Menu" parameterClass="StrObjDict">
+      INSERT INTO 系统_菜单(ID,编码,名称,模块代码,说明,上级ID,层级,是否末级,功能ID,图标,参数值,打开方式,是否启用权限,是否作废,作废时间,输入码,修改用户,修改时间,排序序号,移动使用,是否关联功能)
+      VALUES (#ID#,#Code#,#Name#,#ModuleCode#,#Remark#,#SuperID#,#Grade#,#IsLast#,#FunID#,#PicUrl#,#ParamValue#,#OpenType#,#IsCtlAuth#,#IsInvalid#,#InvalidTime#,#InputCode#,#ModifyUser#,#ModifyTime#,#SeqNo#,#IsMobileSupport#,#IsRelatFun#)
+    </update>
+
+    <select id="LOAD_Menu" parameterClass="PK_Menu" resultMap="Menu_Result" >
+      SELECT * FROM 系统_菜单
+      WHERE ID=#ID#
+    </select>
+
+    <delete id="DELETE_Menu" parameterClass="StrObjDict" >
+      delete 系统_菜单
+      where ID=#ID# or 上级ID=#ID#
+    </delete>
+
+
+    <update id="UPDATE_Menu" parameterClass="StrObjDict" >
+      update 系统_菜单
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Code" >编码=#Code#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModuleCode" >模块代码=#ModuleCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Remark" >说明=#Remark#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SuperID" >上级ID=#SuperID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Grade" >层级=#Grade#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsLast" >是否末级=#IsLast#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="FunID" >功能ID=#FunID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PicUrl" >图标=#PicUrl#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ParamValue" >参数值=#ParamValue#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="OpenType" >打开方式=#OpenType#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsCtlAuth" >是否启用权限=#IsCtlAuth#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InvalidTime" >作废时间=#InvalidTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InputCode" >输入码=#InputCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改时间=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SeqNo" >排序序号=#SeqNo#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsMobileSupport" >移动使用=#IsMobileSupport#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsRelatFun" >是否关联功能=#IsRelatFun#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <select id="LOAD_Menu_Option" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT c.操作代码 AS "OpCode" FROM 系统_角色权限 a
+      INNER JOIN 系统_角色成员 b ON a.角色ID = b.角色ID
+      INNER JOIN 系统_菜单 d ON a.菜单ID = d.ID
+      INNER JOIN 系统_功能 e ON e.ID = d.功能ID
+      LEFT JOIN 系统_菜单操作 c ON c.ID = a.菜单操作ID
+      WHERE b.用户ID = #UserID# AND a.菜单操作ID = '-1' AND d.ID = c.菜单ID
+      AND (CASE WHEN e.地址 IS NOT NULL THEN e.地址 || (CASE WHEN d.参数值 IS NOT NULL THEN CHR(63)||d.参数值 ELSE NULL END) ELSE NULL END) = #Url#
+      UNION ALL
+      SELECT a.操作代码 AS "OpCode" FROM 系统_功能操作 a
+      INNER JOIN 系统_功能 b ON a.功能ID = b.ID
+      INNER JOIN 系统_菜单 c ON b.Id = c.功能ID
+      LEFT JOIN 系统_菜单操作 d ON a.ID = d.功能操作ID
+      WHERE d.菜单ID IS NULL
+      AND (CASE WHEN b.地址 IS NOT NULL THEN b.地址 || (CASE WHEN c.参数值 IS NOT NULL THEN CHR(63)||c.参数值 ELSE NULL END) ELSE NULL END) = #Url#
+    </select>
+
+    <select id="LOAD2_Menu_Option" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT c.操作代码 AS "OpCode" FROM 系统_角色权限 a
+      INNER JOIN 系统_角色成员 b ON a.角色ID = b.角色ID
+      LEFT JOIN 系统_菜单操作 c ON c.ID = a.菜单操作ID
+      WHERE b.用户ID = #UserID# AND a.菜单操作ID = '-1'
+      AND a.菜单ID = #MenuID#
+      UNION ALL
+      SELECT 'ALL' AS "OpCode" FROM 系统_菜单 a,
+      (SELECT 菜单ID,COUNT(菜单ID) AS 数量 FROM 系统_角色权限 GROUP BY 菜单ID) b
+      WHERE b.数量 = 1 AND a.ID = b.菜单ID
+      AND a.ID = #MenuID#
+    </select>
+
+    <!-- 根据请求判断是否有权限操作 待优化 -->
+    <select id="LOAD_Menu_Permission_By_userid_request" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT c.菜单操作ID AS "AuthID" FROM 系统_角色成员 a,系统_角色 b,系统_角色权限 c ,系统_菜单 d,系统_功能 e
+      WHERE e.ID = d.功能ID AND d.ID = c.菜单ID AND b.ID = c.角色ID AND a.角色ID = b.ID
+      AND a.用户id = #UserID#
+      AND d.是否启用权限=1
+      AND b.所属模块代码=#ModuleCode# AND c.菜单操作ID='-1'
+      AND (CASE WHEN e.地址 IS NOT NULL THEN e.地址 || (CASE WHEN d.参数值 IS NOT NULL THEN CHR(63)||d.参数值 ELSE NULL END) ELSE NULL END) = #Url#
+      UNION all
+      SELECT g.ID AS "AuthID" FROM  系统_角色成员 a,系统_角色 b,系统_角色权限 c ,系统_菜单 d,系统_功能 e,系统_功能操作 f,系统_菜单操作 g
+      WHERE e.ID = d.功能ID AND d.ID = c.菜单ID AND b.ID = c.角色ID AND a.角色ID = b.ID AND f.功能ID = e.ID AND f.ID= g.功能操作ID AND c.菜单操作ID = g.ID
+      AND a.用户id = #UserID#
+      AND g.是否控制权限=1
+      AND b.所属模块代码=#ModuleCode#
+      AND c.菜单操作ID&lt;>'-1'
+      AND f.操作地址 = #Url#
+      UNION ALL
+      SELECT '0' AS "AuthID" from 系统_菜单 a,系统_功能 b
+      WHERE a.是否启用权限=0 AND a.功能ID=b.ID
+      AND (CASE WHEN b.地址 IS NOT NULL THEN b.地址 || (CASE WHEN a.参数值 IS NOT NULL THEN CHR(63)||a.参数值 ELSE NULL END) ELSE NULL END) = #Url#
+      UNION ALL
+      SELECT a.ID AS "AuthID" FROM 系统_功能操作 a
+      LEFT JOIN 系统_菜单操作 b ON a.ID = b.功能操作ID
+      WHERE (b.菜单ID IS NULL OR b.是否控制权限 = 0)
+      AND a.操作地址=#Url#
+    </select>
+
+  </statements>
+</sqlMap>

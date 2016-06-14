@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+        <typeAlias alias="XT_TREE" type="ZLSoft.Model.System.XT_TREE, ZLSoft.Model" />
+        <typeAlias alias="PK_XT_TREE" type="ZLSoft.Model.System.PK_XT_TREE, ZLSoft.Model" />
+    </alias>
+    <statements>
+        <insert id="INSERT_XT_TREE" parameterClass="StrObjDict" >
+            insert into XT_TREE(TREEDM,TREEMC,ZFPB,XTPB,BZ,ROOT_SHOW_FLAG,ROOT_NAME,SHOW_FORMAT,COL_ID,COL_NAME,COL_WIDTH,SRM1,SRM2,SRM3,XGR,XGRQ,PXXH,FLID,CONN_ID,SQL_ORACLE,SQL_MSSQL,PXZD)
+            values(
+            #TREEDM#,#TREEMC#,#ZFPB#,#XTPB#,#BZ#,#ROOT_SHOW_FLAG#,#ROOT_NAME#,#SHOW_FORMAT#,#COL_ID#,#COL_NAME#,#COL_WIDTH#,#SRM1#,#SRM2#,#SRM3#,#XGR#,#XGRQ#,#PXXH#,#FLID#,#CONN_ID#,#SQL_ORACLE#,#SQL_MSSQL#,#PXZD#)
+        </insert>
+        <update id="UPDATE_XT_TREE" parameterClass="StrObjDict" >
+            update XT_TREE
+            set
+            <dynamic prepend=" ">
+                <isPropertyAvailable prepend=" , " property="TREEMC" >TREEMC=#TREEMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="ZFPB" >ZFPB=#ZFPB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="XTPB" >XTPB=#XTPB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="BZ" >BZ=#BZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="ROOT_SHOW_FLAG" >ROOT_SHOW_FLAG=#ROOT_SHOW_FLAG#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="ROOT_NAME" >ROOT_NAME=#ROOT_NAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SHOW_FORMAT" >SHOW_FORMAT=#SHOW_FORMAT#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="COL_ID" >COL_ID=#COL_ID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="COL_NAME" >COL_NAME=#COL_NAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="COL_WIDTH" >COL_WIDTH=#COL_WIDTH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SRM1" >SRM1=#SRM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SRM2" >SRM2=#SRM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SRM3" >SRM3=#SRM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="XGR" >XGR=#XGR#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="XGRQ" >XGRQ=#XGRQ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="PXXH" >PXXH=#PXXH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="FLID" >FLID=#FLID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="CONN_ID" >CONN_ID=#CONN_ID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SQL_ORACLE" >SQL_ORACLE=#SQL_ORACLE#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="SQL_MSSQL" >SQL_MSSQL=#SQL_MSSQL#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" , " property="PXZD" >PXZD=#PXZD#</isPropertyAvailable>
+            </dynamic>
+            where TREEDM=#TREEDM#
+        </update>
+        <delete id="DELETE_XT_TREE" parameterClass="StrObjDict" >
+            delete XT_TREE
+            where TREEDM=#TREEDM#
+        </delete>
+        <select id="LOAD_XT_TREE" parameterClass="PK_XT_TREE" resultClass="XT_TREE" >
+            select TREEDM,TREEMC,ZFPB,XTPB,BZ,ROOT_SHOW_FLAG,ROOT_NAME,SHOW_FORMAT,COL_ID,COL_NAME,COL_WIDTH,SRM1,SRM2,SRM3,XGR,XGRQ,PXXH,FLID,CONN_ID,SQL_ORACLE,SQL_MSSQL,PXZD from XT_TREE
+            where TREEDM=#TREEDM#
+        </select>
+        <select id="LIST_XT_TREE" parameterClass="StrObjDict" resultClass="XT_TREE" >
+            select TREEDM,TREEMC,ZFPB,XTPB,BZ,ROOT_SHOW_FLAG,ROOT_NAME,SHOW_FORMAT,COL_ID,COL_NAME,COL_WIDTH,SRM1,SRM2,SRM3,XGR,XGRQ,PXXH,FLID,CONN_ID,SQL_ORACLE,SQL_MSSQL,PXZD from XT_TREE
+            <dynamic prepend=" WHERE ">
+                <isPropertyAvailable prepend=" AND " property="TREEDM" >TREEDM=#TREEDM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="TREEMC" >TREEMC=#TREEMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ZFPB" >ZFPB=#ZFPB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XTPB" >XTPB=#XTPB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="BZ" >BZ=#BZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ROOT_SHOW_FLAG" >ROOT_SHOW_FLAG=#ROOT_SHOW_FLAG#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ROOT_NAME" >ROOT_NAME=#ROOT_NAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SHOW_FORMAT" >SHOW_FORMAT=#SHOW_FORMAT#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="COL_ID" >COL_ID=#COL_ID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="COL_NAME" >COL_NAME=#COL_NAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="COL_WIDTH" >COL_WIDTH=#COL_WIDTH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM1" >SRM1=#SRM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM2" >SRM2=#SRM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM3" >SRM3=#SRM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGR" >XGR=#XGR#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_START" >XGRQ>=${ibatis_key_todate}#XGRQ_START#${ibatis_key_plus}' 00:00:00'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_END" >XGRQ&lt;=${ibatis_key_todate}#XGRQ_END#${ibatis_key_plus}' 23:59:59'${ibatis_key_todate_end}</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PXXH" >PXXH=#PXXH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="FLID" >FLID=#FLID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CONN_ID" >CONN_ID=#CONN_ID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SQL_ORACLE" >SQL_ORACLE=#SQL_ORACLE#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SQL_MSSQL" >SQL_MSSQL=#SQL_MSSQL#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PXZD" >PXZD=#PXZD#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+            <dynamic prepend=" ORDER BY ">
+                <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+        </select>
+
+        <select id="LIST2_XT_TREE" parameterClass="StrObjDict" resultClass="StrObjDict" >
+            select TREEDM,TREEMC,ZFPB,XTPB,BZ,ROOT_SHOW_FLAG,ROOT_NAME,SHOW_FORMAT,COL_ID,COL_NAME,COL_WIDTH,SRM1,SRM2,SRM3,XGR,XGRQ,PXXH,FLID,CONN_ID,SQL_ORACLE,SQL_MSSQL,PXZD from XT_TREE
+            <dynamic prepend=" WHERE ">
+                <isPropertyAvailable prepend=" AND " property="TREEDM" >TREEDM=#TREEDM#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="TREEMC" >TREEMC=#TREEMC#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ZFPB" >ZFPB=#ZFPB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XTPB" >XTPB=#XTPB#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="BZ" >BZ=#BZ#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ROOT_SHOW_FLAG" >ROOT_SHOW_FLAG=#ROOT_SHOW_FLAG#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="ROOT_NAME" >ROOT_NAME=#ROOT_NAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SHOW_FORMAT" >SHOW_FORMAT=#SHOW_FORMAT#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="COL_ID" >COL_ID=#COL_ID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="COL_NAME" >COL_NAME=#COL_NAME#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="COL_WIDTH" >COL_WIDTH=#COL_WIDTH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM1" >SRM1=#SRM1#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM2" >SRM2=#SRM2#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SRM3" >SRM3=#SRM3#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGR" >XGR=#XGR#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_START" >XGRQ>=to_date(#XGRQ_START#||' 00:00:00','yyyy-mm-dd HH24:mi:ss')</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="XGRQ_END" >XGRQ&lt;=to_date(#XGRQ_END#||' 23:59:59','yyyy-mm-dd HH24:mi:ss')</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PXXH" >PXXH=#PXXH#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="FLID" >FLID=#FLID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="CONN_ID" >CONN_ID=#CONN_ID#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SQL_ORACLE" >SQL_ORACLE=#SQL_ORACLE#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="SQL_MSSQL" >SQL_MSSQL=#SQL_MSSQL#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="PXZD" >PXZD=#PXZD#</isPropertyAvailable>
+                <isPropertyAvailable prepend=" AND " property="WHERE_CLAUSE">$WHERE_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+            <dynamic prepend=" ORDER BY ">
+                <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+            </dynamic>
+        </select>
+
+    </statements>
+</sqlMap>

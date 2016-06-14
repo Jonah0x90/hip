@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="ChangesTationLog" type="ZLSoft.Model.PUB.ChangesTationLog, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="ChangesTationLog_Result" class="ChangesTationLog">
+      <result property="ChangesTationLogID" column="交班记录ID" />
+      <result property="SubmitTime" column="提交时间" />
+      <result property="SubmitPerson" column="提交人" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_ChangesTationLog" parameterClass="StrObjDict">
+      INSERT INTO PUB_交班日志(交班记录ID,提交时间,提交人)
+      VALUES (#ChangesTationLogID#,#SubmitTime#,#SubmitPerson#)
+    </update>
+
+    <update id="UPDATE_ChangesTationLog" parameterClass="StrObjDict" >
+      update PUB_交班日志
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="ChangesTationLogID" >交班记录ID=#ChangesTationLogID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SubmitTime" >提交时间=#SubmitTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SubmitPerson" >提交人=#SubmitPerson#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_ChangesTationLog" parameterClass="StrObjDict" >
+      delete from PUB_交班日志
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_ChangesTationLog" parameterClass="StrObjDict" resultMap="ChangesTationLog_Result" >
+      SELECT * FROM PUB_交班日志
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_ChangesTationLog" parameterClass="StrObjDict" resultClass="ChangesTationLog" resultMap="ChangesTationLog_Result" >
+      select * from PUB_交班日志
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ChangesTationLogID" >交班记录ID like '%$ChangesTationLogID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >提交时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >提交时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SubmitTime" >提交时间 like '%$SubmitTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SubmitPerson" >提交人 like '%$SubmitPerson$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_ChangesTationLog" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM PUB_交班日志
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ChangesTationLogID" >交班记录ID like '%$ChangesTationLogID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >提交时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >提交时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SubmitTime" >提交时间 like '%$SubmitTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SubmitPerson" >提交人 like '%$SubmitPerson$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

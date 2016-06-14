@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="Role" type="ZLSoft.Model.PUB.Role, ZLSoft.Model" />
+    <typeAlias alias="PK_Role" type="ZLSoft.Model.PUB.PK_Role, ZLSoft.Model" />
+    <typeAlias alias="RolePower" type="ZLSoft.Model.PUB.RolePower, ZLSoft.Model" />
+    <typeAlias alias="PK_RolePower" type="ZLSoft.Model.PUB.PK_RolePower, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="Role_Result" class="Role">
+      <result property="ID" column="ID" />
+      <result property="RoleGroupName" column="名称" />
+      <result property="IsInvalid" column="是否作废" />
+      <result property="InvalidTime" column="作废时间" />
+      <result property="ModifyUser" column="修改用户" />
+      <result property="ModifyTime" column="修改日期" />
+      <result property="ModuleCode" column="所属模块代码" />
+      <result property="UserType" column="用户组类型" />
+      <result property="InputCode" column="输入码" />
+      <result property="SeqNo" column="排序序号" />
+      <result property="DefalutFunction" column="默认载入功能" />
+    </resultMap>
+
+    <resultMap id="RolePower_Result" class="RolePower">
+      <result property="RoleID" column="角色ID" />
+      <result property="MenuID" column="菜单ID" />
+      <result property="PowerID" column="菜单操作ID" />
+    </resultMap>
+  
+  </resultMaps>
+  <statements>
+    <update id="INSERT_Role" parameterClass="StrObjDict">
+      INSERT INTO 系统_角色(ID,名称,是否作废,作废时间,修改用户,修改日期,所属模块代码,用户组类型,输入码,排序序号,默认载入功能)
+      VALUES (#ID#,#RoleGroupName#,#IsInvalid#,#InvalidTime#,#ModifyUser#,#ModifyTime#,#ModuleCode#,#UserType#,#InputCode#,#SeqNo#,#DefalutFunction#)
+    </update>
+
+    <update id="UPDATE_Role" parameterClass="StrObjDict" >
+      update 系统_角色
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="RoleGroupName" >名称=#RoleGroupName#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsInvalid" >是否作废=#IsInvalid#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InvalidTime" >作废时间=#InvalidTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyUser" >修改用户=#ModifyUser#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModifyTime" >修改日期=#ModifyTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ModuleCode" >所属模块代码=#ModuleCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="UserType" >用户组类型=#UserType#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="InputCode" >输入码=#InputCode#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SeqNo" >排序序号=#SeqNo#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SeqNo" >默认载入功能=#DefalutFunction#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_Role" parameterClass="StrObjDict" >
+      delete from 系统_角色
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_Role" parameterClass="PK_Role" resultMap="Role_Result" >
+      SELECT * FROM 系统_角色
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_Role" parameterClass="StrObjDict" resultClass="Role" resultMap="Role_Result" >
+      select * from 系统_角色
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RoleGroupName" >名称 like '%$RoleGroupName$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsInvalid" >是否作废 like '%$IsInvalid$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >作废时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >作废时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InvalidTime" >作废时间 like '%$InvalidTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyUser" >修改用户 like '%$ModifyUser$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="StartDate" >修改日期 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >修改日期 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModifyTime" >修改日期 like '%$ModifyTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ModuleCode" >所属模块代码 like '%$ModuleCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="UserType" >用户组类型 like '%$UserType$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="InputCode" >输入码 like '%$InputCode$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SeqNo" >排序序号 like '%$SeqNo$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="DefalutFunction" >默认载入功能 like '%$DefalutFunction$%'</isPropertyAvailable>
+        
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="LIST_Model" parameterClass="StrObjDict" resultClass="StrObjDict">
+      select "名称" as "RoleGroupName",排序序号 as "SortOrder",模块代码 as "ModuleCode" FROM 系统_模块
+      order by 排序序号
+    </select>
+
+    <select id="LIST_ModelRoleGroup" parameterClass="StrObjDict" resultClass="StrObjDict">
+      SELECT ID, 名称 AS "RoleGroupName",排序序号 as "SeqNo",用户组类型 as "UserType",所属模块代码 as "ModuleCode",是否作废 as "IsInvalid",
+      默认载入功能 As "DefalutFunction"
+      FROM 系统_角色
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend="" property="ModuleCode" >所属模块代码=#ModuleCode#</isPropertyAvailable>
+      </dynamic>
+      order by 排序序号
+    </select>
+
+    <select id="Check_Powers" parameterClass="StrObjDict" resultClass="StrObjDict">
+      Select 菜单操作ID From 系统_角色权限 Where 菜单ID = #MenuID# AND 角色ID = #RoleID#
+    </select>
+    
+    <select id="Get_RoleAndDefaultFunction" parameterClass="StrObjDict" resultClass="StrObjDict">
+      select A.默认载入功能 as "DefaultFunction",A.名称 as "Role",A.ID  as "RoleID",
+      (select 地址 from 系统_功能 where ID = (select 功能ID from 系统_菜单 where ID = A.默认载入功能)) as "URL",
+      (select 名称 from 系统_菜单 where id=a.默认载入功能) as "DefaultName"
+      from 系统_角色 A where ID in (select 角色ID from 系统_角色成员 where 用户ID = (select 职工相关ID from 系统_用户信息 where ID = #ID#))
+
+    </select>
+    
+
+    <select id="LIST2_Role" parameterClass="StrObjDict" resultClass="Role" resultMap="Role_Result" >
+      select ID, "名称" as "RoleGroupName",上级ID as "SuperID","图标" as "PicUrl" FROM 系统_菜单
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend="" property="ModuleCode" >模块代码=#ModuleCode#</isPropertyAvailable>
+      </dynamic>
+      order by 排序序号
+    </select>
+
+    <select id="LIST_Role_NotSelectedUser" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      <!--select  distinct t.ID,t."EmployeeID",t."PYCode",t."Name" ,listagg(t."Org",',')  within group (order by t."Org")  over (partition by t.ID,t."EmployeeID",t."PYCode",t."Name") As "Org" from
+      (SELECT distinct d.ID, a.人员相关ID AS "EmployeeID", c.输入码 AS "PYCode" , c.姓名 AS "Name",
+      f."Org"
+      from 系统_组织机构_部门人员关联 a
+      join 系统_组织机构 b on a.部门相关ID = b.相关ID
+      join 人事_职工信息 c on a.人员相关ID = c.相关ID
+      join  系统_用户信息 d on d.职工相关ID = a.人员相关ID
+      join 系统_角色成员 e on e.用户ID &lt;> c.ID
+      join (select g.部门相关ID, LISTAGG (g.部门相关ID || '-' || g.名称, ',') WITHIN GROUP (ORDER BY g.部门相关ID) AS "Org"
+      from (select distinct a.部门相关ID , b.名称
+      from 系统_组织机构_部门人员关联 a, 系统_组织机构 b
+      where a.部门相关ID = b.相关ID) g
+      GROUP BY g.部门相关ID) f on f.部门相关ID=a.部门相关ID
+      where e.角色ID = #RoleGroupID#) t
+      where t."EmployeeID" not in (select 用户ID from 系统_角色成员 where 角色ID = #RoleGroupID#)-->
+      SELECT c.ID,
+      c.职工相关ID AS "EmployeeID",
+      d.输入码 AS "PYCode",
+      d.姓名 AS "Name",
+      e.所属部门 AS "Org"
+      FROM 系统_用户信息 c,
+      人事_职工信息 d,
+      (SELECT a.人员相关ID, LISTAGG (a.部门相关ID || '-' || b.名称, ',')
+      WITHIN GROUP (ORDER BY a.部门相关ID) AS 所属部门
+      FROM 系统_组织机构_部门人员关联 a, 系统_组织机构 b
+      WHERE a.部门相关ID = b.相关ID GROUP BY a.人员相关ID) e
+      WHERE     c.职工相关ID = d.相关ID
+      AND d.相关ID = e.人员相关ID
+      AND c.职工相关ID not in (select 用户ID from 系统_角色成员 where 角色ID = #RoleGroupID#)
+    </select>
+
+    <select id="LIST_Role_SelectedUser" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT c.ID,c.职工相关ID AS "EmployeeID",c.用户名 AS "PYCode",d.姓名 AS "Name",e.所属部门 AS "Org" FROM 系统_用户信息 c ,人事_职工信息 d,
+      (
+      SELECT a.人员相关ID,LISTAGG(a.部门相关ID||'-'||b.名称, ',') WITHIN GROUP (ORDER BY a.部门相关ID) AS 所属部门
+      FROM  系统_组织机构_部门人员关联 a,系统_组织机构 b,系统_角色成员 f
+      WHERE a.部门相关ID = b.相关ID AND f.角色ID = #RoleGroupID# AND f.用户ID = a.人员相关ID GROUP BY a.人员相关ID
+      ) e
+      WHERE c.职工相关ID = d.相关ID AND d.相关ID = e.人员相关ID
+    </select>
+
+    <update id="INSERT_RolePower" parameterClass="StrObjDict">
+      INSERT INTO 系统_角色权限(角色ID,菜单ID,菜单操作ID)
+      VALUES (#RoleID#,#MenuID#,#PowerID#)
+    </update>
+
+    <update id="UPDATE_RolePower" parameterClass="StrObjDict" >
+      update 系统_角色权限
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="RoleID" >角色ID=#RoleID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="MenuID" >菜单ID=#MenuID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="PowerID" >菜单操作ID=#PowerID#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_RolePower" parameterClass="StrObjDict" >
+      delete from 系统_角色权限
+      where 角色ID=#RoleID# AND 菜单ID=#MenuID#
+    </delete>
+
+    <delete id="DEL_RolePower" parameterClass="StrObjDict" >
+      delete from 系统_角色权限
+      where 菜单ID=#MenuID#
+    </delete>
+
+    <delete id="DELALL_RolePower" parameterClass="StrObjDict" >
+      delete from 系统_角色权限
+      where 角色ID=#RoleID# 
+    </delete>
+
+
+
+    <select id="LOAD_RolePower" parameterClass="PK_RolePower" resultMap="RolePower_Result" >
+      SELECT * FROM 系统_角色权限
+      WHERE ID=#ID#
+    </select>
+
+    <select id="GetPowerTree_RolePower" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT 脚本_ORC as "SQL" FROM 系统_树定义 WHERE ID = #TreeID#
+    </select>
+
+    <select id="GetOptionTree_RolePower" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT 脚本_ORC as "SQL" FROM 系统_树定义 WHERE ID = #OptionID#
+    </select>
+
+    <select id="Checked_RolePower" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT 菜单操作ID as "PowerID" FROM 系统_角色权限 
+      WHERE 菜单ID = #MenuID# AND INSTR（菜单操作ID,#PowerID#) > 0
+    </select>
+
+
+    <select id="LIST_RolePower" parameterClass="StrObjDict" resultClass="RolePower" resultMap="RolePower_Result" >
+      select * from 系统_角色权限
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RoleID" >角色ID like '%$RoleID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MenuID" >菜单ID like '%$MenuID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PowerID" >菜单操作ID like '%$PowerID$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_RolePower" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM 系统_角色权限
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="RoleID" >角色ID like '%$RoleID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MenuID" >菜单ID like '%$MenuID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="PowerID" >菜单操作ID like '%$PowerID$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

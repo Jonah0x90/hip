@@ -1,0 +1,13 @@
+E:\Application\trunk\mhome\HIP\ZLSoft.DataFilterChainManager\bin\Debug\ZLSoft.DataFilterChainManager.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.DataFilterChainManager\bin\Debug\ZLSoft.DataFilterChainManager.pdb
+E:\Application\trunk\mhome\HIP\ZLSoft.DataFilterChainManager\bin\Debug\ZLSoft.Model.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.DataFilterChainManager\bin\Debug\ZLSoft.Pub.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.DataFilterChainManager\bin\Debug\IBatisNet.DataAccess.2005.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.DataFilterChainManager\bin\Debug\IBatisNet.DataMapper.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.DataFilterChainManager\bin\Debug\IBatisNet.Common.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.DataFilterChainManager\bin\Debug\Castle.DynamicProxy.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.DataFilterChainManager\bin\Debug\ZLSoft.Model.pdb
+E:\Application\trunk\mhome\HIP\ZLSoft.DataFilterChainManager\bin\Debug\ZLSoft.Pub.pdb
+E:\Application\trunk\mhome\HIP\ZLSoft.DataFilterChainManager\obj\Debug\ZLSoft.DataFilterChainManager.csprojResolveAssemblyReference.cache
+E:\Application\trunk\mhome\HIP\ZLSoft.DataFilterChainManager\obj\Debug\ZLSoft.DataFilterChainManager.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.DataFilterChainManager\obj\Debug\ZLSoft.DataFilterChainManager.pdb

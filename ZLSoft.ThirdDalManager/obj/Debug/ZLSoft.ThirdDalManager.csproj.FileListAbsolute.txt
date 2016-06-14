@@ -1,0 +1,4 @@
+E:\Application\trunk\mhome\HIP\ZLSoft.ThirdDalManager\bin\Debug\ZLSoft.ThirdDalManager.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.ThirdDalManager\bin\Debug\ZLSoft.ThirdDalManager.pdb
+E:\Application\trunk\mhome\HIP\ZLSoft.ThirdDalManager\obj\Debug\ZLSoft.ThirdDalManager.dll
+E:\Application\trunk\mhome\HIP\ZLSoft.ThirdDalManager\obj\Debug\ZLSoft.ThirdDalManager.pdb

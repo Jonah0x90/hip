@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <parameterMaps>
+        <parameterMap id="proc_oracle_outputdata_param" class="StrObjDict">
+            <parameter  property="AS_TABLE" column="AS_TABLE" direction="Input" type="string" dbType="VarChar" />
+            <parameter  property="AS_WHERE" column="AS_WHERE" direction="Input" type="string" dbType="VarChar" />
+            <parameter  property="AS_COLS" column="AS_COLS" direction="Output" type="string" dbType="VarChar" />
+            <parameter  property="AS_DBTYPE" column="AS_DBTYPE" direction="Input" type="string" dbType="VarChar" />
+            <parameter  property="CUR_OUT" column="CUR_OUT" direction="Output"   dbType="Cursor"  typeHandler="IBatisNet.DataMapper.Customize.StoreProcedureOutputCursorTypeHandlerCallback,IBatisNet.DataMapper" />
+        </parameterMap>
+
+        <parameterMap id="proc_mssql_outputdata_param" class="StrObjDict">
+            <parameter  property="AS_TABLE" column="AS_TABLE" direction="Input" type="string" dbType="VarChar" />
+            <parameter  property="AS_WHERE" column="AS_WHERE" direction="Input" type="string" dbType="VarChar" />
+            <parameter  property="AS_COLS" column="AS_COLS" direction="Output" type="string" dbType="VarChar" />
+            <parameter  property="AS_DBTYPE" column="AS_DBTYPE" direction="Input" type="string" dbType="VarChar" />
+
+        </parameterMap>
+    </parameterMaps>
+
+    <statements>
+        <statement id="ExecuteScalar" parameterClass="string"   remapResults="true" resultClass="System.Object" >
+            <![CDATA[$sql$]]>
+        </statement>
+        <statement id="ExecuteForQuery" parameterClass="string"   remapResults="true" resultClass="StrObjDict" >
+            <![CDATA[$sql$]]>
+        </statement>
+        <statement id="ExecuteNoneQuery" parameterClass="string"   remapResults="true" >
+            <![CDATA[$sql$]]>
+        </statement>
+
+        <statement id="PubSql_GetSrm" parameterClass="string"   remapResults="true" resultClass="StrObjDict" >
+            select F_GetSrm(#WORD#,#SRM#) as SRM from dual
+        </statement>
+
+        <statement id="PubSql_GetSrm_Mssql" parameterClass="string"   remapResults="true" resultClass="StrObjDict" >
+            select dbo.F_GetSrm(#WORD#,#SRM#) as SRM
+        </statement>
+
+        <update id="Sys_Exec_Sql" parameterClass="StrObjDict"> $SQL$</update>
+        <insert id="Sys_Exec_InsertSql" parameterClass="StrObjDict"> $SQL$</insert>
+        <delete id="Sys_Exec_DelSql" parameterClass="StrObjDict"> $SQL$</delete>
+        <statement id="EXECSQL" parameterClass="string" remapResults="true"><![CDATA[$SQL$]]></statement>
+
+
+        <procedure id="proc_oracle_outputdata" parameterMap="proc_oracle_outputdata_param"  resultClass="System.Data.DataTable">
+            pkg_pub.prc_outputdata
+        </procedure>
+
+
+
+        <procedure id="proc_mssql_outputdata" parameterMap="proc_mssql_outputdata_param"  resultClass="System.Data.DataTable">
+            prc_outputdata
+        </procedure>
+
+        <procedure id="proc_mssql_getxtcs"   resultClass="System.Data.DataTable">
+            getxtcs
+        </procedure>
+
+
+
+    </statements>
+</sqlMap>

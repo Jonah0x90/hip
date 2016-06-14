@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="BPMLog" type="ZLSoft.Model.PLATFORM.BPMLog, ZLSoft.Model" />
+    <typeAlias alias="PK_BPMLog" type="ZLSoft.Model.PLATFORM.PK_BPMLog, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="BPMLog_Result" class="BPMLog">
+      <result property="ID" column="ID" />
+      <result property="BPMID" column="BPMID" />
+      <result property="EndTime" column="完成时间" />
+      <result property="ResultContent" column="执行结果" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_BPMLog" parameterClass="StrObjDict">
+      INSERT INTO 系统_BPM记录(ID,BPMID)
+      VALUES (SEQ_系统_BPM记录_ID.NEXTVAL,#BPMID#)
+    </update>
+
+    <update id="UPDATE_BPMLog" parameterClass="StrObjDict" >
+      update 系统_BPM记录
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="EndTime" >完成时间=#EndTime#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ResultContent" >执行结果=#ResultContent#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_BPMLog" parameterClass="StrObjDict" >
+      delete from 系统_BPM记录
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_BPMLog" parameterClass="PK_BPMLog" resultMap="BPMLog_Result" >
+      SELECT * FROM 系统_BPM记录
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_BPMLog" parameterClass="StrObjDict" resultClass="BPMLog" resultMap="BPMLog_Result" >
+      select * from 系统_BPM记录
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="BPMID" >BPMID = #BPMID#</isPropertyAvailable>
+        <!--<isPropertyAvailable prepend=" AND " property="StartDate" >完成时间 > to_date(#StartDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndDate" >完成时间 &lt; to_date(#EndDate#,'yyyy/mm/dd hh24:mi:ss')</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="EndTime" >完成时间 like '%$EndTime$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ResultContent" >执行结果 like '%$ResultContent$%'</isPropertyAvailable>-->
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+  </statements>
+</sqlMap>

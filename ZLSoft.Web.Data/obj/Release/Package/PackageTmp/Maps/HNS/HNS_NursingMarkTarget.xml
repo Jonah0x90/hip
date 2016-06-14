@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="NursingMarkTarget" type="ZLSoft.Model.HNS.NursingMarkTarget, ZLSoft.Model" />
+    <typeAlias alias="PK_NursingMarkTarget" type="ZLSoft.Model.HNS.PK_NursingMarkTarget, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="NursingMarkTarget_Result" class="NursingMarkTarget">
+      <result property="ID" column="ID" />
+      <result property="MarkTabID" column="评分表ID" />
+      <result property="Name" column="名称" />
+      <result property="Remark" column="说明" />
+      <result property="SerialNumber" column="序号" />
+      <result property="ValueRange" column="数据值域" />
+      <result property="ScoreValue" column="分值" />
+      <result property="IsMultiple" column="是否多选" />
+      <result property="ElementID" column="元素ID" />
+      <result property="ScoreRemark" column="分值说明" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_NursingMarkTarget" parameterClass="StrObjDict">
+      INSERT INTO HNS_护理评分项目(ID,评分表ID,名称,说明,序号,数据值域,分值,是否多选,元素ID,分值说明)
+      VALUES (#ID#,#MarkTabID#,#Name#,#Remark#,#SerialNumber#,#ValueRange#,#ScoreValue#,#IsMultiple#,#ElementID#,#ScoreRemark#)
+    </update>
+
+    <update id="UPDATE_NursingMarkTarget" parameterClass="StrObjDict" >
+      update HNS_护理评分项目
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="MarkTabID" >评分表ID=#MarkTabID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Remark" >说明=#Remark#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="SerialNumber" >序号=#SerialNumber#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ValueRange" >数据值域=#ValueRange#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ScoreValue" >分值=#ScoreValue#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="IsMultiple" >是否多选=#IsMultiple#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ElementID" >元素ID=#ElementID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="ScoreRemark" >分值说明=#ScoreRemark#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_NursingMarkTarget" parameterClass="StrObjDict" >
+      delete from HNS_护理评分项目
+      where ID=#ID#
+    </delete>
+
+
+
+    <delete id="DeleteTargetByMark" parameterClass="StrObjDict" >
+      delete from HNS_护理评分项目
+      where 评分表ID=#MarkTabID#
+    </delete>
+
+    <select id="LOAD_NursingMarkTarget" parameterClass="PK_NursingMarkTarget" resultMap="NursingMarkTarget_Result" >
+      SELECT * FROM HNS_护理评分项目
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_NursingMarkTarget" parameterClass="StrObjDict" resultClass="NursingMarkTarget" resultMap="NursingMarkTarget_Result" >
+      select * from HNS_护理评分项目
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkTabID" >评分表ID = #MarkTabID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remark" >说明 like '%$Remark$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SerialNumber" >序号 like '%$SerialNumber$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ValueRange" >数据值域 like '%$ValueRange$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ScoreValue" >分值 like '%$ScoreValue$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsMultiple" >是否多选 like '%$IsMultiple$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ElementID" >元素ID like '%$ElementID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ScoreRemark" >分值说明 like '%$ScoreRemark$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_NursingMarkTarget" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM HNS_护理评分项目
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="MarkTabID" >评分表ID =#MarkTabID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remark" >说明 like '%$Remark$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SerialNumber" >序号 like '%$SerialNumber$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ValueRange" >数据值域 like '%$ValueRange$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ScoreValue" >分值 like '%$ScoreValue$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="IsMultiple" >是否多选 like '%$IsMultiple$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ElementID" >元素ID like '%$ElementID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="ScoreRemark" >分值说明 like '%$ScoreRemark$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+    
+    <select id="GetMarkTargetMaxNum" parameterClass="StrObjDict" resultClass="int" >
+      SELECT max(序号)+1 FROM HNS_护理评分项目
+      WHERE 评分表ID = #MarkTabID#
+    </select>
+
+  </statements>
+</sqlMap>

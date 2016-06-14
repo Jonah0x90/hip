@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Infrastructure" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="ElementPartGroup" type="ZLSoft.Model.PUB.ElementPartGroup, ZLSoft.Model" />
+    <typeAlias alias="PK_ElementPartGroup" type="ZLSoft.Model.PUB.PK_ElementPartGroup, ZLSoft.Model" />
+  </alias>
+  <resultMaps>
+    <resultMap id="ElementPartGroup_Result" class="ElementPartGroup">
+      <result property="ID" column="ID" />
+      <result property="SuperID" column="上级ID" />
+      <result property="No" column="编号" />
+      <result property="Name" column="名称" />
+      <result property="Remark" column="说明" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <update id="INSERT_ElementPartGroup" parameterClass="StrObjDict">
+      INSERT INTO HNS_护理要素分类(ID,上级ID,编号,名称,说明)
+      VALUES (#ID#,#SuperID#,#No#,#Name#,#Remark#)
+    </update>
+
+    <update id="UPDATE_ElementPartGroup" parameterClass="StrObjDict" >
+      update HNS_护理要素分类
+      set
+      <dynamic prepend=" ">
+        <isPropertyAvailable prepend=" , " property="SuperID" >上级ID=#SuperID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="No" >编号=#No#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Name" >名称=#Name#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" , " property="Remark" >说明=#Remark#</isPropertyAvailable>
+      </dynamic>
+      where ID=#ID#
+    </update>
+
+    <delete id="DELETE_ElementPartGroup" parameterClass="StrObjDict" >
+      delete from HNS_护理要素分类
+      where ID=#ID#
+    </delete>
+
+
+
+    <select id="LOAD_ElementPartGroup" parameterClass="PK_ElementPartGroup" resultMap="ElementPartGroup_Result" >
+      SELECT * FROM HNS_护理要素分类
+      WHERE ID=#ID#
+    </select>
+
+
+    <select id="LIST_ElementPartGroup" parameterClass="StrObjDict" resultClass="ElementPartGroup" resultMap="ElementPartGroup_Result" >
+      select * from HNS_护理要素分类
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SuperID" >上级ID like '%$SuperID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="No" >编号 like '%$No$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remark" >说明 like '%$Remark$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+
+
+    <select id="COUNT_ElementPartGroup" parameterClass="StrObjDict" resultClass="int" >
+      SELECT count(*) FROM HNS_护理要素分类
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="SuperID" >上级ID like '%$SuperID$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="No" >编号 like '%$No$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Name" >名称 like '%$Name$%'</isPropertyAvailable>
+        <isPropertyAvailable prepend=" AND " property="Remark" >说明 like '%$Remark$%'</isPropertyAvailable>
+      </dynamic>
+      <dynamic prepend=" ORDER BY ">
+        <isPropertyAvailable prepend="" property="ORDER_BY_CLAUSE">$ORDER_BY_CLAUSE$</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+    <select id="Get_FormPartGroups" parameterClass="StrObjDict" resultClass="StrObjDict" >
+      SELECT ID,上级ID as "SuperID",编号 as "No",名称 as "Name",说明 as "Remark" FROM HNS_护理要素分类
+      <dynamic prepend="WHERE">
+        <isPropertyAvailable prepend=" AND " property="ID" >ID=#ID#</isPropertyAvailable>
+      </dynamic>
+    </select>
+
+  </statements>
+</sqlMap>
